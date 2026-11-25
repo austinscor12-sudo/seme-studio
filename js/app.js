@@ -17,7 +17,6 @@ const ICONO_WHATSAPP_SVG = `
   </svg>
 `;
 
-// Menú móvil
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
     navLinks.classList.toggle("active");
@@ -36,9 +35,11 @@ function renderizarServicios(filtro = "todos") {
     : lista.filter((item) => item.categoria === filtro);
 
   servicesGrid.innerHTML = filtrados.map((servicio) => `
-    <article class="service-card">
+    <article class="service-card tilt-card">
+      <div class="card-glare"></div>
       <div class="service-cover">
         <span class="service-badge">${servicio.etiqueta}</span>
+        <span class="service-live-dot">● DEMO</span>
         <img src="${servicio.imagen}" alt="${servicio.titulo}" loading="lazy" />
       </div>
       <div class="service-content">
@@ -58,6 +59,10 @@ function renderizarServicios(filtro = "todos") {
       </div>
     </article>
   `).join("");
+
+  if (typeof window.initTiltCards === "function") {
+    window.initTiltCards();
+  }
 }
 
 function abrirModalServicio(servicioId) {
@@ -72,9 +77,8 @@ function abrirModalServicio(servicioId) {
     <p style="color: var(--text-muted); margin-top: 0.5rem;">${servicio.descripcionLarga}</p>
 
     <div class="modal-media">
-      <video controls poster="${servicio.imagen}" preload="none">
+      <video controls poster="${servicio.imagen}" preload="metadata">
         <source src="${servicio.video}" type="video/mp4" />
-        Tu navegador no soporta reproducción de video.
       </video>
     </div>
 
@@ -98,7 +102,6 @@ function abrirModalServicio(servicioId) {
   serviceModal.setAttribute("aria-hidden", "false");
 }
 
-// Delegación de eventos en tarjetas y modal
 document.addEventListener("click", (e) => {
   const btnDetalle = e.target.closest(".btn-detalle");
   if (btnDetalle) {
@@ -111,7 +114,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Filtros por categoría
 if (filterBar) {
   filterBar.addEventListener("click", (e) => {
     const btn = e.target.closest(".filter-btn");
@@ -122,7 +124,6 @@ if (filterBar) {
   });
 }
 
-// Cerrar modal
 if (modalClose && serviceModal) {
   modalClose.addEventListener("click", () => {
     serviceModal.classList.remove("open");
@@ -137,5 +138,4 @@ if (modalClose && serviceModal) {
   });
 }
 
-// Carga inicial
 renderizarServicios("todos");

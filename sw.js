@@ -1,15 +1,16 @@
-const CACHE_NAME = "seme-studio-v2";
+const CACHE_NAME = "seme-studio-v3";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
   "./css/styles.css",
+  "./js/intro.js",
+  "./js/fx-engine.js",
   "./js/servicios-data.js",
   "./js/pwa.js",
   "./js/app.js",
   "./assets/img/icono.jpg"
 ];
 
-// Instala la nueva versión y toma el control inmediatamente
 self.addEventListener("install", (event) => {
   self.skipWaiting();
   event.waitUntil(
@@ -17,7 +18,6 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// Elimina las versiones viejas guardadas en el navegador
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
@@ -30,7 +30,6 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Siempre trae la versión más nueva de internet; usa caché solo si no hay conexión
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET" || !event.request.url.startsWith("http")) return;
 

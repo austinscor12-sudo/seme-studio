@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SEME STUDIO | Soluciones Web, MicroApps e Invitaciones Digitales</title>
-  <meta name="description" content="Desarrollo de invitaciones digitales interactivas, microapps a medida, catálogos con pedido por WhatsApp, tarjetas NFC y automatización para negocios." />
+  <title>SEME STUDIO | Soluciones Web 3D, MicroApps e Invitaciones Digitales</title>
+  <meta name="description" content="Estudio digital de alto impacto: invitaciones digitales interactivas, microapps a medida, catálogos con pedido por WhatsApp, tarjetas NFC y bots con IA." />
   <meta name="theme-color" content="#05070B" />
 
   <!-- PWA Manifest & Íconos -->
@@ -12,15 +12,18 @@
   <link rel="icon" type="image/jpeg" href="./assets/img/icono.jpg" />
   <link rel="apple-touch-icon" href="./assets/img/icono.jpg" />
 
-  <!-- Tipografía geométrica moderna -->
+  <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Estilos principales -->
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body class="intro-active">
+
+  <!-- CANVAS 3D INTERACTIVO DE FONDO -->
+  <canvas id="spatialCanvas" class="spatial-canvas" aria-hidden="true"></canvas>
 
   <!-- CINEMÁTICA DE ENTRADA -->
   <div class="intro-overlay" id="introOverlay" aria-hidden="true">
@@ -59,7 +62,7 @@
     <button type="button" class="intro-skip-btn" id="skipIntroBtn">Saltar</button>
   </div>
 
-  <!-- BARRA DE NAVEGACIÓN -->
+  <!-- BARRA DE NAVEGACIÓN FLOTANTE GLASS -->
   <header class="navbar">
     <div class="container nav-content">
       <a href="#inicio" class="brand-link" aria-label="SEME Studio Inicio">
@@ -68,16 +71,16 @@
 
       <nav class="nav-links" id="navLinks">
         <a href="#servicios">Servicios</a>
-        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#configurador">Simulador</a>
+        <a href="#como-funciona">Método</a>
         <a href="#app-movil">App Celular</a>
-        <a href="#contacto">Contacto</a>
       </nav>
 
       <div class="nav-actions">
-        <button id="btnInstallNav" class="btn btn-outline btn-sm" type="button">
+        <button id="btnInstallNav" class="btn btn-outline btn-sm magnetic-btn" type="button">
           <span class="dot-live"></span> Instalar App
         </button>
-        <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Quiero%20consultar%20por%20una%20soluci%C3%B3n%20digital." target="_blank" rel="noopener" class="btn btn-whatsapp btn-icon-round" aria-label="Contactar por WhatsApp" title="WhatsApp">
+        <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Quiero%20consultar%20por%20una%20soluci%C3%B3n%20digital." target="_blank" rel="noopener" class="btn btn-whatsapp btn-icon-round magnetic-btn" aria-label="Contactar por WhatsApp" title="WhatsApp">
           <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
             <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.758.459 3.475 1.331 4.988L2 22l5.184-1.359a9.927 9.927 0 0 0 4.847 1.258h.004c5.515 0 9.968-4.453 9.968-9.969 0-2.663-1.037-5.167-2.92-7.05A9.903 9.903 0 0 0 12.031 2zm5.822 14.274c-.246.693-1.432 1.326-1.983 1.41-.506.076-1.147.108-1.851-.116-.427-.136-.976-.318-1.678-.621-2.952-1.275-4.88-4.247-5.027-4.443-.147-.196-1.2-1.596-1.2-3.044 0-1.448.76-2.16 1.03-2.454.27-.295.589-.368.785-.368.196 0 .393.002.564.01.181.009.424-.069.663.506.246.589.835 2.037.908 2.184.074.147.123.319.025.515-.098.196-.147.319-.295.491-.147.172-.31.384-.442.515-.147.147-.301.307-.129.601.172.295.763 1.259 1.639 2.04 1.126 1.004 2.075 1.315 2.37 1.462.295.147.466.123.638-.074.172-.196.736-.859.933-1.154.196-.295.393-.245.663-.147.27.098 1.718.81 2.013.957.295.147.491.221.564.344.074.123.074.712-.172 1.405z"/>
           </svg>
@@ -89,145 +92,239 @@
     </div>
   </header>
 
-  <!-- SECCIÓN PRINCIPAL (HERO) -->
+  <!-- CONTENIDO PRINCIPAL -->
   <main id="inicio">
+    <!-- HERO ESPACIAL 3D -->
     <section class="hero">
-      <div class="hero-glow"></div>
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+
       <div class="container hero-grid">
         <div class="hero-text reveal-item reveal-delay-1">
-          <span class="badge-tech">ESTUDIO DIGITAL &bull; DESARROLLO A MEDIDA</span>
-          <h1>Transformamos ideas en <span class="text-gradient">experiencias web</span> que venden y organizan tu negocio.</h1>
-          <p class="hero-subtitle">
-            Desde invitaciones digitales interactivas hasta microapps de turnos, catálogos con pedido directo a WhatsApp y sistemas a medida. Explorá cada solución y probá nuestras muestras en vivo.
-          </p>
-          <div class="hero-buttons">
-            <a href="#servicios" class="btn btn-primary">Explorar Servicios y Demos</a>
-            <a href="#app-movil" class="btn btn-secondary">Descargar Versión Celular</a>
+          <div class="live-status-pill">
+            <span class="pulse-ring"></span>
+            <span>ESTUDIO DIGITAL &bull; ARQUITECTURA WEB DE ALTO IMPACTO</span>
           </div>
+
+          <h1>
+            No hacemos páginas comunes. Creamos
+            <span class="text-gradient-animated">experiencias 3D e interactivas</span>
+            que venden solas.
+          </h1>
+
+          <p class="hero-subtitle">
+            Invitaciones digitales con impacto cinematográfico, microapps de turnos, catálogos que envían pedidos listos a WhatsApp y tarjetas NFC inteligentes. Tocá, probá y explorá muestras reales en vivo.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#servicios" class="btn btn-primary magnetic-btn">
+              <span>Explorar Soluciones y Demos</span>
+              <span class="btn-arrow">→</span>
+            </a>
+            <a href="#configurador" class="btn btn-secondary magnetic-btn">
+              Armar mi Proyecto
+            </a>
+          </div>
+
           <div class="hero-metrics">
             <div class="metric">
-              <strong>100%</strong>
-              <span>Adaptado a celular</span>
+              <strong>60 FPS</strong>
+              <span>Fluidez total PC & Celu</span>
             </div>
             <div class="metric">
-              <strong>Demos</strong>
-              <span>Interactivas en vivo</span>
+              <strong>En Vivo</strong>
+              <span>Demos reales interactivas</span>
             </div>
             <div class="metric">
-              <strong>A medida</strong>
-              <span>Para cada rubro</span>
+              <strong>PWA App</strong>
+              <span>Instalable sin tiendas</span>
             </div>
           </div>
         </div>
 
+        <!-- ESCENARIO HOLOGRÁFICO INTERACTIVO 3D -->
         <div class="hero-visual reveal-item reveal-delay-2">
-          <div class="showcase-card">
-            <div class="showcase-header">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
-              <span class="showcase-url">semestudio.app/demos</span>
-            </div>
-            <div class="showcase-body">
-              <img src="./assets/img/icono.jpg" alt="SEME Studio" class="showcase-logo" />
-              <div class="showcase-tags">
-                <span>Invitaciones</span>
-                <span>MicroApps</span>
-                <span>Catálogos</span>
-                <span>NFC</span>
-                <span>Bots IA</span>
+          <div class="holo-stage tilt-card">
+            <div class="card-glare"></div>
+
+            <div class="holo-topbar">
+              <div class="holo-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
               </div>
-              <p>Seleccioná cualquier servicio abajo para ver su explicación detallada, galería y probar una muestra real.</p>
+              <span class="holo-domain">SEME STUDIO &bull; LIVE LAB</span>
             </div>
+
+            <!-- Selector interactivo de vista previa dentro del escenario 3D -->
+            <div class="stage-tabs" id="stageTabs">
+              <button type="button" class="stage-tab active" data-stage="invitaciones">Invitaciones</button>
+              <button type="button" class="stage-tab" data-stage="microapps">Turnos</button>
+              <button type="button" class="stage-tab" data-stage="catalogos">Catálogos</button>
+              <button type="button" class="stage-tab" data-stage="nfc">NFC</button>
+            </div>
+
+            <div class="holo-screen" id="stageDisplay"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CATÁLOGO DE SERVICIOS -->
+    <!-- CINTA CINÉTICA DE ESPECIALIDADES -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <span>INVITACIONES DIGITALES INTERACTIVAS</span>
+        <span class="sep">◆</span>
+        <span>MICROAPPS DE TURNOS Y SEÑAS</span>
+        <span class="sep">◆</span>
+        <span>CATÁLOGOS CON PEDIDO A WHATSAPP</span>
+        <span class="sep">◆</span>
+        <span>TARJETAS INTELIGENTES NFC</span>
+        <span class="sep">◆</span>
+        <span>PORTFOLIOS 3D DE ALTO IMPACTO</span>
+        <span class="sep">◆</span>
+        <span>BOTS DE WHATSAPP CON IA</span>
+        <span class="sep">◆</span>
+        <!-- Duplicado para bucle infinito fluido -->
+        <span>INVITACIONES DIGITALES INTERACTIVAS</span>
+        <span class="sep">◆</span>
+        <span>MICROAPPS DE TURNOS Y SEÑAS</span>
+        <span class="sep">◆</span>
+        <span>CATÁLOGOS CON PEDIDO A WHATSAPP</span>
+        <span class="sep">◆</span>
+        <span>TARJETAS INTELIGENTES NFC</span>
+        <span class="sep">◆</span>
+        <span>PORTFOLIOS 3D DE ALTO IMPACTO</span>
+        <span class="sep">◆</span>
+        <span>BOTS DE WHATSAPP CON IA</span>
+        <span class="sep">◆</span>
+      </div>
+    </div>
+
+    <!-- CATÁLOGO INTERACTIVO DE SERVICIOS -->
     <section id="servicios" class="section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">PORTAFOLIO DE SOLUCIONES</span>
-          <h2>Nuestros Servicios</h2>
-          <p>Elegí una categoría o abrí cualquier servicio para ver en detalle qué incluye, imágenes/videos de ejemplo y probar su demo interactiva.</p>
+        <div class="section-header reveal-scroll">
+          <span class="section-tag">PORTAFOLIO INTERACTIVO</span>
+          <h2>Nuestros Servicios & Demos en Vivo</h2>
+          <p>Pasá el cursor o tocá cada tarjeta para interactuar. Abrí <strong>Ver Detalles</strong> para ver videos y funciones, o tocá <strong>Probar Muestra</strong> para experimentar la versión de prueba.</p>
         </div>
 
         <!-- Filtros por categoría -->
-        <div class="filter-bar" id="filterBar">
-          <button class="filter-btn active" data-filter="todos" type="button">Todos</button>
+        <div class="filter-bar reveal-scroll" id="filterBar">
+          <button class="filter-btn active" data-filter="todos" type="button">Todos los Servicios</button>
           <button class="filter-btn" data-filter="eventos" type="button">Invitaciones</button>
           <button class="filter-btn" data-filter="negocios" type="button">MicroApps & Negocios</button>
           <button class="filter-btn" data-filter="profesionales" type="button">Marca Personal</button>
         </div>
 
-        <!-- Grilla dinámica cargada desde js/servicios-data.js -->
+        <!-- Grilla dinámica 3D cargada desde js/servicios-data.js -->
         <div class="services-grid" id="servicesGrid"></div>
       </div>
     </section>
 
-    <!-- CÓMO FUNCIONA -->
-    <section id="como-funciona" class="section section-dark">
+    <!-- SIMULADOR INTERACTIVO DE SOLUCIONES -->
+    <section id="configurador" class="section section-glass">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">PROCESO SIMPLE</span>
-          <h2>¿Cómo trabajamos tu proyecto?</h2>
+        <div class="section-header reveal-scroll">
+          <span class="section-tag">CONFIGURADOR INTELIGENTE</span>
+          <h2>¿Qué querés lograr hoy?</h2>
+          <p>Elegí tu objetivo principal y mirá al instante qué arquitectura digital te conviene implementar.</p>
+        </div>
+
+        <div class="sim-wrapper reveal-scroll">
+          <div class="sim-options" id="simOptions">
+            <button type="button" class="sim-pill active" data-sim="ventas">
+              <strong>Vender más por WhatsApp</strong>
+              <span>Catálogos y pedidos automáticos</span>
+            </button>
+            <button type="button" class="sim-pill" data-sim="turnos">
+              <strong>Organizar Turnos y Reservas</strong>
+              <span>Agenda online sin perder tiempo</span>
+            </button>
+            <button type="button" class="sim-pill" data-sim="eventos">
+              <strong>Invitar a un Evento Especial</strong>
+              <span>Tarjetas web interactivas con QR</span>
+            </button>
+            <button type="button" class="sim-pill" data-sim="marca">
+              <strong>Destacar mi Marca Personal</strong>
+              <span>Tarjetas NFC y Portfolios 3D</span>
+            </button>
+          </div>
+
+          <div class="sim-result tilt-card" id="simResult">
+            <div class="card-glare"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÉTODO DE TRABAJO BENTO -->
+    <section id="como-funciona" class="section">
+      <div class="container">
+        <div class="section-header reveal-scroll">
+          <span class="section-tag">FLUJO DE DESARROLLO</span>
+          <h2>De la idea a tu celular en 3 pasos</h2>
         </div>
 
         <div class="steps-grid">
-          <article class="step-card">
+          <article class="step-card tilt-card reveal-scroll">
+            <div class="card-glare"></div>
             <span class="step-number">01</span>
-            <h3>Probás la muestra</h3>
-            <p>Navegás nuestras demos reales desde tu celular para ver exactamente cómo van a interactuar tus clientes o invitados.</p>
+            <h3>Probás la muestra real</h3>
+            <p>Navegás nuestras demos interactivas desde tu teléfono para comprobar la fluidez y el diseño antes de decidir.</p>
           </article>
-          <article class="step-card">
+          <article class="step-card tilt-card reveal-scroll">
+            <div class="card-glare"></div>
             <span class="step-number">02</span>
-            <h3>Personalizamos tu marca</h3>
-            <p>Adaptamos colores, textos, fotos, funciones y medios de pago a la identidad de tu evento o negocio.</p>
+            <h3>Diseño exclusivo a medida</h3>
+            <p>Creamos una identidad visual única con tus colores, fotos, videos, precios y reglas de negocio.</p>
           </article>
-          <article class="step-card">
+          <article class="step-card tilt-card reveal-scroll">
+            <div class="card-glare"></div>
             <span class="step-number">03</span>
-            <h3>Lanzamiento inmediato</h3>
-            <p>Te entregamos tu enlace listo para compartir en WhatsApp, códigos QR o tarjetas NFC sin instalar nada pesado.</p>
+            <h3>Despliegue en la nube</h3>
+            <p>Publicamos tu web app con certificado seguro, velocidad instantánea y lista para compartir por link, QR o NFC.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN DESCARGAR VERSIÓN PARA CELULAR (PWA) -->
+    <!-- SECCIÓN PWA APP CELULAR -->
     <section id="app-movil" class="section">
       <div class="container">
-        <div class="pwa-banner">
+        <div class="pwa-banner tilt-card reveal-scroll">
+          <div class="card-glare"></div>
           <div class="pwa-info">
-            <span class="badge-tech">TECNOLOGÍA PWA (WEB APP)</span>
-            <h2>Llevá <span class="text-gradient">SEME STUDIO</span> instalado en tu celular</h2>
+            <span class="badge-tech">TECNOLOGÍA PWA (WEB APP NATIVA)</span>
+            <h2>Instalá <span class="text-gradient">SEME STUDIO</span> directo en tu celular</h2>
             <p>
-              No ocupa espacio como una app tradicional ni requiere tiendas externas. Instalá nuestra Web App en tu pantalla de inicio para consultar servicios, mostrar demos a clientes al instante y recibir novedades.
+              Sin ocupar memoria ni pasar por tiendas de aplicaciones. Guardá nuestra plataforma en tu pantalla de inicio para abrir demos frente a tus clientes en menos de un segundo.
             </p>
             <ul class="pwa-features">
-              <li>Acceso directo con ícono propio en tu pantalla</li>
-              <li>Carga ultra rápida y consumo mínimo de datos</li>
-              <li>Compatible con Android, iPhone (iOS) y computadora</li>
+              <li>Ícono propio en el menú de tu teléfono</li>
+              <li>Apertura a pantalla completa como app nativa</li>
+              <li>Compatible con Android, iPhone y Windows</li>
             </ul>
             <div class="pwa-actions">
-              <button id="btnInstallMain" class="btn btn-primary" type="button">
-                Descargar / Instalar App en Celular
+              <button id="btnInstallMain" class="btn btn-primary magnetic-btn" type="button">
+                Descargar / Instalar App
               </button>
               <button id="btnManualPwa" class="btn btn-outline" type="button">
-                ¿Cómo instalar en iPhone / Android?
+                Ver guía rápida iOS / Android
               </button>
             </div>
             <p id="pwaStatusText" class="pwa-status"></p>
           </div>
 
           <div class="pwa-mockup">
-            <div class="phone-frame">
+            <div class="phone-frame floating-3d">
               <div class="phone-notch"></div>
               <div class="phone-screen">
                 <img src="./assets/img/icono.jpg" alt="App SEME Studio" />
                 <h4>SEME STUDIO</h4>
                 <span>Web App Instalada</span>
-                <div class="phone-pill">Listo para usar</div>
+                <div class="phone-pill">● Online & Lista</div>
               </div>
             </div>
           </div>
@@ -235,18 +332,18 @@
       </div>
     </section>
 
-    <!-- CONTACTO -->
-    <section id="contacto" class="section section-dark">
-      <div class="container contact-box">
-        <span class="section-tag">HABLEMOS DE TU IDEA</span>
-        <h2>¿Necesitás una solución a medida?</h2>
-        <p>Escribinos directamente por WhatsApp para asesorarte y armar una muestra pensada para tu evento o negocio.</p>
+    <!-- CONTACTO DIRECTO -->
+    <section id="contacto" class="section section-glass">
+      <div class="container contact-box reveal-scroll">
+        <span class="section-tag">CONTACTO INMEDIATO</span>
+        <h2>¿Listo para darle otro nivel a tu proyecto?</h2>
+        <p>Escribinos directo por WhatsApp y armamos una propuesta pensada a medida para tu negocio o evento.</p>
         <div class="contact-buttons">
-          <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Me%20interesa%20crear%20un%20proyecto%20web." target="_blank" rel="noopener" class="btn btn-whatsapp">
+          <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Vi%20la%20web%20y%20quiero%20consultar%20por%20un%20proyecto." target="_blank" rel="noopener" class="btn btn-whatsapp magnetic-btn">
             <svg class="wa-icon" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
               <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.758.459 3.475 1.331 4.988L2 22l5.184-1.359a9.927 9.927 0 0 0 4.847 1.258h.004c5.515 0 9.968-4.453 9.968-9.969 0-2.663-1.037-5.167-2.92-7.05A9.903 9.903 0 0 0 12.031 2zm5.822 14.274c-.246.693-1.432 1.326-1.983 1.41-.506.076-1.147.108-1.851-.116-.427-.136-.976-.318-1.678-.621-2.952-1.275-4.88-4.247-5.027-4.443-.147-.196-1.2-1.596-1.2-3.044 0-1.448.76-2.16 1.03-2.454.27-.295.589-.368.785-.368.196 0 .393.002.564.01.181.009.424-.069.663.506.246.589.835 2.037.908 2.184.074.147.123.319.025.515-.098.196-.147.319-.295.491-.147.172-.31.384-.442.515-.147.147-.301.307-.129.601.172.295.763 1.259 1.639 2.04 1.126 1.004 2.075 1.315 2.37 1.462.295.147.466.123.638-.074.172-.196.736-.859.933-1.154.196-.295.393-.245.663-.147.27.098 1.718.81 2.013.957.295.147.491.221.564.344.074.123.074.712-.172 1.405z"/>
             </svg>
-            <span>Enviar WhatsApp Directo</span>
+            <span>Hablar por WhatsApp</span>
           </a>
         </div>
       </div>
@@ -258,7 +355,7 @@
     <div class="container footer-content">
       <div class="footer-brand">
         <img src="./assets/img/icono.jpg" alt="SEME Studio" class="footer-logo" />
-        <p>Desarrollo Web, MicroApps & Soluciones Digitales.</p>
+        <p>Arquitectura Web, MicroApps & Experiencias Digitales.</p>
       </div>
       <div class="footer-copy">
         <p>&copy; <span id="currentYear"></span> SEME STUDIO. Todos los derechos reservados.</p>
@@ -273,7 +370,7 @@
     </svg>
   </a>
 
-  <!-- MODAL DE DETALLE DEL SERVICIO (EXPLICACIÓN + IMÁGENES/VIDEO + LINK DEMO) -->
+  <!-- MODAL DE DETALLE DEL SERVICIO -->
   <div class="modal-backdrop" id="serviceModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal-close" id="modalClose" aria-label="Cerrar ventana" type="button">&times;</button>
@@ -303,6 +400,7 @@
 
   <!-- SCRIPTS MODULARES -->
   <script src="./js/intro.js"></script>
+  <script src="./js/fx-engine.js"></script>
   <script type="module" src="./js/firebase-config.js"></script>
   <script src="./js/servicios-data.js"></script>
   <script src="./js/pwa.js"></script>
