@@ -20,7 +20,44 @@
   <!-- Estilos principales -->
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
-<body>
+<body class="intro-active">
+
+  <!-- CINEMÁTICA DE ENTRADA -->
+  <div class="intro-overlay" id="introOverlay" aria-hidden="true">
+    <div class="intro-grid-bg"></div>
+    <div class="intro-radial-glow"></div>
+
+    <div class="intro-stage">
+      <div class="intro-emblem-wrap">
+        <svg class="intro-hex-svg" viewBox="0 0 160 160" width="160" height="160">
+          <defs>
+            <linearGradient id="semeHexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1464F6" />
+              <stop offset="100%" stop-color="#16B1FF" />
+            </linearGradient>
+          </defs>
+          <polygon
+            class="intro-hex-path"
+            points="80,8 144,44 144,116 80,152 16,116 16,44"
+            fill="none"
+            stroke="url(#semeHexGrad)"
+            stroke-width="3"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <img src="./assets/img/icono.jpg" alt="SEME Studio" class="intro-logo-img" />
+      </div>
+
+      <div class="intro-text-block">
+        <span class="intro-kicker">EXPERIENCIAS WEB &bull; MICROAPPS</span>
+        <div class="intro-bar-track">
+          <div class="intro-bar-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="intro-skip-btn" id="skipIntroBtn">Saltar</button>
+  </div>
 
   <!-- BARRA DE NAVEGACIÓN -->
   <header class="navbar">
@@ -57,7 +94,7 @@
     <section class="hero">
       <div class="hero-glow"></div>
       <div class="container hero-grid">
-        <div class="hero-text">
+        <div class="hero-text reveal-item reveal-delay-1">
           <span class="badge-tech">ESTUDIO DIGITAL &bull; DESARROLLO A MEDIDA</span>
           <h1>Transformamos ideas en <span class="text-gradient">experiencias web</span> que venden y organizan tu negocio.</h1>
           <p class="hero-subtitle">
@@ -83,7 +120,7 @@
           </div>
         </div>
 
-        <div class="hero-visual">
+        <div class="hero-visual reveal-item reveal-delay-2">
           <div class="showcase-card">
             <div class="showcase-header">
               <span class="dot red"></span>
@@ -265,6 +302,7 @@
   </div>
 
   <!-- SCRIPTS MODULARES -->
+  <script src="./js/intro.js"></script>
   <script type="module" src="./js/firebase-config.js"></script>
   <script src="./js/servicios-data.js"></script>
   <script src="./js/pwa.js"></script>
