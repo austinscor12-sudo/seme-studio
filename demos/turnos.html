@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: MicroApp de Turnos y Reservas | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/turnos.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <!-- CABECERA DEL LOCAL DE MUESTRA -->
+  <header class="biz-header">
+    <div class="container">
+      <div class="biz-card">
+        <div class="biz-avatar">✂️</div>
+        <div class="biz-info">
+          <div class="biz-top-row">
+            <h1>KRONOS BARBER & STUDIO</h1>
+            <span class="badge-live">● Turnos Online 24/7</span>
+          </div>
+          <p>Av. 3 de Abril 1140 &bull; ⭐ 4.9 (180+ reseñas)</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FLUJO INTERACTIVO DE RESERVA -->
+  <main class="container booking-flow">
+
+    <!-- PASO 1: SERVICIO -->
+    <section class="step-block">
+      <div class="step-heading">
+        <span class="step-pill">01</span>
+        <h2>Elegí el servicio</h2>
+      </div>
+      <div class="services-list" id="serviceOptions"></div>
+    </section>
+
+    <!-- PASO 2: PROFESIONAL -->
+    <section class="step-block">
+      <div class="step-heading">
+        <span class="step-pill">02</span>
+        <h2>Profesional</h2>
+      </div>
+      <div class="staff-grid" id="staffOptions"></div>
+    </section>
+
+    <!-- PASO 3: DÍA Y HORARIO EN TIEMPO REAL -->
+    <section class="step-block">
+      <div class="step-heading">
+        <span class="step-pill">03</span>
+        <h2>Fecha y horario disponible</h2>
+      </div>
+
+      <div class="date-strip" id="dateOptions"></div>
+
+      <div class="slots-legend">
+        <span><i class="dot free"></i> Disponible</span>
+        <span><i class="dot selected"></i> Seleccionado</span>
+        <span><i class="dot busy"></i> Ocupado</span>
+      </div>
+
+      <div class="slots-grid" id="timeSlotsGrid"></div>
+    </section>
+
+    <!-- PASO 4: DATOS Y SEÑA -->
+    <section class="step-block">
+      <div class="step-heading">
+        <span class="step-pill">04</span>
+        <h2>Confirmación y seña</h2>
+      </div>
+
+      <div class="confirm-card">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="clientName">Tu nombre y apellido</label>
+            <input type="text" id="clientName" value="Matías Gómez" placeholder="Ej: Matías Gómez" />
+          </div>
+          <div class="form-group">
+            <label for="clientPhone">WhatsApp de contacto</label>
+            <input type="tel" id="clientPhone" value="3794 55-2190" placeholder="Ej: 3794..." />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Modalidad de pago</label>
+          <div class="pay-toggle" id="depositToggle">
+            <button type="button" class="pay-btn active" data-deposit="50">
+              💳 Seña 50% Online (<span id="depositAmountLabel">$0</span>)
+            </button>
+            <button type="button" class="pay-btn" data-deposit="0">
+              🏪 Abonar 100% en el local
+            </button>
+          </div>
+        </div>
+
+        <div class="summary-box">
+          <div class="sum-row"><span>Servicio:</span><strong id="sumService">—</strong></div>
+          <div class="sum-row"><span>Profesional:</span><strong id="sumStaff">—</strong></div>
+          <div class="sum-row"><span>Fecha y Hora:</span><strong id="sumDateTime" class="cyan">—</strong></div>
+          <div class="sum-row"><span>Valor total:</span><strong id="sumTotal">$0</strong></div>
+          <div class="sum-row highlight" id="sumDepositRow">
+            <span>Seña para bloquear turno:</span>
+            <strong id="sumDeposit">$0</strong>
+          </div>
+        </div>
+
+        <div class="wa-preview">
+          <span class="mono-label">COMPROBANTE AUTOMÁTICO WHATSAPP:</span>
+          <pre id="waTicketPreview"></pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BARRA FLOTANTE DE ACCIÓN -->
+  <div class="sticky-bottom">
+    <div class="sticky-inner">
+      <div class="sticky-meta">
+        <small id="stickyDateLabel">Hoy &bull; 17:00 hs</small>
+        <strong id="stickyPriceLabel">Seña: $4.500</strong>
+      </div>
+      <button type="button" class="btn-confirm-booking" id="confirmBookingBtn">
+        Confirmar Turno →
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL DE TURNO CONFIRMADO CON PASE DIGITAL QR -->
+  <div class="modal-backdrop" id="passModal" aria-hidden="true">
+    <div class="pass-card">
+      <div class="pass-header">
+        <span class="mono-label">TURNO BLOQUEADO EN AGENDA</span>
+        <h3>¡Reserva Confirmada!</h3>
+      </div>
+
+      <div class="qr-ticket">
+        <div class="qr-mock" aria-hidden="true">
+          <div class="qr-grid"></div>
+        </div>
+        <span class="ticket-code" id="ticketCodeText">#TRN-8492</span>
+        <p id="passDetailsText">Corte + Barba Ritual &bull; Hoy 17:00 hs</p>
+      </div>
+
+      <p class="pass-note">
+        En la versión real, el horario queda bloqueado al instante en tu panel para que nadie más lo tome y el cliente recibe este pase por WhatsApp.
+      </p>
+
+      <div class="pass-actions">
+        <button type="button" class="btn-sec" id="closePassBtn">Probar otro horario</button>
+        <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20de%20Turnos%20y%20Reservas%20y%20quiero%20uno%20para%20mi%20negocio." target="_blank" rel="noopener" class="btn-pri">
+          Quiero este sistema
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/turnos.js"></script>
+</body>
+</html>

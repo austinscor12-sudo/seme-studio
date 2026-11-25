@@ -133,7 +133,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Terminá con el ida y vuelta de mensajes para coordinar un horario. Tus clientes ven los turnos libres en tiempo real, reservan desde el celular y podés solicitar una seña previa para asegurar la asistencia.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-turnos.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=MicroApp%20de%20Turnos",
+    demoUrl: "./demos/turnos.html",
     incluye: [
       "Selección de servicio, profesional, día y hora",
       "Bloqueo automático de turnos ya ocupados",

@@ -1,0 +1,640 @@
+:root {
+  --bg: #060911;
+  --surface: #0D1321;
+  --surface-2: #141D30;
+  --primary: #1464F6;
+  --cyan: #16B1FF;
+  --cyan-soft: rgba(22, 177, 255, 0.14);
+  --green: #22C55E;
+  --text: #FFFFFF;
+  --muted: #94A3B8;
+  --border: rgba(255, 255, 255, 0.09);
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 96px;
+  line-height: 1.5;
+}
+
+.container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* CINTA SUPERIOR SEME STUDIO */
+.demo-ribbon {
+  background: linear-gradient(90deg, #091224 0%, #102447 100%);
+  border-bottom: 1px solid rgba(22, 177, 255, 0.3);
+  padding: 0.55rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
+
+.back-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: rgba(20, 100, 246, 0.25);
+  border: 1px solid rgba(22, 177, 255, 0.4);
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+}
+
+.demo-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--cyan);
+  letter-spacing: 0.06em;
+}
+
+/* CABECERA NEGOCIO */
+.biz-header {
+  padding: 1.25rem 0 0.75rem;
+}
+
+.biz-card {
+  background: linear-gradient(135deg, #10182B 0%, #0B101D 100%);
+  border: 1px solid rgba(22, 177, 255, 0.24);
+  border-radius: 20px;
+  padding: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+}
+
+.biz-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--primary), var(--cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  box-shadow: 0 10px 25px rgba(20, 100, 246, 0.35);
+}
+
+.biz-top-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.biz-top-row h1 {
+  font-size: 1.22rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.badge-live {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+}
+
+.biz-info p {
+  font-size: 0.84rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+/* BLOQUES DE PASOS */
+.booking-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 0.75rem;
+}
+
+.step-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.step-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--cyan);
+  background: var(--cyan-soft);
+  border: 1px solid rgba(22, 177, 255, 0.35);
+  padding: 0.22rem 0.55rem;
+  border-radius: 8px;
+}
+
+.step-heading h2 {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+/* PASO 1: SERVICIOS */
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+
+.srv-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.srv-item:hover {
+  border-color: rgba(22, 177, 255, 0.45);
+}
+
+.srv-item.active {
+  background: linear-gradient(135deg, rgba(20, 100, 246, 0.2), rgba(22, 177, 255, 0.1));
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 1px var(--cyan);
+}
+
+.srv-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.srv-top strong {
+  font-size: 0.96rem;
+}
+
+.srv-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--cyan);
+  font-size: 0.94rem;
+}
+
+.srv-item small {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* PASO 2: PROFESIONALES */
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+
+.staff-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.8rem 0.65rem;
+  text-align: center;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.staff-card.active {
+  background: rgba(20, 100, 246, 0.2);
+  border-color: var(--cyan);
+}
+
+.staff-emoji {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.staff-card strong {
+  display: block;
+  font-size: 0.86rem;
+}
+
+.staff-card span {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* PASO 3: FECHAS Y HORARIOS */
+.date-strip {
+  display: flex;
+  gap: 0.55rem;
+  overflow-x: auto;
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.85rem;
+  scrollbar-width: none;
+}
+
+.date-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.date-pill {
+  min-width: 76px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.65rem 0.5rem;
+  text-align: center;
+  color: var(--text);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.date-pill span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.date-pill strong {
+  display: block;
+  font-size: 1.05rem;
+  margin-top: 0.15rem;
+}
+
+.date-pill.active {
+  background: linear-gradient(135deg, var(--primary), var(--cyan));
+  border-color: transparent;
+}
+
+.date-pill.active span {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.slots-legend {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.76rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.slots-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.free { background: var(--surface-2); border: 1px solid rgba(255,255,255,0.3); }
+.dot.selected { background: var(--cyan); }
+.dot.busy { background: #334155; }
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  gap: 0.55rem;
+}
+
+.slot-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: #FFFFFF;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.86rem;
+  font-weight: 700;
+  padding: 0.68rem 0.4rem;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.slot-btn:hover:not(:disabled) {
+  border-color: var(--cyan);
+}
+
+.slot-btn.active {
+  background: var(--cyan);
+  color: #04101E;
+  border-color: var(--cyan);
+  box-shadow: 0 6px 18px rgba(22, 177, 255, 0.35);
+}
+
+.slot-btn:disabled {
+  background: rgba(15, 23, 42, 0.5);
+  color: #475569;
+  border-color: rgba(255, 255, 255, 0.04);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+/* PASO 4: FORMULARIO Y RESUMEN */
+.confirm-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.15rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+@media (max-width: 520px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  margin-bottom: 0.9rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.form-group input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.68rem 0.85rem;
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.pay-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+@media (max-width: 520px) {
+  .pay-toggle {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pay-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.68rem 0.75rem;
+  border-radius: 11px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.pay-btn.active {
+  background: rgba(20, 100, 246, 0.22);
+  border-color: var(--cyan);
+  color: #FFFFFF;
+}
+
+.summary-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.9rem;
+}
+
+.sum-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.sum-row strong {
+  color: #FFFFFF;
+}
+
+.sum-row strong.cyan {
+  color: var(--cyan);
+}
+
+.sum-row.highlight {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  color: #FFFFFF;
+  font-size: 0.94rem;
+}
+
+.wa-preview {
+  background: #06130C;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: 12px;
+  padding: 0.85rem;
+}
+
+.mono-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  display: block;
+}
+
+.wa-preview pre {
+  margin-top: 0.45rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  color: #BBF7D0;
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
+/* BARRA FLOTANTE INFERIOR */
+.sticky-bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  z-index: 70;
+  padding: 0 1rem;
+}
+
+.sticky-inner {
+  max-width: 620px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #0F172A 0%, #172554 100%);
+  border: 1px solid rgba(22, 177, 255, 0.45);
+  border-radius: 16px;
+  padding: 0.78rem 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  box-shadow: 0 14px 35px rgba(5, 10, 25, 0.75);
+}
+
+.sticky-meta small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--cyan);
+}
+
+.sticky-meta strong {
+  font-size: 1.02rem;
+}
+
+.btn-confirm-booking {
+  background: linear-gradient(135deg, var(--primary), var(--cyan));
+  color: #FFFFFF;
+  border: none;
+  padding: 0.68rem 1.1rem;
+  border-radius: 11px;
+  font-weight: 800;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+/* MODAL DE PASE QR CONFIRMADO */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(3, 5, 10, 0.85);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.pass-card {
+  background: var(--surface);
+  border: 1px solid rgba(22, 177, 255, 0.45);
+  border-radius: 22px;
+  padding: 1.75rem 1.4rem;
+  max-width: 410px;
+  width: 100%;
+  text-align: center;
+}
+
+.pass-header h3 {
+  margin-top: 0.3rem;
+  font-size: 1.35rem;
+}
+
+.qr-ticket {
+  background: var(--bg);
+  border: 1px dashed rgba(22, 177, 255, 0.45);
+  border-radius: 16px;
+  padding: 1.15rem;
+  margin: 1.1rem 0;
+}
+
+.qr-mock {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 0.65rem;
+  background: #FFFFFF;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.qr-grid {
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(45deg, #05070B 25%, transparent 25%),
+    linear-gradient(-45deg, #05070B 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #05070B 75%),
+    linear-gradient(-45deg, transparent 75%, #05070B 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+.ticket-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--cyan);
+  font-size: 0.95rem;
+  display: block;
+}
+
+.qr-ticket p {
+  font-size: 0.84rem;
+  color: #E2E8F0;
+  margin-top: 0.25rem;
+}
+
+.pass-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+.pass-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.btn-sec,
+.btn-pri {
+  padding: 0.72rem 0.85rem;
+  border-radius: 11px;
+  font-weight: 700;
+  font-size: 0.83rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-sec {
+  background: var(--surface-2);
+  color: #FFFFFF;
+}
+
+.btn-pri {
+  background: linear-gradient(135deg, var(--primary), var(--cyan));
+  color: #FFFFFF;
+}
