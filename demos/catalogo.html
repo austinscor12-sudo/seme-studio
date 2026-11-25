@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Catálogo Digital + WhatsApp | SEME STUDIO</title>
+  <meta name="theme-color" content="#07090E" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/catalogo.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <!-- CABECERA DEL COMERCIO DE MUESTRA -->
+  <header class="store-header">
+    <div class="store-container">
+      <div class="store-brand">
+        <div class="store-avatar">🔥</div>
+        <div>
+          <div class="store-title-row">
+            <h1>BRASA & CO.</h1>
+            <span class="status-open">● Abierto ahora</span>
+          </div>
+          <p>Burgers Artesanales &bull; Envíos y Retiro en Local</p>
+        </div>
+      </div>
+
+      <!-- Buscador instantáneo -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="searchInput" placeholder="Buscar burger, papas, bebidas..." autocomplete="off" />
+      </div>
+
+      <!-- Categorías -->
+      <nav class="cat-pills" id="catPills">
+        <button type="button" class="cat-pill active" data-cat="todos">Todos</button>
+        <button type="button" class="cat-pill" data-cat="burgers">Burgers</button>
+        <button type="button" class="cat-pill" data-cat="combos">Combos</button>
+        <button type="button" class="cat-pill" data-cat="acompanamientos">Papas & Extras</button>
+        <button type="button" class="cat-pill" data-cat="bebidas">Bebidas</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- GRILLA DE PRODUCTOS -->
+  <main class="store-container store-main">
+    <div class="products-grid" id="productsGrid"></div>
+  </main>
+
+  <!-- BARRA FLOTANTE INFERIOR DEL CARRITO -->
+  <div class="cart-bar hidden" id="cartBar">
+    <div class="cart-bar-inner">
+      <div class="cart-summary-info">
+        <span class="cart-badge-count" id="cartCount">0</span>
+        <div>
+          <small>Tu pedido actual</small>
+          <strong id="cartTotalBar">$0</strong>
+        </div>
+      </div>
+      <button type="button" class="btn-view-cart" id="openCartBtn">
+        Ver Pedido →
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL / DRAWER DEL CARRITO Y CHECKOUT -->
+  <div class="drawer-backdrop" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div>
+          <span class="mono-label">RESUMEN DE COMPRA</span>
+          <h2>Tu Pedido</h2>
+        </div>
+        <button type="button" class="close-drawer" id="closeCartBtn" aria-label="Cerrar">&times;</button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="cart-items-list" id="cartItemsList"></div>
+
+        <!-- Opciones de entrega y pago -->
+        <div class="checkout-form" id="checkoutForm">
+          <div class="form-group">
+            <label>Modalidad de entrega</label>
+            <div class="toggle-group" id="deliveryToggle">
+              <button type="button" class="toggle-btn active" data-mode="Envío a domicilio">🛵 Delivery (+$1.500)</button>
+              <button type="button" class="toggle-btn" data-mode="Retiro en local">🏪 Retiro en local</button>
+            </div>
+          </div>
+
+          <div class="form-group" id="addressGroup">
+            <label for="clientAddress">Dirección de envío</label>
+            <input type="text" id="clientAddress" placeholder="Ej: Av. Costanera 1420, Depto 2B" value="San Martín 850" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="clientName">Tu nombre</label>
+              <input type="text" id="clientName" placeholder="Ej: Lucas" value="Lucas" />
+            </div>
+            <div class="form-group">
+              <label for="paymentMethod">Forma de pago</label>
+              <select id="paymentMethod">
+                <option value="Transferencia / Mercado Pago">Transferencia / MP</option>
+                <option value="Efectivo">Efectivo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="totals-box">
+            <div class="total-line"><span>Subtotal</span><span id="subTotalText">$0</span></div>
+            <div class="total-line"><span>Envío</span><span id="shippingText">$1.500</span></div>
+            <div class="total-line grand"><span>Total a pagar</span><strong id="grandTotalText">$0</strong></div>
+          </div>
+
+          <!-- Vista previa del mensaje que recibe el comercio -->
+          <div class="wa-preview-box">
+            <span class="mono-label">VISTA PREVIA DEL MENSAJE QUE RECIBE TU WHATSAPP:</span>
+            <pre id="waMessagePreview"></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button type="button" class="btn-wa-send" id="simulateOrderBtn">
+          Simular Envío por WhatsApp ✓
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONFIRMACIÓN DE DEMO -->
+  <div class="drawer-backdrop" id="successModal" aria-hidden="true">
+    <div class="success-card">
+      <div class="success-icon">✓</div>
+      <span class="mono-label">DEMOSTRACIÓN COMPLETADA</span>
+      <h3>¡Así recibe el pedido tu cliente!</h3>
+      <p>En la versión real de tu negocio, al tocar ese botón se abre WhatsApp con todo el detalle cargado y listo para enviar en 1 segundo.</p>
+      <div class="success-actions">
+        <button type="button" class="btn-secondary-demo" id="closeSuccessBtn">Seguir probando</button>
+        <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20del%20Cat%C3%A1logo%20Digital%20y%20quiero%20uno%20para%20mi%20negocio." target="_blank" rel="noopener" class="btn-primary-demo">
+          Quiero este catálogo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/catalogo.js"></script>
+</body>
+</html>

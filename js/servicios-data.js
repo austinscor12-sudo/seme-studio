@@ -53,7 +53,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Ideal para hamburgueserías, rotiserías, tiendas de ropa, regalerías y emprendimientos. Mostrá tus productos con fotos, precios y variantes; el cliente suma todo al carrito y te llega el detalle ordenado con total calculado directo a tu WhatsApp.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-catalogo.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Cat%C3%A1logo%20con%20WhatsApp",
+    demoUrl: "./demos/catalogo.html",
     incluye: [
       "Categorías, fotos y buscador instantáneo",
       "Carrito de compras con suma automática",
