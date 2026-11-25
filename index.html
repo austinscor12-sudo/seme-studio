@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SEME STUDIO | Soluciones Web 3D, MicroApps e Invitaciones Digitales</title>
-  <meta name="description" content="Estudio digital de alto impacto: invitaciones digitales interactivas, microapps a medida, catálogos con pedido por WhatsApp, tarjetas NFC y bots con IA." />
+  <meta name="description" content="Estudio digital de alto impacto: invitaciones digitales interactivas, microapps de gestión, catálogos con pedido por WhatsApp, tarjetas NFC, bots con IA y automatización." />
   <meta name="theme-color" content="#05070B" />
 
   <!-- PWA Manifest & Íconos -->
@@ -109,16 +109,16 @@
           <h1>
             No hacemos páginas comunes. Creamos
             <span class="text-gradient-animated">experiencias 3D e interactivas</span>
-            que venden solas.
+            que venden y ordenan tu negocio.
           </h1>
 
           <p class="hero-subtitle">
-            Invitaciones digitales con impacto cinematográfico, microapps de turnos, catálogos que envían pedidos listos a WhatsApp y tarjetas NFC inteligentes. Tocá, probá y explorá muestras reales en vivo.
+            Desde invitaciones digitales cinematográficas hasta microapps de gestión interna, catálogos con pedido a WhatsApp, control por QR/GPS y automatización inteligente. Probá muestras reales en vivo.
           </p>
 
           <div class="hero-buttons">
             <a href="#servicios" class="btn btn-primary magnetic-btn">
-              <span>Explorar Soluciones y Demos</span>
+              <span>Explorar 13 Soluciones y Demos</span>
               <span class="btn-arrow">→</span>
             </a>
             <a href="#configurador" class="btn btn-secondary magnetic-btn">
@@ -159,9 +159,9 @@
             <!-- Selector interactivo de vista previa dentro del escenario 3D -->
             <div class="stage-tabs" id="stageTabs">
               <button type="button" class="stage-tab active" data-stage="invitaciones">Invitaciones</button>
-              <button type="button" class="stage-tab" data-stage="microapps">Turnos</button>
-              <button type="button" class="stage-tab" data-stage="catalogos">Catálogos</button>
-              <button type="button" class="stage-tab" data-stage="nfc">NFC</button>
+              <button type="button" class="stage-tab" data-stage="catalogos">Ventas</button>
+              <button type="button" class="stage-tab" data-stage="gestion">Gestión QR</button>
+              <button type="button" class="stage-tab" data-stage="automatizacion">IA & Bots</button>
             </div>
 
             <div class="holo-screen" id="stageDisplay"></div>
@@ -170,31 +170,39 @@
       </div>
     </section>
 
-    <!-- CINTA CINÉTICA DE ESPECIALIDADES -->
+    <!-- CINTA CINÉTICA INFINITA (MARQUEE) -->
     <div class="marquee-strip" aria-hidden="true">
       <div class="marquee-track">
         <span>INVITACIONES DIGITALES INTERACTIVAS</span>
         <span class="sep">◆</span>
-        <span>MICROAPPS DE TURNOS Y SEÑAS</span>
-        <span class="sep">◆</span>
         <span>CATÁLOGOS CON PEDIDO A WHATSAPP</span>
         <span class="sep">◆</span>
-        <span>TARJETAS INTELIGENTES NFC</span>
+        <span>CONTROL DE ASISTENCIA QR + GPS</span>
         <span class="sep">◆</span>
-        <span>PORTFOLIOS 3D DE ALTO IMPACTO</span>
+        <span>MICROAPPS DE TURNOS Y TALLERES</span>
+        <span class="sep">◆</span>
+        <span>MENÚ DE MESA + DIVISIÓN DE CUENTA</span>
+        <span class="sep">◆</span>
+        <span>RULETAS QR & FILTRO DE RESEÑAS GOOGLE</span>
+        <span class="sep">◆</span>
+        <span>PRESUPUESTOS PDF AL INSTANTE</span>
         <span class="sep">◆</span>
         <span>BOTS DE WHATSAPP CON IA</span>
         <span class="sep">◆</span>
         <!-- Duplicado para bucle infinito fluido -->
         <span>INVITACIONES DIGITALES INTERACTIVAS</span>
         <span class="sep">◆</span>
-        <span>MICROAPPS DE TURNOS Y SEÑAS</span>
-        <span class="sep">◆</span>
         <span>CATÁLOGOS CON PEDIDO A WHATSAPP</span>
         <span class="sep">◆</span>
-        <span>TARJETAS INTELIGENTES NFC</span>
+        <span>CONTROL DE ASISTENCIA QR + GPS</span>
         <span class="sep">◆</span>
-        <span>PORTFOLIOS 3D DE ALTO IMPACTO</span>
+        <span>MICROAPPS DE TURNOS Y TALLERES</span>
+        <span class="sep">◆</span>
+        <span>MENÚ DE MESA + DIVISIÓN DE CUENTA</span>
+        <span class="sep">◆</span>
+        <span>RULETAS QR & FILTRO DE RESEÑAS GOOGLE</span>
+        <span class="sep">◆</span>
+        <span>PRESUPUESTOS PDF AL INSTANTE</span>
         <span class="sep">◆</span>
         <span>BOTS DE WHATSAPP CON IA</span>
         <span class="sep">◆</span>
@@ -205,17 +213,18 @@
     <section id="servicios" class="section">
       <div class="container">
         <div class="section-header reveal-scroll">
-          <span class="section-tag">PORTAFOLIO INTERACTIVO</span>
+          <span class="section-tag">PORTAFOLIO COMPLETO</span>
           <h2>Nuestros Servicios & Demos en Vivo</h2>
-          <p>Pasá el cursor o tocá cada tarjeta para interactuar. Abrí <strong>Ver Detalles</strong> para ver videos y funciones, o tocá <strong>Probar Muestra</strong> para experimentar la versión de prueba.</p>
+          <p>Filtrá por rubro o tocá <strong>Ver Detalles</strong> en cualquier tarjeta para ver videos y funciones, o <strong>Probar Muestra</strong> para experimentar la versión de prueba.</p>
         </div>
 
         <!-- Filtros por categoría -->
         <div class="filter-bar reveal-scroll" id="filterBar">
-          <button class="filter-btn active" data-filter="todos" type="button">Todos los Servicios</button>
-          <button class="filter-btn" data-filter="eventos" type="button">Invitaciones</button>
-          <button class="filter-btn" data-filter="negocios" type="button">MicroApps & Negocios</button>
-          <button class="filter-btn" data-filter="profesionales" type="button">Marca Personal</button>
+          <button class="filter-btn active" data-filter="todos" type="button">Todos (13)</button>
+          <button class="filter-btn" data-filter="ventas" type="button">Ventas & Catálogos</button>
+          <button class="filter-btn" data-filter="gestion" type="button">Gestión & Operaciones</button>
+          <button class="filter-btn" data-filter="eventos" type="button">Invitaciones & Marketing</button>
+          <button class="filter-btn" data-filter="automatizacion" type="button">Automatización & IA</button>
         </div>
 
         <!-- Grilla dinámica 3D cargada desde js/servicios-data.js -->
@@ -228,27 +237,27 @@
       <div class="container">
         <div class="section-header reveal-scroll">
           <span class="section-tag">CONFIGURADOR INTELIGENTE</span>
-          <h2>¿Qué querés lograr hoy?</h2>
+          <h2>¿Qué querés resolver hoy?</h2>
           <p>Elegí tu objetivo principal y mirá al instante qué arquitectura digital te conviene implementar.</p>
         </div>
 
         <div class="sim-wrapper reveal-scroll">
           <div class="sim-options" id="simOptions">
             <button type="button" class="sim-pill active" data-sim="ventas">
-              <strong>Vender más por WhatsApp</strong>
-              <span>Catálogos y pedidos automáticos</span>
+              <strong>Vender más y cotizar rápido</strong>
+              <span>Catálogos WhatsApp, Menús de Mesa y PDFs</span>
             </button>
-            <button type="button" class="sim-pill" data-sim="turnos">
-              <strong>Organizar Turnos y Reservas</strong>
-              <span>Agenda online sin perder tiempo</span>
+            <button type="button" class="sim-pill" data-sim="operaciones">
+              <strong>Ordenar turnos, taller o personal</strong>
+              <span>Reservas, Fichaje QR/GPS y Checklists</span>
             </button>
             <button type="button" class="sim-pill" data-sim="eventos">
-              <strong>Invitar a un Evento Especial</strong>
-              <span>Tarjetas web interactivas con QR</span>
+              <strong>Invitar o atraer clientes con QR</strong>
+              <span>Invitaciones Web, Ruletas y Tarjetas NFC</span>
             </button>
-            <button type="button" class="sim-pill" data-sim="marca">
-              <strong>Destacar mi Marca Personal</strong>
-              <span>Tarjetas NFC y Portfolios 3D</span>
+            <button type="button" class="sim-pill" data-sim="automatizar">
+              <strong>Automatizar mensajes y reseñas</strong>
+              <span>Bots IA, Cobranzas y Filtro Google Maps</span>
             </button>
           </div>
 

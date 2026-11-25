@@ -47,7 +47,6 @@
     function animateCanvas() {
       ctx.clearRect(0, 0, width, height);
 
-      // Luz ambiental sutil siguiendo el puntero
       if (pointer.active) {
         const grad = ctx.createRadialGradient(pointer.x, pointer.y, 10, pointer.x, pointer.y, 260);
         grad.addColorStop(0, "rgba(22, 177, 255, 0.08)");
@@ -66,7 +65,6 @@
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
 
-        // Atracción suave al cursor/dedo
         if (pointer.active) {
           const dx = pointer.x - p.x;
           const dy = pointer.y - p.y;
@@ -178,47 +176,47 @@
       link: "https://umbral.umbralinvitaciones.workers.dev/",
       linkLabel: "Probar Invitación Real"
     },
-    microapps: {
-      badge: "GESTIÓN AUTOMÁTICA 24/7",
-      title: "MicroApp de Turnos & Señas",
-      metric: "Cero mensajes ida y vuelta",
-      uiPreview: `
-        <div class="holo-ui-box">
-          <div class="holo-ui-row"><span>Servicio</span><strong>Corte + Barba</strong></div>
-          <div class="holo-ui-row"><span>Horario Libre</span><strong class="cyan">Hoy 18:30 hs</strong></div>
-          <div class="holo-ui-row"><span>Estado Reserva</span><strong class="green">Bloqueado ✓</strong></div>
-        </div>
-      `,
-      link: "#servicios",
-      linkLabel: "Ver Detalles MicroApps"
-    },
     catalogos: {
       badge: "VENTAS DIRECTAS SIN COMISIÓN",
-      title: "Catálogo + Carrito WhatsApp",
-      metric: "Pedido armado en 3 toques",
+      title: "Catálogos, Menús & PDFs",
+      metric: "Pedidos y presupuestos en segundos",
       uiPreview: `
         <div class="holo-ui-box">
-          <div class="holo-ui-row"><span>2x Combo Burger</span><strong>$18.500</strong></div>
-          <div class="holo-ui-row"><span>Envío / Retiro</span><strong class="cyan">Delivery Zona Centro</strong></div>
-          <div class="holo-ui-row"><span>Canal de Cierre</span><strong class="green">WhatsApp Listo ↗</strong></div>
+          <div class="holo-ui-row"><span>Carrito / Mesa 04</span><strong>$24.500</strong></div>
+          <div class="holo-ui-row"><span>División / Envío</span><strong class="cyan">3 Personas / Delivery</strong></div>
+          <div class="holo-ui-row"><span>Cierre de Venta</span><strong class="green">WhatsApp Listo ↗</strong></div>
         </div>
       `,
       link: "#servicios",
-      linkLabel: "Explorar Catálogos"
+      linkLabel: "Ver Soluciones de Venta"
     },
-    nfc: {
-      badge: "IDENTIDAD CORPORATIVA SMART",
-      title: "Tarjeta Digital & NFC",
-      metric: "Un toque para agendar contacto",
+    gestion: {
+      badge: "CONTROL OPERATIVO EN LA NUBE",
+      title: "Fichaje QR/GPS, Turnos & Taller",
+      metric: "Orden total de tu equipo y clientes",
       uiPreview: `
         <div class="holo-ui-box">
-          <div class="holo-ui-row"><span>Acción Instantánea</span><strong>Guardar vCard</strong></div>
-          <div class="holo-ui-row"><span>Redes & Portfolio</span><strong class="cyan">Todo en 1 link</strong></div>
-          <div class="holo-ui-row"><span>Compatibilidad</span><strong class="green">Android & iPhone</strong></div>
+          <div class="holo-ui-row"><span>Ingreso Personal</span><strong>08:01 hs (GPS OK)</strong></div>
+          <div class="holo-ui-row"><span>Orden Taller #104</span><strong class="cyan">Listo para retirar</strong></div>
+          <div class="holo-ui-row"><span>Checklist Apertura</span><strong class="green">6/6 Fotos Subidas ✓</strong></div>
         </div>
       `,
       link: "#servicios",
-      linkLabel: "Ver Tarjetas NFC"
+      linkLabel: "Explorar MicroApps de Gestión"
+    },
+    automatizacion: {
+      badge: "INTELIGENCIA ARTIFICIAL & REPUTACIÓN",
+      title: "Bots IA, Cobranzas & Reseñas",
+      metric: "Tu negocio trabaja en piloto automático",
+      uiPreview: `
+        <div class="holo-ui-box">
+          <div class="holo-ui-row"><span>Reseña 5 Estrellas</span><strong class="cyan">Enviada a Google Maps ↗</strong></div>
+          <div class="holo-ui-row"><span>Aviso Cuota Gimnasio</span><strong>Enviado por WhatsApp</strong></div>
+          <div class="holo-ui-row"><span>Resumen 22:00 hs</span><strong class="green">Reporte Entregado ✓</strong></div>
+        </div>
+      `,
+      link: "#servicios",
+      linkLabel: "Ver Automatizaciones"
     }
   };
 
@@ -258,44 +256,44 @@
      ========================================================= */
   const simConfig = {
     ventas: {
-      titulo: "Catálogo Digital + Pedido Directo a WhatsApp",
-      ideal: "Ideal para locales de comida, tiendas de ropa, regalerías y emprendimientos.",
+      titulo: "Catálogos WhatsApp, Menús de Mesa & Presupuestos PDF",
+      ideal: "Ideal para comercios, bares, gastronomía, fabricantes y vendedores a domicilio.",
       beneficios: [
-        "Tus clientes ven fotos, precios y arman su carrito desde el celular.",
-        "Recibís el pedido ordenado y listo para cobrar en tu WhatsApp.",
-        "Sin pagar comisiones por venta a plataformas externas."
+        "Catálogos con carrito o menú QR por mesa con división de cuenta.",
+        "Generador de presupuestos en PDF con cálculos al instante frente al cliente.",
+        "Cierre de pedidos directo a tu WhatsApp sin pagar comisiones."
       ],
-      mensajeWa: "Hola SEME Studio! Quiero armar un Catálogo Digital con pedidos por WhatsApp para mi negocio."
+      mensajeWa: "Hola SEME Studio! Quiero implementar una herramienta para vender y cotizar más rápido en mi negocio."
     },
-    turnos: {
-      titulo: "MicroApp de Turnos y Reservas Online",
-      ideal: "Ideal para barberías, estética, canchas, consultorios y estudios.",
+    operaciones: {
+      titulo: "MicroApps de Gestión: Turnos, Taller, Fichaje QR/GPS y Checklists",
+      ideal: "Ideal para talleres, peluquerías, canchas, gimnasios, obras y sucursales.",
       beneficios: [
-        "Agenda abierta 24/7 con bloqueo automático de horarios ocupados.",
-        "Opción de solicitar seña previa para evitar turnos caídos.",
-        "Instalable como App en el celular del dueño y del cliente."
+        "Control de asistencia de empleados con validación por QR y ubicación GPS.",
+        "Link de seguimiento en vivo para clientes de servicio técnico o talleres.",
+        "Agenda de turnos 24/7 y checklists diarios con fotos verificadas."
       ],
-      mensajeWa: "Hola SEME Studio! Me interesa una MicroApp de Turnos y Reservas para mi negocio."
+      mensajeWa: "Hola SEME Studio! Me interesa una MicroApp de gestión interna para ordenar mi negocio."
     },
     eventos: {
-      titulo: "Invitación Digital Interactiva con Pase QR",
-      ideal: "Ideal para casamientos, 15 años, cumpleaños, bautismos y eventos empresariales.",
+      titulo: "Invitaciones Web VIP, Ruletas de Premios QR & Tarjetas NFC",
+      ideal: "Ideal para eventos sociales, ferias, locales físicos y equipos profesionales.",
       beneficios: [
-        "Cuenta regresiva en vivo, música, galería de fotos y mapa GPS.",
-        "Confirmación de asistencia inteligente (RSVP) y datos de regalos.",
-        "Diseño 100% personalizado con la estética de tu fiesta."
+        "Invitaciones interactivas con cuenta regresiva, música, mapa y RSVP.",
+        "Ruleta de premios QR para captar contactos y descuentos en locales.",
+        "Tarjetas NFC corporativas que guardan tu contacto en un toque."
       ],
-      mensajeWa: "Hola SEME Studio! Quiero consultar por una Invitación Digital Interactiva para un evento."
+      mensajeWa: "Hola SEME Studio! Quiero consultar por Invitaciones Digitales, Ruleta QR o Tarjetas NFC."
     },
-    marca: {
-      titulo: "Tarjeta Digital NFC + Portfolio Profesional",
-      ideal: "Ideal para inmobiliarias, abogados, arquitectos, fotógrafos y ejecutivos.",
+    automatizar: {
+      titulo: "Bots de WhatsApp con IA, Cobranzas & Filtro de Reseñas Google",
+      ideal: "Ideal para negocios que quieren ahorrar horas de atención y mejorar su reputación.",
       beneficios: [
-        "Guardado automático de tu contacto en la agenda del cliente con un toque.",
-        "Muestra tus trabajos, ubicación y redes con imagen premium.",
-        "Funciona mediante link, código QR o tarjeta física NFC."
+        "Filtro inteligente: clientes felices van a Google Maps; quejas van a tu buzón privado.",
+        "Recordatorios automáticos de cuotas y reportes nocturnos de ventas.",
+        "Asistente virtual en WhatsApp respondiendo consultas 24/7."
       ],
-      mensajeWa: "Hola SEME Studio! Quiero mi Tarjeta Digital / Portfolio profesional."
+      mensajeWa: "Hola SEME Studio! Quiero automatizar mensajes, cobranzas o reseñas de Google en mi negocio."
     }
   };
 
@@ -309,7 +307,7 @@
     simResult.classList.remove("stage-anim");
     void simResult.offsetWidth;
     simResult.innerHTML = `
-      <span class="badge-tech">SOLUCIÓN RECOMENDADA</span>
+      <span class="badge-tech">ARQUITECTURA RECOMENDADA</span>
       <h3>${data.titulo}</h3>
       <p class="sim-ideal">${data.ideal}</p>
       <ul class="sim-list">
@@ -319,7 +317,7 @@
         <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn-whatsapp">
           Cotizar esta solución por WhatsApp
         </a>
-        <a href="#servicios" class="btn btn-secondary">Ver muestra abajo</a>
+        <a href="#servicios" class="btn btn-secondary">Ver detalles en el catálogo</a>
       </div>
     `;
     simResult.classList.add("stage-anim");
@@ -353,6 +351,5 @@
 
   document.querySelectorAll(".reveal-scroll").forEach((el) => revealObserver.observe(el));
 
-  // Inicializar tilt en tarjetas estáticas
   window.initTiltCards();
 })();
