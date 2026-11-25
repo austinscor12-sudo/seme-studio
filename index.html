@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEME STUDIO | Soluciones Web, MicroApps e Invitaciones Digitales</title>
+  <meta name="description" content="Desarrollo de invitaciones digitales interactivas, microapps a medida, catálogos con pedido por WhatsApp, tarjetas NFC y automatización para negocios." />
+  <meta name="theme-color" content="#05070B" />
+
+  <!-- PWA Manifest & Íconos -->
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/jpeg" href="./assets/img/icono.jpg" />
+  <link rel="apple-touch-icon" href="./assets/img/icono.jpg" />
+
+  <!-- Tipografía geométrica moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="#inicio" class="brand-link" aria-label="SEME Studio Inicio">
+        <img src="./assets/img/icono.jpg" alt="Logo SEME Studio" class="brand-logo" />
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#servicios">Servicios</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#app-movil">App Celular</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="btnInstallNav" class="btn btn-outline btn-sm" type="button">
+          <span class="dot-live"></span> Instalar App
+        </button>
+        <a href="https://wa.me/5493794860604?text=Hola%20SEME%20Studio!%20Quiero%20consultar%20por%20una%20soluci%C3%B3n%20digital." target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+          WhatsApp
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN PRINCIPAL (HERO) -->
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <span class="badge-tech">ESTUDIO DIGITAL &bull; DESARROLLO A MEDIDA</span>
+          <h1>Transformamos ideas en <span class="text-gradient">experiencias web</span> que venden y organizan tu negocio.</h1>
+          <p class="hero-subtitle">
+            Desde invitaciones digitales interactivas hasta microapps de turnos, catálogos con pedido directo a WhatsApp y sistemas a medida. Explorá cada solución y probá nuestras muestras en vivo.
+          </p>
+          <div class="hero-buttons">
+            <a href="#servicios" class="btn btn-primary">Explorar Servicios y Demos</a>
+            <a href="#app-movil" class="btn btn-secondary">Descargar Versión Celular</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric">
+              <strong>100%</strong>
+              <span>Adaptado a celular</span>
+            </div>
+            <div class="metric">
+              <strong>Demos</strong>
+              <span>Interactivas en vivo</span>
+            </div>
+            <div class="metric">
+              <strong>A medida</strong>
+              <span>Para cada rubro</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="showcase-card">
+            <div class="showcase-header">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+              <span class="showcase-url">semestudio.app/demos</span>
+            </div>
+            <div class="showcase-body">
+              <img src="./assets/img/icono.jpg" alt="SEME Studio" class="showcase-logo" />
+              <div class="showcase-tags">
+                <span>Invitaciones</span>
+                <span>MicroApps</span>
+                <span>Catálogos</span>
+                <span>NFC</span>
+                <span>Bots IA</span>
+              </div>
+              <p>Seleccioná cualquier servicio abajo para ver su explicación detallada, galería y probar una muestra real.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATÁLOGO DE SERVICIOS -->
+    <section id="servicios" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">PORTAFOLIO DE SOLUCIONES</span>
+          <h2>Nuestros Servicios</h2>
+          <p>Elegí una categoría o abrí cualquier servicio para ver en detalle qué incluye, imágenes/videos de ejemplo y probar su demo interactiva.</p>
+        </div>
+
+        <!-- Filtros por categoría -->
+        <div class="filter-bar" id="filterBar">
+          <button class="filter-btn active" data-filter="todos" type="button">Todos</button>
+          <button class="filter-btn" data-filter="eventos" type="button">Invitaciones</button>
+          <button class="filter-btn" data-filter="negocios" type="button">MicroApps & Negocios</button>
+          <button class="filter-btn" data-filter="profesionales" type="button">Marca Personal</button>
+        </div>
+
+        <!-- Grilla dinámica cargada desde js/servicios-data.js -->
+        <div class="services-grid" id="servicesGrid"></div>
+      </div>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section id="como-funciona" class="section section-dark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">PROCESO SIMPLE</span>
+          <h2>¿Cómo trabajamos tu proyecto?</h2>
+        </div>
+
+        <div class="steps-grid">
+          <article class="step-card">
+            <span class="step-number">01</span>
+            <h3>Probás la muestra</h3>
+            <p>Navegás nuestras demos reales desde tu celular para ver exactamente cómo van a interactuar tus clientes o invitados.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">02</span>
+            <h3>Personalizamos tu marca</h3>
+            <p>Adaptamos colores, textos, fotos, funciones y medios de pago a la identidad de tu evento o negocio.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">03</span>
+            <h3>Lanzamiento inmediato</h3>
+            <p>Te entregamos tu enlace listo para compartir en WhatsApp, Instagram, códigos QR o tarjetas NFC sin instalar nada pesado.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DESCARGAR VERSIÓN PARA CELULAR (PWA) -->
+    <section id="app-movil" class="section">
+      <div class="container">
+        <div class="pwa-banner">
+          <div class="pwa-info">
+            <span class="badge-tech">TECNOLOGÍA PWA (WEB APP)</span>
+            <h2>Llevá <span class="text-gradient">SEME STUDIO</span> instalado en tu celular</h2>
+            <p>
+              No ocupa espacio como una app tradicional ni requiere tiendas externas. Instalá nuestra Web App en tu pantalla de inicio para consultar servicios, mostrar demos a clientes al instante y recibir novedades.
+            </p>
+            <ul class="pwa-features">
+              <li>Acceso directo con ícono propio en tu pantalla</li>
+              <li>Carga ultra rápida y consumo mínimo de datos</li>
+              <li>Compatible con Android, iPhone (iOS) y computadora</li>
+            </ul>
+            <div class="pwa-actions">
+              <button id="btnInstallMain" class="btn btn-primary" type="button">
+                Descargar / Instalar App en Celular
+              </button>
+              <button id="btnManualPwa" class="btn btn-outline" type="button">
+                ¿Cómo instalar en iPhone / Android?
+              </button>
+            </div>
+            <p id="pwaStatusText" class="pwa-status"></p>
+          </div>
+
+          <div class="pwa-mockup">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img src="./assets/img/icono.jpg" alt="App SEME Studio" />
+                <h4>SEME STUDIO</h4>
+                <span>Web App Instalada</span>
+                <div class="phone-pill">Listo para usar</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO Y REDES -->
+    <section id="contacto" class="section section-dark">
+      <div class="container contact-box">
+        <span class="section-tag">HABLEMOS DE TU IDEA</span>
+        <h2>¿Necesitás una solución a medida?</h2>
+        <p>Escribinos directamente por WhatsApp o seguinos en Instagram para ver los últimos lanzamientos y demos.</p>
+        <div class="contact-buttons">
+          <a href="https://wa.me/5493794860604?text=Hola%20SEME%20Studio!%20Me%20interesa%20crear%20un%20proyecto%20web." target="_blank" rel="noopener" class="btn btn-primary">
+            Enviar WhatsApp Directo
+          </a>
+          <a href="https://instagram.com/" target="_blank" rel="noopener" class="btn btn-secondary" id="igLink">
+            Seguir en Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <img src="./assets/img/icono.jpg" alt="SEME Studio" class="footer-logo" />
+        <p>Desarrollo Web, MicroApps & Soluciones Digitales.</p>
+      </div>
+      <div class="footer-copy">
+        <p>&copy; <span id="currentYear"></span> SEME STUDIO. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a href="https://wa.me/5493794860604?text=Hola%20SEME%20Studio!%20Vengo%20desde%20la%20web." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+    <span>WhatsApp</span>
+  </a>
+
+  <!-- MODAL DE DETALLE DEL SERVICIO (EXPLICACIÓN + IMÁGENES/VIDEO + LINK DEMO) -->
+  <div class="modal-backdrop" id="serviceModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar ventana" type="button">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- MODAL DE INSTRUCCIONES PWA -->
+  <div class="modal-backdrop" id="pwaHelpModal" aria-hidden="true">
+    <div class="modal-card modal-sm" role="dialog" aria-modal="true">
+      <button class="modal-close" id="pwaHelpClose" aria-label="Cerrar ayuda PWA" type="button">&times;</button>
+      <h3>Instalar SEME STUDIO en tu celular</h3>
+      <div class="pwa-guide">
+        <div class="guide-block">
+          <h4>En Android (Chrome)</h4>
+          <p>1. Tocá los <strong>tres puntitos (⋮)</strong> arriba a la derecha.</p>
+          <p>2. Seleccioná <strong>"Instalar aplicación"</strong> o <strong>"Agregar a la pantalla principal"</strong>.</p>
+        </div>
+        <div class="guide-block">
+          <h4>En iPhone / iPad (Safari)</h4>
+          <p>1. Tocá el botón <strong>Compartir (cuadrado con flecha hacia arriba)</strong> abajo.</p>
+          <p>2. Bajá y elegí <strong>"Agregar a inicio"</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS MODULARES -->
+  <script type="module" src="./js/firebase-config.js"></script>
+  <script src="./js/servicios-data.js"></script>
+  <script src="./js/pwa.js"></script>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

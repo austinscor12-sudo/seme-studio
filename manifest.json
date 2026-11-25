@@ -1,0 +1,18 @@
+{
+  "name": "SEME STUDIO - Soluciones Digitales",
+  "short_name": "SEME STUDIO",
+  "description": "Invitaciones digitales, microapps a medida, catálogos con WhatsApp y soluciones web.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#05070B",
+  "theme_color": "#1464F6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./assets/img/icono.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
