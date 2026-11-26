@@ -152,7 +152,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Evitá decenas de llamadas preguntando '¿ya está listo?'. Al ingresar un equipo o vehículo, el sistema genera un enlace único donde el cliente ve en vivo si está 'En diagnóstico', 'Esperando repuesto' o 'Listo para retirar', junto con el detalle del trabajo y garantía.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-taller.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Gestor%20de%20Servicio%20T%C3%A9cnico",
+    demoUrl: "./demos/taller.html",
     incluye: [
       "Link único de seguimiento por orden de trabajo",
       "Estados en vivo: Revisión, Repuesto, Terminado",

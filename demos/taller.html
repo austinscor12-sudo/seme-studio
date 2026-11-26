@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Gestor de Servicio Técnico y Garantías | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/taller.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <!-- CABECERA DEL TALLER DE MUESTRA -->
+  <header class="shop-header">
+    <div class="container">
+      <div class="shop-banner">
+        <div class="shop-icon">🛠️</div>
+        <div class="shop-meta">
+          <div class="shop-title-row">
+            <h1>NEXUS LAB &bull; SERVICIO TÉCNICO</h1>
+            <span class="badge-cloud">● Seguimiento Online</span>
+          </div>
+          <p>Reparación de Smartphones, Notebooks &amp; Consolas &bull; Garantía Escrita</p>
+        </div>
+      </div>
+
+      <!-- SELECTOR DE MODO DE VISTA (CLIENTE VS TALLER) -->
+      <div class="role-switcher" id="roleSwitcher">
+        <button type="button" class="role-btn active" data-view="cliente">
+          📱 Vista Cliente (Link Único)
+        </button>
+        <button type="button" class="role-btn" data-view="taller">
+          🔧 Panel Técnico (Actualizar Estado)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+
+    <!-- SELECTOR RÁPIDO DE ÓRDENES DE EJEMPLO -->
+    <div class="orders-bar">
+      <span class="mono-label">ÓRDENES ACTIVAS EN DEMO:</span>
+      <div class="order-pills" id="orderPills"></div>
+    </div>
+
+    <!-- =====================================================
+         VISTA 1: LO QUE VE EL CLIENTE AL ABRIR SU LINK
+         ===================================================== -->
+    <section id="clientView" class="view-section">
+      <div class="ticket-card">
+        <div class="ticket-top">
+          <div>
+            <span class="mono-label" id="cOrderCode">#ORD-4082</span>
+            <h2 id="cDeviceName">iPhone 13 Pro 256GB</h2>
+            <p class="client-sub" id="cClientOwner">Titular: Martín Pereyra &bull; Ingreso: 24/11</p>
+          </div>
+          <span class="status-pill" id="cStatusBadge">Listo para retirar</span>
+        </div>
+
+        <!-- LÍNEA DE TIEMPO VISUAL -->
+        <div class="timeline-box" id="cTimeline"></div>
+
+        <!-- DIAGNÓSTICO Y DETALLE TÉCNICO -->
+        <div class="detail-grid">
+          <div class="info-tile">
+            <small>FALLA REPORTADA</small>
+            <strong id="cReportedIssue">Módulo astillado y batería degradada (74%)</strong>
+          </div>
+          <div class="info-tile">
+            <small>INFORME DEL TÉCNICO</small>
+            <strong id="cTechReport">Cambio de pantalla OLED original + batería nueva. Testeo de FaceID y carga OK.</strong>
+          </div>
+        </div>
+
+        <!-- CHECKLIST DE RECEPCIÓN Y GARANTÍA -->
+        <div class="warranty-strip">
+          <div class="warranty-left">
+            <span class="shield-icon">🛡️</span>
+            <div>
+              <strong>Garantía Escrita Activa: <span id="cWarrantyDays">90 días</span></strong>
+              <small>Cubre fallas de fábrica del repuesto y mano de obra.</small>
+            </div>
+          </div>
+          <div class="price-box">
+            <small>TOTAL SERVICIO</small>
+            <strong id="cTotalPrice">$145.000</strong>
+          </div>
+        </div>
+
+        <!-- ACCIONES DEL CLIENTE -->
+        <div class="client-actions">
+          <button type="button" class="btn-outline-demo" id="copyTrackingBtn">
+            🔗 Copiar Link de Seguimiento
+          </button>
+          <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20del%20Gestor%20de%20Servicio%20T%C3%A9cnico%20y%20quiero%20uno%20para%20mi%20taller." target="_blank" rel="noopener" class="btn-primary-demo">
+            Quiero este sistema →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         VISTA 2: PANEL DEL TÉCNICO / DUEÑO DEL TALLER
+         ===================================================== -->
+    <section id="techView" class="view-section hidden">
+      <div class="tech-card">
+        <div class="tech-header">
+          <div>
+            <span class="mono-label">CONTROL DE TALLER EN TIEMPO REAL</span>
+            <h2>Actualizar Orden <span id="tOrderCode">#ORD-4082</span></h2>
+          </div>
+          <button type="button" class="btn-switch-back" id="jumpToClientBtn">
+            Ver como Cliente ↗
+          </button>
+        </div>
+
+        <p class="tech-hint">
+          Tocá cualquier estado para actualizar el progreso: el cliente lo ve reflejado al instante en su enlace sin tener que llamar.
+        </p>
+
+        <div class="state-buttons-grid" id="stateButtonsGrid">
+          <button type="button" class="state-option" data-step="0">
+            <span class="st-num">01</span>
+            <strong>Equipo Ingresado</strong>
+            <small>Recepción y checklist</small>
+          </button>
+          <button type="button" class="state-option" data-step="1">
+            <span class="st-num">02</span>
+            <strong>En Diagnóstico</strong>
+            <small>Revisión en banco</small>
+          </button>
+          <button type="button" class="state-option" data-step="2">
+            <span class="st-num">03</span>
+            <strong>Esperando Repuesto</strong>
+            <small>Pedido a proveedor</small>
+          </button>
+          <button type="button" class="state-option" data-step="3">
+            <span class="st-num">04</span>
+            <strong>Listo para Retirar</strong>
+            <small>Control de calidad OK</small>
+          </button>
+        </div>
+
+        <div class="tech-note-editor">
+          <label for="techNoteInput">Nota visible para el cliente en su link:</label>
+          <textarea id="techNoteInput" rows="2"></textarea>
+        </div>
+
+        <!-- VISTA PREVIA DEL AVISO POR WHATSAPP AL CAMBIAR ESTADO -->
+        <div class="wa-notify-box">
+          <div class="wa-notify-top">
+            <span class="mono-label">MENSAJE AUTOMÁTICO PARA AVISAR AL CLIENTE:</span>
+            <button type="button" class="btn-sim-notify" id="simNotifyBtn">Simular Aviso ✓</button>
+          </div>
+          <pre id="waNotifyPreview"></pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST DE CONFIRMACIÓN -->
+  <div class="toast-msg" id="toastMsg">Estado actualizado en vivo ✓</div>
+
+  <script src="./js/taller.js"></script>
+</body>
+</html>
