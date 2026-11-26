@@ -232,7 +232,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Al terminar una atención o compra, el cliente califica su experiencia de 1 a 5 estrellas. Si elige 4 o 5, el sistema lo lleva directo a publicar su reseña en tu perfil de Google Maps; si elige 1 a 3, abre un buzón privado que llega solo al dueño para solucionar el problema a tiempo.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-resenas.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Filtro%20Inteligente%20de%20Rese%C3%B1as",
+    demoUrl: "./demos/resenas.html",
     incluye: [
       "Enrutamiento inteligente según puntuación (1-3 vs 4-5)",
       "Impulso directo al posicionamiento en Google Maps",
