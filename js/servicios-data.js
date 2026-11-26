@@ -213,7 +213,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "No pierdas ventas por demorar en contestar fuera de horario. Desarrollamos asistentes entrenados con el catálogo, precios y reglas de tu negocio para atender consultas al instante y derivar casos complejos a un asesor humano.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-bot.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Bot%20WhatsApp%20con%20IA",
+    demoUrl: "./demos/bot-whatsapp.html",
     incluye: [
       "Atención automática las 24 horas los 7 días",
       "Entrenado con tus productos, servicios y precios",

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Bots de WhatsApp con IA 24/7 | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/bot-whatsapp.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <main class="container main-wrap">
+
+    <!-- SELECTOR DE RUBRO PARA DEMOSTRAR ADAPTACIÓN DE LA IA -->
+    <div class="niche-switcher" id="nicheSwitcher">
+      <button type="button" class="niche-btn active" data-niche="tienda">
+        🛍️ Rubro: Tienda &amp; Envíos
+      </button>
+      <button type="button" class="niche-btn" data-niche="turnos">
+        🦷 Rubro: Consultorio &amp; Turnos
+      </button>
+    </div>
+
+    <!-- SIMULADOR DE WHATSAPP BUSINESS CON IA -->
+    <section class="wa-phone-shell">
+      <!-- CABECERA DEL CHAT -->
+      <header class="wa-chat-header">
+        <div class="wa-biz-info">
+          <div class="wa-avatar" id="waAvatar">K</div>
+          <div>
+            <div class="wa-title-row">
+              <strong id="waBizName">KROMA INDUMENTARIA</strong>
+              <span class="verified-badge" title="Cuenta Oficial">✓</span>
+            </div>
+            <span class="wa-status-text" id="waStatusText">● En línea &bull; Asistente IA 24/7</span>
+          </div>
+        </div>
+        <button type="button" class="btn-reset-chat" id="resetChatBtn" title="Reiniciar conversación">
+          ↻ Reiniciar
+        </button>
+      </header>
+
+      <!-- ÁREA DE MENSAJES -->
+      <div class="wa-messages-area" id="waMessagesArea"></div>
+
+      <!-- PREGUNTAS RÁPIDAS EN 1 TOQUE -->
+      <div class="quick-prompts-bar" id="quickPromptsBar"></div>
+
+      <!-- BARRA DE ESCRITURA LIBRE -->
+      <form class="wa-input-bar" id="waChatForm">
+        <input
+          type="text"
+          id="waUserInput"
+          placeholder="Escribí una consulta como cliente..."
+          autocomplete="off"
+        />
+        <button type="submit" class="btn-send-wa" aria-label="Enviar mensaje">
+          ➤
+        </button>
+      </form>
+    </section>
+
+    <!-- MONITOR DE INTELIGENCIA ARTIFICIAL EN TIEMPO REAL -->
+    <section class="ai-telemetry-card">
+      <div class="telemetry-head">
+        <div>
+          <span class="mono-label">MOTOR CONVERSACIONAL EN VIVO</span>
+          <h2>¿Qué está haciendo la IA por detrás?</h2>
+        </div>
+        <span class="speed-pill" id="aiLatencyBadge">⚡ Respuesta: 0.6s</span>
+      </div>
+
+      <div class="telemetry-grid">
+        <div class="tele-tile">
+          <small>INTENCIÓN DETECTADA</small>
+          <strong id="detectedIntent">Bienvenida y Catálogo</strong>
+        </div>
+        <div class="tele-tile">
+          <small>ACCIÓN AUTOMÁTICA</small>
+          <strong id="autoActionTaken">Responde con precios y stock</strong>
+        </div>
+        <div class="tele-tile">
+          <small>ESTADO DEL LEAD</small>
+          <strong class="lead-hot" id="leadStatusTag">Atendido sin demora</strong>
+        </div>
+      </div>
+
+      <div class="cta-strip">
+        <div>
+          <strong>¿Querés este Bot IA entrenado con los datos de tu negocio?</strong>
+          <small>Responde precios, agenda turnos y deriva ventas a tu WhatsApp personal.</small>
+        </div>
+        <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20del%20Bot%20de%20WhatsApp%20con%20IA%2024%2F7%20y%20quiero%20uno%20para%20mi%20negocio." target="_blank" rel="noopener" class="btn-cta-bot">
+          Quiero mi Bot IA →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="./js/bot-whatsapp.js"></script>
+</body>
+</html>
