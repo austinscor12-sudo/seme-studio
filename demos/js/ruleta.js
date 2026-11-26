@@ -53,8 +53,12 @@ function dibujarRuleta() {
     ctx.rotate(inicio + arco / 2);
     ctx.textAlign = "right";
     ctx.fillStyle = "#FFFFFF";
-    ctx.font = "800 13px 'Plus Jakarta Sans', sans-serif";
-    ctx.fillText(PREMIOS_RULETA[i].label, radio - 18, 5);
+    ctx.font = "800 12px 'Plus Jakarta Sans', sans-serif";
+    const palabras = PREMIOS_RULETA[i].label.split(" ");
+    const lineas = palabras.length > 1 && PREMIOS_RULETA[i].label.length > 9 ? palabras : [PREMIOS_RULETA[i].label];
+    const altoLinea = 14;
+    const y0 = 4 - ((lineas.length - 1) * altoLinea) / 2;
+    lineas.forEach((txt, k) => ctx.fillText(txt, radio - 16, y0 + k * altoLinea));
     ctx.restore();
   }
 }

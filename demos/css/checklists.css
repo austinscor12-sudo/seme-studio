@@ -680,3 +680,13 @@ body {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
+
+/* MEJORA: cinta superior compacta en una sola línea (celulares) */
+.demo-ribbon { flex-wrap: nowrap; }
+.back-link { white-space: nowrap; flex-shrink: 0; }
+.demo-tag { white-space: nowrap; text-align: right; }
+@media (max-width: 460px) {
+  .demo-ribbon { padding: 0.5rem 0.75rem; gap: 0.5rem; }
+  .back-link { font-size: 0.76rem; padding: 0.3rem 0.65rem; }
+  .demo-tag { font-size: 0.6rem; letter-spacing: 0.02em; }
+}
