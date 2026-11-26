@@ -110,7 +110,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Reemplazá las tarjetas de papel que se pierden. Con un link, QR o acercando una tarjeta física NFC al celular, tu cliente accede a tu portfolio, ubicación y redes, y guarda tu número directo en su agenda telefónica.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-nfc.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Tarjeta%20Digital%20NFC",
+    demoUrl: "./demos/tarjeta-nfc.html",
     incluye: [
       "Botón 'Guardar Contacto' directo en agenda (vCard)",
       "Galería de obras, propiedades o casos de éxito",

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Tarjetas Digitales NFC &amp; Portfolios 3D | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/tarjeta-nfc.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <main class="container main-wrap">
+
+    <!-- SELECTOR DE RUBRO PARA MOSTRAR EN LA DEMO -->
+    <div class="profile-switcher" id="profileSwitcher">
+      <button type="button" class="prof-btn active" data-profile="ejecutivo">
+        💼 Perfil Ejecutivo / Inmobiliaria
+      </button>
+      <button type="button" class="prof-btn" data-profile="creativo">
+        📐 Perfil Creativo / Portfolio 3D
+      </button>
+    </div>
+
+    <!-- TARJETA FÍSICA NFC INTERACTIVA EN 3D -->
+    <section class="nfc-stage">
+      <div class="nfc-card-3d" id="nfcCard3d">
+        <div class="card-glare" id="cardGlare"></div>
+
+        <div class="card-top-row">
+          <span class="card-brand-tag" id="cardBrandTag">GRUPO VÉRTICE &bull; PROPIEDADES</span>
+          <div class="nfc-waves" title="Chip NFC Activo">
+            <span></span><span></span><span></span>
+            <strong>NFC</strong>
+          </div>
+        </div>
+
+        <div class="card-middle-row">
+          <div class="card-chip"></div>
+          <span class="card-serial" id="cardSerial">ID • 0049-NFC</span>
+        </div>
+
+        <div class="card-bottom-row">
+          <div>
+            <h2 id="cardHolderName">Dr. Mateo Benítez</h2>
+            <p id="cardHolderRole">Corredor Inmobiliario &amp; Tasaciones</p>
+          </div>
+          <button type="button" class="btn-sim-tap" id="simTapBtn">
+            📡 Simular Toque
+          </button>
+        </div>
+      </div>
+      <p class="tilt-hint">Mové el dedo o el cursor sobre la tarjeta para ver el efecto 3D</p>
+    </section>
+
+    <!-- PERFIL DIGITAL QUE SE ABRE EN EL CELULAR DEL CLIENTE -->
+    <section class="digital-profile-card">
+      <div class="profile-hero">
+        <div class="avatar-ring">
+          <div class="avatar-initials" id="avatarInitials">MB</div>
+          <span class="verified-dot" title="Perfil Verificado">✓</span>
+        </div>
+
+        <div class="profile-identity">
+          <span class="mono-label" id="profileCategoryTag">TARJETA INTELIGENTE + AGENDA 1-TOQUE</span>
+          <h1 id="profileName">Dr. Mateo Benítez</h1>
+          <p class="profile-role" id="profileRole">Corredor Inmobiliario Mat. 418 &bull; Grupo Vértice</p>
+          <p class="profile-bio" id="profileBio">
+            Asesoramiento integral en compra, venta y tasación de propiedades residenciales y comerciales en Corrientes y Resistencia.
+          </p>
+        </div>
+      </div>
+
+      <!-- BOTÓN ESTRELLA: GUARDAR CONTACTO EN AGENDA (.VCF REAL) -->
+      <div class="primary-cta-row">
+        <button type="button" class="btn-save-vcard" id="saveVcardBtn">
+          📥 Guardar Contacto en Agenda (.vcf)
+        </button>
+        <button type="button" class="btn-show-qr" id="openQrBtn" title="Mostrar QR de respaldo">
+          QR
+        </button>
+      </div>
+
+      <!-- ACCESOS DIRECTOS EN 1 TOQUE -->
+      <div class="quick-links-grid" id="quickLinksGrid"></div>
+
+      <!-- SECCIÓN DE PORTFOLIO / PROYECTOS DESTACADOS -->
+      <div class="portfolio-section">
+        <div class="section-head">
+          <span class="mono-label" id="portfolioEyebrow">PROPIEDADES Y OPERACIONES DESTACADAS</span>
+          <h3 id="portfolioTitle">Catálogo / Portfolio Interactivo</h3>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid"></div>
+      </div>
+
+      <!-- BANNER CONVERSIÓN SEME STUDIO -->
+      <div class="seme-promo-box">
+        <div>
+          <strong>¿Querés tu propia Tarjeta NFC + Web Portfolio?</strong>
+          <small>Incluye tarjeta física personalizada + perfil editable de por vida.</small>
+        </div>
+        <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20de%20Tarjetas%20Digitales%20NFC%20y%20Portfolios%203D%20y%20quiero%20encargar%20la%20m%C3%ADa." target="_blank" rel="noopener" class="btn-order-nfc">
+          Pedir la mía →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: DETALLE DE PROYECTO / PROPIEDAD -->
+  <div class="modal-backdrop" id="projectModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-top">
+        <span class="mono-label" id="mProjTag">FICHA DESTACADA</span>
+        <button type="button" class="close-btn" id="closeProjectModal">&times;</button>
+      </div>
+      <div class="modal-emoji-banner" id="mProjEmoji">🏢</div>
+      <h3 id="mProjTitle">Torre Costanera Norte</h3>
+      <p id="mProjDesc">Descripción completa del proyecto o propiedad seleccionada.</p>
+      <div class="modal-specs" id="mProjSpecs"></div>
+      <a href="https://wa.me/5493794048564?text=Hola!%20Vi%20tu%20tarjeta%20digital%20NFC%20y%20quiero%20consultar%20por%20un%20proyecto%20destacado." target="_blank" rel="noopener" class="btn-modal-wa">
+        💬 Consultar por WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- MODAL: QR DE RESPALDO PARA TELÉFONOS SIN NFC -->
+  <div class="modal-backdrop" id="qrModal" aria-hidden="true">
+    <div class="modal-card qr-modal-card">
+      <div class="modal-top">
+        <span class="mono-label">RESPALDO UNIVERSAL SIN NFC</span>
+        <button type="button" class="close-btn" id="closeQrModal">&times;</button>
+      </div>
+      <h3>Escaneá con cualquier cámara</h3>
+      <p>Si el teléfono del cliente no tiene chip NFC activado, escanea este código desde la misma tarjeta.</p>
+      <div class="qr-box-visual">
+        <div class="qr-matrix" aria-hidden="true"></div>
+      </div>
+      <span class="qr-url-pill" id="qrUrlText">semestudio.app/card/mateo-benitez</span>
+    </div>
+  </div>
+
+  <!-- TOAST DE CONFIRMACIÓN -->
+  <div class="toast-msg" id="toastMsg">Contacto descargado listo para agendar ✓</div>
+
+  <script src="./js/tarjeta-nfc.js"></script>
+</body>
+</html>
