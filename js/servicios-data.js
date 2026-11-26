@@ -30,7 +30,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Convertí visitantes en clientes recurrentes. Al escanear el código QR en tu mostrador o stand, la persona deja su nombre y WhatsApp para girar una ruleta digital animada y ganar un premio o cupón, mientras tu negocio guarda una base de datos real para futuras promociones.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-ruleta.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Ruleta%20de%20Premios%20QR",
+    demoUrl: "./demos/ruleta.html",
     incluye: [
       "Animación fluida 60 FPS en cualquier celular",
       "Configuración de probabilidades y stock de premios",

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Ruleta de Premios QR | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/ruleta.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <!-- CABECERA DEL LOCAL PROMOCIONAL -->
+  <header class="promo-header">
+    <div class="container">
+      <div class="store-pill">
+        <span class="store-icon">⚡</span>
+        <span>URBAN DROP STORE &bull; PROMO QR MOSTRADOR</span>
+      </div>
+      <h1>¡Girá la ruleta y ganá un beneficio al instante!</h1>
+      <p>Completá tus datos para activar tu giro y recibí tu cupón único para canjear hoy en caja.</p>
+    </div>
+  </header>
+
+  <main class="container main-layout">
+
+    <!-- TARJETA PRINCIPAL DE LA RULETA -->
+    <section class="wheel-stage-card">
+      <div class="wheel-wrapper">
+        <div class="wheel-pointer" aria-hidden="true">▼</div>
+        <canvas id="wheelCanvas" width="340" height="340"></canvas>
+        <button type="button" class="wheel-hub" id="hubSpinBtn" aria-label="Girar ruleta">
+          GIRAR
+        </button>
+      </div>
+
+      <!-- FORMULARIO RÁPIDO DE CAPTACIÓN -->
+      <form class="lead-form" id="spinForm">
+        <div class="form-grid">
+          <div class="input-group">
+            <label for="playerName">Tu nombre</label>
+            <input type="text" id="playerName" value="Sofía Martínez" placeholder="Ej: Sofía" required />
+          </div>
+          <div class="input-group">
+            <label for="playerWa">Tu WhatsApp</label>
+            <input type="tel" id="playerWa" value="3794 62-8810" placeholder="Ej: 3794..." required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-spin-main" id="mainSpinBtn">
+          🎡 Girar Ruleta Ahora
+        </button>
+        <span class="legal-hint">1 giro por cliente &bull; Cupón con código único verificable</span>
+      </form>
+    </section>
+
+    <!-- PANEL EN VIVO DEL DUEÑO DEL LOCAL -->
+    <section class="owner-panel">
+      <div class="owner-header">
+        <div>
+          <span class="mono-tag">VISTA ADMINISTRADOR (LO QUE VE EL DUEÑO)</span>
+          <h2>Base de Clientes Capturados en Vivo</h2>
+        </div>
+        <span class="leads-counter" id="leadsCountBadge">3 registros</span>
+      </div>
+
+      <div class="leads-list" id="leadsList"></div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE PREMIO GANADO -->
+  <div class="modal-backdrop" id="winModal" aria-hidden="true">
+    <div class="win-card">
+      <div class="win-confetti" aria-hidden="true">🎉</div>
+      <span class="mono-tag">¡PREMIO DESBLOQUEADO!</span>
+      <h3 id="wonPrizeTitle">20% OFF en tu compra</h3>
+      <p id="wonPlayerText">Felicitaciones Sofía, presentá este código en caja antes de pagar:</p>
+
+      <div class="coupon-box">
+        <small>CÓDIGO ÚNICO DE CANJE</small>
+        <strong id="couponCodeText">#WIN-4920</strong>
+        <button type="button" class="btn-copy-code" id="copyCodeBtn">Copiar código</button>
+      </div>
+
+      <div class="wa-ticket-preview">
+        <span class="mono-tag">MENSAJE AUTOMÁTICO AL CLIENTE:</span>
+        <pre id="waCouponPreview"></pre>
+      </div>
+
+      <div class="win-actions">
+        <button type="button" class="btn-sec" id="spinAgainBtn">Girar de nuevo (Demo)</button>
+        <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20de%20la%20Ruleta%20de%20Premios%20QR%20y%20quiero%20una%20para%20mi%20negocio." target="_blank" rel="noopener" class="btn-pri">
+          Quiero esta ruleta
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/ruleta.js"></script>
+</body>
+</html>
