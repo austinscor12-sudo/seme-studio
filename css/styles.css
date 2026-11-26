@@ -1386,3 +1386,288 @@ a {
     padding: 1.75rem;
   }
 }
+
+/* =========================================================
+   CINEMÁTICA DE ENTRADA PANORÁMICA 16:9 (60 FPS GPU)
+   ========================================================= */
+body.intro-active {
+  overflow: hidden;
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle at 50% 48%, #0A162B 0%, #05070B 72%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.intro-overlay.is-leaving {
+  opacity: 0;
+  transform: scale(1.07);
+  pointer-events: none;
+}
+
+/* Grilla 3D en perspectiva */
+.intro-grid-3d {
+  position: absolute;
+  inset: -40%;
+  background-image:
+    linear-gradient(to right, rgba(22, 177, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 100, 246, 0.09) 1px, transparent 1px);
+  background-size: 56px 56px;
+  transform: perspective(650px) rotateX(58deg) translateY(-10%);
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.85) 15%, transparent 68%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.85) 15%, transparent 68%);
+  animation: introGridDrift 3.2s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes introGridDrift {
+  0% {
+    opacity: 0;
+    transform: perspective(650px) rotateX(58deg) translateY(0) scale(0.95);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.75;
+    transform: perspective(650px) rotateX(58deg) translateY(56px) scale(1.04);
+  }
+}
+
+/* Aurora ambiental */
+.intro-aurora {
+  position: absolute;
+  width: min(820px, 95vw);
+  height: 320px;
+  background: radial-gradient(ellipse at center, rgba(20, 100, 246, 0.28) 0%, rgba(22, 177, 255, 0.12) 45%, transparent 72%);
+  filter: blur(36px);
+  animation: introAuroraPulse 2.6s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes introAuroraPulse {
+  0% { opacity: 0; transform: scale(0.65); }
+  45% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.85; transform: scale(1); }
+}
+
+/* Escenario central */
+.intro-stage {
+  position: relative;
+  z-index: 2;
+  width: min(820px, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Marco panorámico 16:9 ajustado al PNG */
+.intro-logo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Aura enfocada detrás del isotipo S (lado izquierdo del PNG) */
+.intro-emblem-aura {
+  position: absolute;
+  left: 11%;
+  top: 50%;
+  width: 30%;
+  aspect-ratio: 1 / 1;
+  transform: translateY(-50%) scale(0.4);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(22, 177, 255, 0.55) 0%, rgba(20, 100, 246, 0.2) 55%, transparent 75%);
+  filter: blur(22px);
+  opacity: 0;
+  animation: emblemIgnite 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  pointer-events: none;
+}
+
+@keyframes emblemIgnite {
+  0% { opacity: 0; transform: translateY(-50%) scale(0.4); }
+  50% { opacity: 1; transform: translateY(-50%) scale(1.15); }
+  100% { opacity: 0.7; transform: translateY(-50%) scale(1); }
+}
+
+/* Imagen PNG panorámica con fusión limpia sin recuadro */
+.intro-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: lighten;
+  background: transparent;
+  user-select: none;
+  -webkit-user-drag: none;
+  opacity: 0;
+  transform: scale(1.08);
+  clip-path: inset(0 100% 0 0);
+  filter: drop-shadow(0 0 24px rgba(22, 177, 255, 0.32));
+  animation: logoPanoramicReveal 1.55s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+  will-change: transform, opacity, clip-path;
+}
+
+@keyframes logoPanoramicReveal {
+  0% {
+    opacity: 0;
+    transform: scale(1.08);
+    clip-path: inset(0 100% 0 0);
+  }
+  38% {
+    opacity: 1;
+    transform: scale(1.03);
+    /* Primero descubre el isotipo S izquierdo */
+    clip-path: inset(0 61% 0 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    /* Despliega completo SEME STUDIO hacia la derecha */
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* Línea láser vertical que acompaña el barrido */
+.intro-laser-line {
+  position: absolute;
+  top: 16%;
+  bottom: 16%;
+  left: 0%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, #16B1FF 35%, #FFFFFF 50%, #1464F6 65%, transparent 100%);
+  box-shadow: 0 0 18px 3px rgba(22, 177, 255, 0.85);
+  opacity: 0;
+  animation: laserSweep 1.55s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+  pointer-events: none;
+}
+
+@keyframes laserSweep {
+  0% { left: 2%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 0.95; }
+  100% { left: 98%; opacity: 0; }
+}
+
+/* Destello especular diagonal al completar el logo */
+.intro-glass-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(22, 177, 255, 0.28) 48%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(20, 100, 246, 0.22) 52%,
+    transparent 65%
+  );
+  mix-blend-mode: screen;
+  transform: translateX(-110%);
+  animation: sheenGlide 0.95s ease-in-out 1.45s forwards;
+  pointer-events: none;
+}
+
+@keyframes sheenGlide {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(110%); }
+}
+
+/* HUD inferior */
+.intro-hud {
+  width: min(460px, 84vw);
+  margin-top: -0.4rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: hudAppear 0.55s ease-out 0.65s forwards;
+}
+
+@keyframes hudAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-hud-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.45rem;
+}
+
+.intro-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.64rem, 1.8vw, 0.76rem);
+  letter-spacing: 0.14em;
+  color: #94A3B8;
+}
+
+.intro-percent {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #16B1FF;
+}
+
+.intro-bar-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.intro-bar-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #1464F6 0%, #16B1FF 65%, #FFFFFF 100%);
+  border-radius: 999px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: barCharge 2.15s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+@keyframes barCharge {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+/* Botón Saltar */
+.intro-skip-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 5;
+  background: rgba(13, 19, 33, 0.72);
+  border: 1px solid rgba(22, 177, 255, 0.32);
+  color: #CBD5E1;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.intro-skip-btn:hover {
+  border-color: #16B1FF;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}

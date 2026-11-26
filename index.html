@@ -25,27 +25,38 @@
   <!-- CANVAS 3D INTERACTIVO DE FONDO -->
   <canvas id="spatialCanvas" class="spatial-canvas" aria-hidden="true"></canvas>
 
-  <!-- CINEMÁTICA DE ENTRADA -->
+  <!-- CINEMÁTICA DE ENTRADA PANORÁMICA 16:9 -->
   <div class="intro-overlay" id="introOverlay" aria-hidden="true">
-    <div class="intro-grid-bg"></div>
-    <div class="intro-radial-glow"></div>
+    <div class="intro-grid-3d"></div>
+    <div class="intro-aurora"></div>
+    <div class="intro-particles"></div>
 
     <div class="intro-stage">
-      <img
-        src="./assets/img/logo-cinematica.png?v=2"
-        alt="SEME Studio"
-        style="width: min(340px, 82vw); height: auto; object-fit: contain; mix-blend-mode: lighten; background: transparent; border-radius: 0; box-shadow: none; display: block; margin: 0 auto 1.1rem;"
-      />
+      <!-- Contenedor 16:9 exacto para aprovechar todo el ancho de logo-cinematica.png -->
+      <div class="intro-logo-frame">
+        <div class="intro-emblem-aura"></div>
+        <img
+          src="./assets/img/logo-cinematica.png?v=2"
+          alt="SEME Studio"
+          class="intro-logo-img"
+        />
+        <div class="intro-laser-line"></div>
+        <div class="intro-glass-sheen"></div>
+      </div>
 
-      <div class="intro-text-block">
-        <span class="intro-kicker">EXPERIENCIAS WEB &bull; MICROAPPS</span>
+      <!-- HUD inferior minimalista -->
+      <div class="intro-hud">
+        <div class="intro-hud-top">
+          <span class="intro-kicker">ARQUITECTURA WEB 3D &bull; MICROAPPS &bull; IA</span>
+          <span class="intro-percent" id="introPercent">0%</span>
+        </div>
         <div class="intro-bar-track">
           <div class="intro-bar-fill"></div>
         </div>
       </div>
     </div>
 
-    <button type="button" class="intro-skip-btn" id="skipIntroBtn">Saltar</button>
+    <button type="button" class="intro-skip-btn" id="skipIntroBtn">Saltar intro ✕</button>
   </div>
 
   <!-- BARRA DE NAVEGACIÓN FLOTANTE GLASS -->

@@ -1,38 +1,54 @@
-(function () {
+document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("introOverlay");
   const skipBtn = document.getElementById("skipIntroBtn");
-  const body = document.body;
+  const percentEl = document.getElementById("introPercent");
 
   if (!overlay) {
-    body.classList.remove("intro-active");
-    body.classList.add("site-ready");
+    document.body.classList.remove("intro-active");
     return;
   }
 
-  let finalizado = false;
+  let closed = false;
+  let progress = 0;
 
-  function finalizarCinematica() {
-    if (finalizado) return;
-    finalizado = true;
+  // Contador fluido de 0% a 100% sincronizado con la barra
+  const counterInterval = setInterval(() => {
+    progress += Math.floor(Math.random() * 9) + 6;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(counterInterval);
+    }
+    if (percentEl) percentEl.textContent = `${progress}%`;
+  }, 110);
 
-    // Inicia la salida tipo telón y habilita la entrada en cascada del Hero
+  function closeIntro() {
+    if (closed) return;
+    closed = true;
+    clearInterval(counterInterval);
+    if (percentEl) percentEl.textContent = "100%";
+
     overlay.classList.add("is-leaving");
-    body.classList.remove("intro-active");
-    body.classList.add("site-ready");
+    document.body.classList.remove("intro-active");
 
-    // Desactiva el overlay por completo cuando termina la transición de salida
     setTimeout(() => {
-      overlay.style.display = "none";
-    }, 750);
+      overlay.remove();
+    }, 680);
   }
 
-  // Tiempo total de la cinemática antes de levantar el telón
-  const timerPrincipal = setTimeout(finalizarCinematica, 2200);
+  // Cierre automático al terminar la cinemática (2.65s)
+  const autoTimer = setTimeout(closeIntro, 2650);
 
   if (skipBtn) {
     skipBtn.addEventListener("click", () => {
-      clearTimeout(timerPrincipal);
-      finalizarCinematica();
+      clearTimeout(autoTimer);
+      closeIntro();
     });
   }
-})();
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      clearTimeout(autoTimer);
+      closeIntro();
+    }
+  });
+});
