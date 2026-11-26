@@ -9,8 +9,8 @@
 
   <!-- PWA Manifest & Íconos -->
   <link rel="manifest" href="./manifest.json" />
-  <link rel="icon" type="image/jpeg" href="./assets/img/icono.jpg" />
-  <link rel="apple-touch-icon" href="./assets/img/icono.jpg" />
+  <link rel="icon" type="image/png" href="./assets/img/icono.png?v=2" />
+  <link rel="apple-touch-icon" href="./assets/img/icono.png?v=2" />
 
   <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,25 +31,11 @@
     <div class="intro-radial-glow"></div>
 
     <div class="intro-stage">
-      <div class="intro-emblem-wrap">
-        <svg class="intro-hex-svg" viewBox="0 0 160 160" width="160" height="160">
-          <defs>
-            <linearGradient id="semeHexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1464F6" />
-              <stop offset="100%" stop-color="#16B1FF" />
-            </linearGradient>
-          </defs>
-          <polygon
-            class="intro-hex-path"
-            points="80,8 144,44 144,116 80,152 16,116 16,44"
-            fill="none"
-            stroke="url(#semeHexGrad)"
-            stroke-width="3"
-            stroke-linejoin="round"
-          />
-        </svg>
-        <img src="./assets/img/icono.jpg" alt="SEME Studio" class="intro-logo-img" />
-      </div>
+      <img
+        src="./assets/img/logo-cinematica.png?v=2"
+        alt="SEME Studio"
+        style="width: min(340px, 82vw); height: auto; object-fit: contain; mix-blend-mode: lighten; background: transparent; border-radius: 0; box-shadow: none; display: block; margin: 0 auto 1.1rem;"
+      />
 
       <div class="intro-text-block">
         <span class="intro-kicker">EXPERIENCIAS WEB &bull; MICROAPPS</span>
@@ -66,7 +52,12 @@
   <header class="navbar">
     <div class="container nav-content">
       <a href="#inicio" class="brand-link" aria-label="SEME Studio Inicio">
-        <img src="./assets/img/icono.jpg" alt="Logo SEME Studio" class="brand-logo" />
+        <img
+          src="./assets/img/icono.png?v=2"
+          alt="Logo SEME Studio"
+          class="brand-logo"
+          style="object-fit: contain; mix-blend-mode: lighten; background: transparent;"
+        />
       </a>
 
       <nav class="nav-links" id="navLinks">
@@ -129,7 +120,7 @@
           <div class="hero-metrics">
             <div class="metric">
               <strong>60 FPS</strong>
-              <span>Fluidez total PC & Celu</span>
+              <span>Fluidez total PC &amp; Celu</span>
             </div>
             <div class="metric">
               <strong>En Vivo</strong>
@@ -161,7 +152,7 @@
               <button type="button" class="stage-tab active" data-stage="invitaciones">Invitaciones</button>
               <button type="button" class="stage-tab" data-stage="catalogos">Ventas</button>
               <button type="button" class="stage-tab" data-stage="gestion">Gestión QR</button>
-              <button type="button" class="stage-tab" data-stage="automatizacion">IA & Bots</button>
+              <button type="button" class="stage-tab" data-stage="automatizacion">IA &amp; Bots</button>
             </div>
 
             <div class="holo-screen" id="stageDisplay"></div>
@@ -183,7 +174,7 @@
         <span class="sep">◆</span>
         <span>MENÚ DE MESA + DIVISIÓN DE CUENTA</span>
         <span class="sep">◆</span>
-        <span>RULETAS QR & FILTRO DE RESEÑAS GOOGLE</span>
+        <span>RULETAS QR &amp; FILTRO DE RESEÑAS GOOGLE</span>
         <span class="sep">◆</span>
         <span>PRESUPUESTOS PDF AL INSTANTE</span>
         <span class="sep">◆</span>
@@ -200,7 +191,7 @@
         <span class="sep">◆</span>
         <span>MENÚ DE MESA + DIVISIÓN DE CUENTA</span>
         <span class="sep">◆</span>
-        <span>RULETAS QR & FILTRO DE RESEÑAS GOOGLE</span>
+        <span>RULETAS QR &amp; FILTRO DE RESEÑAS GOOGLE</span>
         <span class="sep">◆</span>
         <span>PRESUPUESTOS PDF AL INSTANTE</span>
         <span class="sep">◆</span>
@@ -214,17 +205,17 @@
       <div class="container">
         <div class="section-header reveal-scroll">
           <span class="section-tag">PORTAFOLIO COMPLETO</span>
-          <h2>Nuestros Servicios & Demos en Vivo</h2>
+          <h2>Nuestros Servicios &amp; Demos en Vivo</h2>
           <p>Filtrá por rubro o tocá <strong>Ver Detalles</strong> en cualquier tarjeta para ver videos y funciones, o <strong>Probar Muestra</strong> para experimentar la versión de prueba.</p>
         </div>
 
         <!-- Filtros por categoría -->
         <div class="filter-bar reveal-scroll" id="filterBar">
           <button class="filter-btn active" data-filter="todos" type="button">Todos (13)</button>
-          <button class="filter-btn" data-filter="ventas" type="button">Ventas & Catálogos</button>
-          <button class="filter-btn" data-filter="gestion" type="button">Gestión & Operaciones</button>
-          <button class="filter-btn" data-filter="eventos" type="button">Invitaciones & Marketing</button>
-          <button class="filter-btn" data-filter="automatizacion" type="button">Automatización & IA</button>
+          <button class="filter-btn" data-filter="ventas" type="button">Ventas &amp; Catálogos</button>
+          <button class="filter-btn" data-filter="gestion" type="button">Gestión &amp; Operaciones</button>
+          <button class="filter-btn" data-filter="eventos" type="button">Invitaciones &amp; Marketing</button>
+          <button class="filter-btn" data-filter="automatizacion" type="button">Automatización &amp; IA</button>
         </div>
 
         <!-- Grilla dinámica 3D cargada desde js/servicios-data.js -->
@@ -330,10 +321,14 @@
             <div class="phone-frame floating-3d">
               <div class="phone-notch"></div>
               <div class="phone-screen">
-                <img src="./assets/img/icono.jpg" alt="App SEME Studio" />
+                <img
+                  src="./assets/img/icono.png?v=2"
+                  alt="App SEME Studio"
+                  style="object-fit: contain; mix-blend-mode: lighten; background: transparent;"
+                />
                 <h4>SEME STUDIO</h4>
                 <span>Web App Instalada</span>
-                <div class="phone-pill">● Online & Lista</div>
+                <div class="phone-pill">● Online &amp; Lista</div>
               </div>
             </div>
           </div>
@@ -363,8 +358,13 @@
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-brand">
-        <img src="./assets/img/icono.jpg" alt="SEME Studio" class="footer-logo" />
-        <p>Arquitectura Web, MicroApps & Experiencias Digitales.</p>
+        <img
+          src="./assets/img/icono.png?v=2"
+          alt="SEME Studio"
+          class="footer-logo"
+          style="object-fit: contain; mix-blend-mode: lighten; background: transparent;"
+        />
+        <p>Arquitectura Web, MicroApps &amp; Experiencias Digitales.</p>
       </div>
       <div class="footer-copy">
         <p>&copy; <span id="currentYear"></span> SEME STUDIO. Todos los derechos reservados.</p>

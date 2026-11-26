@@ -1,4 +1,4 @@
-const CACHE_NAME = "seme-studio-v4";
+const CACHE_NAME = "seme-studio-v5";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
@@ -8,7 +8,8 @@ const ASSETS_TO_CACHE = [
   "./js/servicios-data.js",
   "./js/pwa.js",
   "./js/app.js",
-  "./assets/img/icono.jpg"
+  "./assets/img/icono.png",
+  "./assets/img/logo-cinematica.png"
 ];
 
 self.addEventListener("install", (event) => {
