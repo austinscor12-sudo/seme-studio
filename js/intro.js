@@ -3,15 +3,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const skipBtn = document.getElementById("skipIntroBtn");
   const percentEl = document.getElementById("introPercent");
 
-  if (!overlay) {
+  function revealHeroContent() {
     document.body.classList.remove("intro-active");
+    document.querySelectorAll(".reveal-item").forEach((el) => {
+      el.classList.add("is-visible", "revealed", "active");
+    });
+    window.dispatchEvent(new Event("introFinished"));
+  }
+
+  if (!overlay) {
+    revealHeroContent();
     return;
   }
 
   let closed = false;
   let progress = 0;
 
-  // Contador fluido de 0% a 100% sincronizado con la barra
   const counterInterval = setInterval(() => {
     progress += Math.floor(Math.random() * 9) + 6;
     if (progress >= 100) {
@@ -28,14 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (percentEl) percentEl.textContent = "100%";
 
     overlay.classList.add("is-leaving");
-    document.body.classList.remove("intro-active");
+    revealHeroContent();
 
     setTimeout(() => {
       overlay.remove();
     }, 680);
   }
 
-  // Cierre automático al terminar la cinemática (2.65s)
   const autoTimer = setTimeout(closeIntro, 2650);
 
   if (skipBtn) {
