@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Cobranzas Automáticas &amp; Reportes Diarios | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/cobranzas.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <!-- CABECERA DEL SISTEMA -->
+  <header class="sys-header">
+    <div class="container">
+      <div class="sys-banner">
+        <div class="sys-icon">💸</div>
+        <div class="sys-meta">
+          <div class="sys-title-row">
+            <h1>PULSO CLUB &bull; COBRANZAS Y CAJA</h1>
+            <span class="badge-auto">● Avisos WhatsApp + MP Activos</span>
+          </div>
+          <p>Recordatorios de cuotas automáticos &bull; Cierre diario en el celular del dueño</p>
+        </div>
+      </div>
+
+      <!-- SELECTOR DE VISTA -->
+      <div class="role-switcher" id="roleSwitcher">
+        <button type="button" class="role-btn active" data-view="cobranzas">
+          📲 Cobranzas y Vencimientos
+        </button>
+        <button type="button" class="role-btn" data-view="reporte">
+          📊 Cierre Diario (Vista Dueño)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-wrap">
+
+    <!-- =====================================================
+         VISTA 1: GESTIÓN AUTOMÁTICA DE CUOTAS Y RECORDATORIOS
+         ===================================================== -->
+    <section id="collectionsView" class="view-section">
+      <!-- MÉTRICAS DEL MES -->
+      <div class="kpi-strip">
+        <div class="kpi-box">
+          <small>COBRADO MES</small>
+          <strong id="kpiCollected">$420.000</strong>
+          <span class="up">↑ Recaudación al día</span>
+        </div>
+        <div class="kpi-box">
+          <small>POR COBRAR</small>
+          <strong id="kpiPending">$93.000</strong>
+          <span class="amber" id="kpiPendingCount">3 cuotas activas</span>
+        </div>
+        <div class="kpi-box">
+          <small>EFECTIVIDAD</small>
+          <strong id="kpiRate">82%</strong>
+          <span class="cyan">Cobro sin llamadas</span>
+        </div>
+      </div>
+
+      <!-- BOTÓN DISPARO MASIVO DE RECORDATORIOS -->
+      <div class="batch-bar">
+        <div>
+          <strong>Secuencia Automática de Hoy</strong>
+          <small>Envía aviso cordial por WhatsApp con Link de Pago y Alias</small>
+        </div>
+        <button type="button" class="btn-batch-remind" id="sendBatchBtn">
+          ⚡ Enviar Avisos Pendientes
+        </button>
+      </div>
+
+      <!-- LISTADO DE CLIENTES / ABONADOS -->
+      <div class="debtors-list" id="debtorsList"></div>
+
+      <!-- VISTA PREVIA DEL MENSAJE AUTOMÁTICO ENVIADO -->
+      <div class="wa-preview-card" id="waPreviewCard">
+        <div class="wa-prev-head">
+          <span class="mono-label">MENSAJE WHATSAPP GENERADO AUTOMÁTICAMENTE</span>
+          <span class="recipient-pill" id="waPreviewRecipient">Para: Sofía Benítez</span>
+        </div>
+        <pre id="waPreviewText"></pre>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         VISTA 2: REPORTE DIARIO DE CAJA PARA EL DUEÑO
+         ===================================================== -->
+    <section id="reportView" class="view-section hidden">
+      <div class="report-card">
+        <div class="report-head">
+          <div>
+            <span class="mono-label">RESUMEN AUTOMÁTICO &bull; 21:00 HS</span>
+            <h2>Cierre Diario de Caja y Cobranzas</h2>
+          </div>
+          <button type="button" class="btn-send-owner" id="sendOwnerReportBtn">
+            📲 Enviar al Dueño ✓
+          </button>
+        </div>
+
+        <!-- DESGLOSE POR MEDIO DE PAGO -->
+        <div class="cash-summary-grid">
+          <div class="cash-total-tile">
+            <small>INGRESO TOTAL DEL DÍA</small>
+            <strong id="repTotalDay">$118.000</strong>
+            <span>Conciliado automáticamente</span>
+          </div>
+          <div class="cash-channels">
+            <div class="channel-row">
+              <span>💳 Link Mercado Pago</span>
+              <strong id="repMpAmount">$62.000</strong>
+            </div>
+            <div class="channel-row">
+              <span>🏦 Transferencia / Alias</span>
+              <strong id="repTransfAmount">$38.000</strong>
+            </div>
+            <div class="channel-row">
+              <span>💵 Efectivo en Caja</span>
+              <strong id="repCashAmount">$18.000</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- MOVIMIENTOS REGISTRADOS HOY -->
+        <div class="movements-section">
+          <span class="mono-label">ÚLTIMOS COBROS ACREDITADOS HOY:</span>
+          <div class="movements-list" id="dailyMovementsList"></div>
+        </div>
+
+        <!-- MENSAJE QUE RECIBE EL DUEÑO EN SU WHATSAPP -->
+        <div class="owner-wa-box">
+          <span class="mono-label">VISTA PREVIA DEL REPORTE QUE RECIBÍS EN TU WHATSAPP:</span>
+          <pre id="ownerReportPre"></pre>
+        </div>
+
+        <!-- CTA CONVERSIÓN SEME STUDIO -->
+        <div class="cta-box">
+          <div>
+            <strong>¿Querés automatizar tus cobranzas y recibir tu cierre cada noche?</strong>
+            <small>Lo adaptamos a tu gimnasio, academia, estudio o comercio.</small>
+          </div>
+          <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20de%20Cobranzas%20Autom%C3%A1ticas%20y%20Reportes%20Diarios%20y%20quiero%20implementarlo%20en%20mi%20negocio." target="_blank" rel="noopener" class="btn-cta-seme">
+            Quiero este sistema →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST DE CONFIRMACIÓN -->
+  <div class="toast-msg" id="toastMsg">Recordatorio enviado por WhatsApp ✓</div>
+
+  <script src="./js/cobranzas.js"></script>
+</body>
+</html>

@@ -251,7 +251,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Automatizá tareas repetitivas con procesos programados en la nube. Enviá avisos de vencimiento de cuotas con datos de transferencia a tus socios o recibí todos los días a las 22:00 un reporte limpio en tu WhatsApp con el total vendido y alertas de stock bajo.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-reportes.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Cobranzas%20y%20Reportes%20Autom%C3%A1ticos",
+    demoUrl: "./demos/cobranzas.html",
     incluye: [
       "Avisos automáticos de vencimiento de cuotas y abonos",
       "Envío de alias/CBU o link de pago integrado",
