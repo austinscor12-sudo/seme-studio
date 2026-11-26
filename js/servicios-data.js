@@ -9,7 +9,7 @@ window.SERVICIOS_SEME = [
     titulo: "Invitaciones Digitales Interactivas",
     resumen: "Tarjetas web exclusivas para bodas, 15 años y eventos con cuenta regresiva, música, GPS y confirmación de asistencia.",
     descripcionLarga: "Olvidate de las tarjetas estáticas. Diseñamos una experiencia web única para tu evento con música ambiental, galería de fotos, cuenta regresiva en vivo, botón directo a Google Maps, datos para regalos y confirmación de asistencia (RSVP) con pase QR.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-invitaciones.jpg",
     video: "./assets/video/demo-invitaciones.mp4",
     demoUrl: "https://umbral.umbralinvitaciones.workers.dev/",
     incluye: [
@@ -28,7 +28,7 @@ window.SERVICIOS_SEME = [
     titulo: "Ruleta de Premios & Trivias QR",
     resumen: "MicroApp para locales físicos, ferias y eventos: el cliente escanea un QR, gira la ruleta y gana un descuento al instante.",
     descripcionLarga: "Convertí visitantes en clientes recurrentes. Al escanear el código QR en tu mostrador o stand, la persona deja su nombre y WhatsApp para girar una ruleta digital animada y ganar un premio o cupón, mientras tu negocio guarda una base de datos real para futuras promociones.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-ruleta.jpg",
     video: "./assets/video/demo-ruleta.mp4",
     demoUrl: "./demos/ruleta.html",
     incluye: [
@@ -51,7 +51,7 @@ window.SERVICIOS_SEME = [
     titulo: "Catálogo Digital + Pedido por WhatsApp",
     resumen: "Tienda móvil rápida para gastronomía y comercios donde el cliente arma su carrito y envía el pedido listo a tu WhatsApp.",
     descripcionLarga: "Ideal para hamburgueserías, rotiserías, tiendas de ropa, regalerías y emprendimientos. Mostrá tus productos con fotos, precios y variantes; el cliente suma todo al carrito y te llega el detalle ordenado con total calculado directo a tu WhatsApp.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-catalogo.jpg",
     video: "./assets/video/demo-catalogo.mp4",
     demoUrl: "./demos/catalogo.html",
     incluye: [
@@ -70,7 +70,7 @@ window.SERVICIOS_SEME = [
     titulo: "Menú de Mesa + División de Cuenta",
     resumen: "Carta interactiva para bares y restaurantes donde la mesa pide desde el celular, llama al mozo y divide el total entre amigos.",
     descripcionLarga: "Agilizá la rotación de mesas y mejorá la experiencia de tus clientes. Cada mesa tiene su QR: ven los platos con fotos, envían pedidos o llaman al mozo con un toque, y al terminar pueden dividir la cuenta exacta entre los comensales sin hacer cuentas manuales.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-menu-mesa.jpg",
     video: "./assets/video/demo-menu-mesa.mp4",
     demoUrl: "./demos/menu-mesa.html",
     incluye: [
@@ -89,7 +89,7 @@ window.SERVICIOS_SEME = [
     titulo: "Generador de Presupuestos PDF al Instante",
     resumen: "App móvil para vendedores de aberturas, muebles, obras o servicios: cargás ítems frente al cliente y descargás un PDF profesional.",
     descripcionLarga: "Cerrá ventas en el momento. Tus vendedores cargan medidas, materiales o servicios desde el teléfono mientras hablan con el cliente, el sistema calcula subtotales e impuestos automáticamente y genera un presupuesto PDF con tu membrete listo para enviar por WhatsApp.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-presupuestos.jpg",
     video: "./assets/video/demo-presupuestos.mp4",
     demoUrl: "./demos/presupuestos.html",
     incluye: [
@@ -108,7 +108,7 @@ window.SERVICIOS_SEME = [
     titulo: "Tarjetas Digitales NFC & Portfolios 3D",
     resumen: "Perfil corporativo interactivo para inmobiliarias, abogados, arquitectos y equipos comerciales con guardado de contacto en 1 toque.",
     descripcionLarga: "Reemplazá las tarjetas de papel que se pierden. Con un link, QR o acercando una tarjeta física NFC al celular, tu cliente accede a tu portfolio, ubicación y redes, y guarda tu número directo en su agenda telefónica.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-nfc.jpg",
     video: "./assets/video/demo-nfc.mp4",
     demoUrl: "./demos/tarjeta-nfc.html",
     incluye: [
@@ -131,7 +131,7 @@ window.SERVICIOS_SEME = [
     titulo: "MicroApp de Turnos, Canchas y Reservas",
     resumen: "Sistema web de reservas 24/7 para peluquerías, estética, consultorios y canchas con bloqueo de horarios y opción de seña.",
     descripcionLarga: "Terminá con el ida y vuelta de mensajes para coordinar un horario. Tus clientes ven los turnos libres en tiempo real, reservan desde el celular y podés solicitar una seña previa para asegurar la asistencia.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-turnos.jpg",
     video: "./assets/video/demo-turnos.mp4",
     demoUrl: "./demos/turnos.html",
     incluye: [
@@ -150,7 +150,7 @@ window.SERVICIOS_SEME = [
     titulo: "Gestor de Garantías y Servicio Técnico",
     resumen: "Sistema para talleres mecánicos y reparación de celulares/PC donde el cliente consulta con un link el estado real de su equipo.",
     descripcionLarga: "Evitá decenas de llamadas preguntando '¿ya está listo?'. Al ingresar un equipo o vehículo, el sistema genera un enlace único donde el cliente ve en vivo si está 'En diagnóstico', 'Esperando repuesto' o 'Listo para retirar', junto con el detalle del trabajo y garantía.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-taller.jpg",
     video: "./assets/video/demo-taller.mp4",
     demoUrl: "./demos/taller.html",
     incluye: [
@@ -169,7 +169,7 @@ window.SERVICIOS_SEME = [
     titulo: "Control de Asistencia por QR y GPS",
     resumen: "Fichaje inteligente sin relojes biométricos costosos: el empleado escanea un QR en el local, se valida su ubicación GPS y se registra.",
     descripcionLarga: "Controlá la puntualidad de tu personal desde cualquier lugar. Al llegar al comercio u obra, cada empleado escanea el QR desde su celular; la app verifica mediante GPS que esté dentro del rango del local y guarda entrada, salida y horas trabajadas en la nube.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-asistencia.jpg",
     video: "./assets/video/demo-asistencia.mp4",
     demoUrl: "./demos/asistencia.html",
     incluye: [
@@ -188,7 +188,7 @@ window.SERVICIOS_SEME = [
     titulo: "Checklists y Auditorías de Sucursales",
     resumen: "Ideal para franquicias, gimnasios y gastronomía: encargados completan tareas de apertura/cierre con fotos que el dueño ve en vivo.",
     descripcionLarga: "Asegurá que los estándares de tu negocio se cumplan todos los días aunque no estés presente. Tu equipo marca listas de verificación (limpieza, orden, temperatura de heladeras, cierre de caja) adjuntando fotos desde el celular con hora certificada.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-checklists.jpg",
     video: "./assets/video/demo-checklists.mp4",
     demoUrl: "./demos/checklists.html",
     incluye: [
@@ -211,7 +211,7 @@ window.SERVICIOS_SEME = [
     titulo: "Bots de WhatsApp con IA 24/7",
     resumen: "Asistentes virtuales conectados a la API oficial para responder precios, horarios y consultas de clientes automáticamente.",
     descripcionLarga: "No pierdas ventas por demorar en contestar fuera de horario. Desarrollamos asistentes entrenados con el catálogo, precios y reglas de tu negocio para atender consultas al instante y derivar casos complejos a un asesor humano.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-bot.jpg",
     video: "./assets/video/demo-bot.mp4",
     demoUrl: "./demos/bot-whatsapp.html",
     incluye: [
@@ -230,7 +230,7 @@ window.SERVICIOS_SEME = [
     titulo: "Encuestas con Filtro Inteligente de Reseñas",
     resumen: "Multiplicá tus 5 estrellas en Google Maps y frená críticas públicas antes de que ocurran con un embudo inteligente.",
     descripcionLarga: "Al terminar una atención o compra, el cliente califica su experiencia de 1 a 5 estrellas. Si elige 4 o 5, el sistema lo lleva directo a publicar su reseña en tu perfil de Google Maps; si elige 1 a 3, abre un buzón privado que llega solo al dueño para solucionar el problema a tiempo.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-resenas.jpg",
     video: "./assets/video/demo-resenas.mp4",
     demoUrl: "./demos/resenas.html",
     incluye: [
@@ -249,7 +249,7 @@ window.SERVICIOS_SEME = [
     titulo: "Cobranzas Automáticas & Reportes Diarios",
     resumen: "Recordatorios automáticos de cuotas para gimnasios/clubes y resúmenes diarios de ventas enviados al dueño cada noche.",
     descripcionLarga: "Automatizá tareas repetitivas con procesos programados en la nube. Enviá avisos de vencimiento de cuotas con datos de transferencia a tus socios o recibí todos los días a las 22:00 un reporte limpio en tu WhatsApp con el total vendido y alertas de stock bajo.",
-    imagen: "./assets/img/icono.jpg",
+    imagen: "./assets/img/servicio-cobranzas.jpg",
     video: "./assets/video/demo-reportes.mp4",
     demoUrl: "./demos/cobranzas.html",
     incluye: [
