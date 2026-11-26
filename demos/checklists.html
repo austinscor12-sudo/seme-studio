@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Checklists y Auditorías de Sucursales | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/checklists.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <!-- CABECERA DE LA CADENA DE MUESTRA -->
+  <header class="brand-header">
+    <div class="container">
+      <div class="brand-card">
+        <div class="brand-icon">📋</div>
+        <div class="brand-meta">
+          <div class="brand-top-row">
+            <h1>LA POSTA &bull; CONTROL OPERATIVO</h1>
+            <span class="badge-multi">● 3 Sucursales Conectadas</span>
+          </div>
+          <p>Auditorías de Apertura, Higiene y Caja con Evidencia Fotográfica</p>
+        </div>
+      </div>
+
+      <!-- SELECTOR DE VISTA (ENCARGADO VS DUEÑO) -->
+      <div class="role-switcher" id="roleSwitcher">
+        <button type="button" class="role-btn active" data-view="encargado">
+          📲 Checklist Encargado (En Local)
+        </button>
+        <button type="button" class="role-btn" data-view="supervisor">
+          📊 Tablero Dueño / Supervisor
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-wrap">
+
+    <!-- =====================================================
+         VISTA 1: CHECKLIST EN VIVO DEL ENCARGADO DE SUCURSAL
+         ===================================================== -->
+    <section id="managerView" class="view-section">
+      <div class="audit-card">
+        <!-- CONFIGURACIÓN DE RONDA -->
+        <div class="round-selectors">
+          <div class="field-box">
+            <label for="branchSelect">Sucursal auditada</label>
+            <select id="branchSelect">
+              <option value="Sucursal Centro">Sucursal Centro (Junín 1180)</option>
+              <option value="Sucursal Costanera">Sucursal Costanera (Av. Vera 420)</option>
+              <option value="Sucursal Norte">Sucursal Norte (Av. Libertad 2100)</option>
+            </select>
+          </div>
+          <div class="field-box">
+            <label for="shiftSelect">Rutina / Turno</label>
+            <select id="shiftSelect">
+              <option value="Apertura de Local (07:30 hs)">Apertura de Local (07:30 hs)</option>
+              <option value="Control Bromatológico (13:00 hs)">Control Bromatológico (13:00 hs)</option>
+              <option value="Cierre y Arqueo de Caja (23:00 hs)">Cierre y Arqueo de Caja (23:00 hs)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- TERMÓMETRO DE CUMPLIMIENTO EN VIVO -->
+        <div class="score-banner">
+          <div class="score-left">
+            <span class="mono-label" id="activeBranchLabel">SUCURSAL CENTRO &bull; EN CURSO</span>
+            <div class="score-numbers">
+              <strong id="liveScorePct">83%</strong>
+              <span id="liveScoreDetail">5 OK &bull; 1 Desvío &bull; 0 N/A</span>
+            </div>
+          </div>
+          <div class="progress-ring-wrap">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="liveScoreBar" style="width: 83%;"></div>
+            </div>
+            <small id="scoreStatusTag">Requiere atención en 1 punto</small>
+          </div>
+        </div>
+
+        <!-- LISTA DE ÍTEMS DE CONTROL -->
+        <div class="checklist-list" id="checklistItemsList"></div>
+
+        <!-- BOTÓN FIRMAR Y ENVIAR -->
+        <button type="button" class="btn-submit-audit" id="submitAuditBtn">
+          ✍️ Firmar y Enviar Auditoría al Dueño
+        </button>
+
+        <!-- COMPROBANTE DE ENVÍO -->
+        <div class="receipt-box hidden" id="auditReceipt">
+          <div class="receipt-top">
+            <span class="mono-label">AUDITORÍA REGISTRADA CON SELLO HORARIO</span>
+            <span class="receipt-pill" id="receiptStamp">08:05 hs</span>
+          </div>
+          <p id="receiptText">Ronda enviada por Encargado de Turno con respaldo fotográfico.</p>
+          <button type="button" class="btn-jump-sup" id="jumpSupervisorBtn">
+            Ver reflejado en Tablero del Dueño →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         VISTA 2: TABLERO EJECUTIVO DEL DUEÑO / SUPERVISOR
+         ===================================================== -->
+    <section id="supervisorView" class="view-section hidden">
+      <!-- KPIs GLOBALES -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <small>CUMPLIMIENTO RED</small>
+          <strong id="kpiGlobalPct">91%</strong>
+          <span class="kpi-note green">↑ +4% vs semana pasada</span>
+        </div>
+        <div class="kpi-card">
+          <small>RONDAS HOY</small>
+          <strong id="kpiRoundsCount">3 / 3</strong>
+          <span class="kpi-note cyan">100% entregadas</span>
+        </div>
+        <div class="kpi-card">
+          <small>DESVÍOS ABIERTOS</small>
+          <strong id="kpiOpenIssues">2</strong>
+          <span class="kpi-note amber">Con foto evidencia</span>
+        </div>
+      </div>
+
+      <!-- RANKING POR SUCURSAL -->
+      <div class="panel-box">
+        <div class="panel-header">
+          <div>
+            <span class="mono-label">COMPARATIVA MULTI-SUCURSAL</span>
+            <h2>Puntaje Operativo por Local</h2>
+          </div>
+        </div>
+        <div class="branches-ranking" id="branchesRankingList"></div>
+      </div>
+
+      <!-- ALERTAS Y HALLAZGOS CON FOTO EVIDENCIA -->
+      <div class="panel-box">
+        <div class="panel-header">
+          <div>
+            <span class="mono-label">SEGUIMIENTO DE NO CONFORMIDADES</span>
+            <h2>Desvíos Detectados y Evidencia</h2>
+          </div>
+        </div>
+        <div class="issues-feed" id="issuesFeedList"></div>
+      </div>
+
+      <!-- CTA FINAL SEME STUDIO -->
+      <div class="cta-banner">
+        <div>
+          <strong>¿Querés controlar tus sucursales sin estar encima?</strong>
+          <small>Armamos tus checklists a medida con alertas por WhatsApp y reportes.</small>
+        </div>
+        <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20de%20Checklists%20y%20Auditor%C3%ADas%20de%20Sucursales%20y%20quiero%20implementarlo%20en%20mi%20negocio." target="_blank" rel="noopener" class="btn-cta-seme">
+          Pedir sistema →
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST FLOTANTE -->
+  <div class="toast-msg" id="toastMsg">Auditoría enviada al panel del dueño ✓</div>
+
+  <script src="./js/checklists.js"></script>
+</body>
+</html>

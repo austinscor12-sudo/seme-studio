@@ -190,7 +190,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Asegurá que los estándares de tu negocio se cumplan todos los días aunque no estés presente. Tu equipo marca listas de verificación (limpieza, orden, temperatura de heladeras, cierre de caja) adjuntando fotos desde el celular con hora certificada.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-checklists.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Checklists%20y%20Auditor%C3%ADas",
+    demoUrl: "./demos/checklists.html",
     incluye: [
       "Listas personalizadas de apertura, turno y cierre",
       "Carga obligatoria de foto verificada en cada punto",
