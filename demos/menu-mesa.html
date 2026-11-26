@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Menú de Mesa + División de Cuenta | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/menu-mesa.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <!-- CABECERA DE LA MESA -->
+  <header class="table-header">
+    <div class="container">
+      <div class="table-card">
+        <div class="table-top">
+          <div class="venue-info">
+            <span class="table-badge">📍 MESA 07 &bull; TERRAZA</span>
+            <h1>BARRA &amp; FUEGO</h1>
+            <p>Carta Digital &bull; Pedidos directos sin esperar</p>
+          </div>
+          <div class="table-status-box">
+            <small>CONSUMO MESA</small>
+            <strong id="headerTableTotal">$0</strong>
+          </div>
+        </div>
+
+        <!-- BOTONES RÁPIDOS DE ATENCIÓN EN MESA -->
+        <div class="quick-table-actions">
+          <button type="button" class="btn-call-waiter" id="callWaiterBtn">
+            🔔 Llamar al Mozo
+          </button>
+          <button type="button" class="btn-split-bill" id="openBillBtn">
+            🧾 Dividir Cuenta
+          </button>
+        </div>
+      </div>
+
+      <!-- CATEGORÍAS DE LA CARTA -->
+      <nav class="menu-cats" id="menuCats">
+        <button type="button" class="cat-btn active" data-cat="todos">Todo</button>
+        <button type="button" class="cat-btn" data-cat="tapas">Para Picar</button>
+        <button type="button" class="cat-btn" data-cat="principales">Principales</button>
+        <button type="button" class="cat-btn" data-cat="tragos">Tragos &amp; Birras</button>
+        <button type="button" class="cat-btn" data-cat="postres">Postres</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- GRILLA DE PLATOS Y TRAGOS -->
+  <main class="container menu-main">
+    <div class="dishes-grid" id="dishesGrid"></div>
+  </main>
+
+  <!-- BARRA FLOTANTE INFERIOR (RONDA NUEVA O VER CUENTA) -->
+  <div class="bottom-dock">
+    <div class="dock-inner">
+      <div class="dock-info">
+        <small id="dockSubLabel">Cuenta activa Mesa 07</small>
+        <strong id="dockMainLabel">$34.400 acumulado</strong>
+      </div>
+      <button type="button" class="btn-dock-action" id="dockActionBtn">
+        Ver Cuenta y Dividir →
+      </button>
+    </div>
+  </div>
+
+  <!-- DRAWER: CUENTA DE LA MESA Y DIVISIÓN ENTRE COMENSALES -->
+  <div class="modal-backdrop" id="billDrawer" aria-hidden="true">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div>
+          <span class="mono-label">MESA 07 &bull; CUENTA EN VIVO</span>
+          <h2>Consumo y División</h2>
+        </div>
+        <button type="button" class="close-btn" id="closeBillBtn" aria-label="Cerrar">&times;</button>
+      </div>
+
+      <div class="drawer-body">
+        <!-- RONDA PENDIENTE (SI AGREGÓ PLATOS NUEVOS) -->
+        <div class="pending-round-box hidden" id="pendingRoundBox">
+          <div class="pending-head">
+            <span>🔥 Nueva ronda lista para enviar a cocina</span>
+            <button type="button" class="btn-send-kitchen" id="sendKitchenBtn">
+              Enviar Ronda ✓
+            </button>
+          </div>
+          <div id="pendingItemsList"></div>
+        </div>
+
+        <!-- CONSUMO YA SERVIDO EN LA MESA -->
+        <div class="consumed-section">
+          <span class="mono-label">PEDIDOS CARGADOS EN LA MESA:</span>
+          <div class="consumed-list" id="consumedList"></div>
+        </div>
+
+        <!-- SELECTOR DE MODO DE DIVISIÓN -->
+        <div class="splitter-card">
+          <div class="split-mode-tabs" id="splitModeTabs">
+            <button type="button" class="split-tab active" data-mode="equal">
+              👥 Partes Iguales
+            </button>
+            <button type="button" class="split-tab" data-mode="items">
+              🍽️ Por lo que consumí
+            </button>
+          </div>
+
+          <!-- MODO A: PARTES IGUALES -->
+          <div id="equalSplitPanel">
+            <div class="diners-row">
+              <div>
+                <strong>¿Entre cuántos dividen?</strong>
+                <small>Calcula el monto exacto por persona</small>
+              </div>
+              <div class="diners-stepper">
+                <button type="button" id="decDinersBtn">−</button>
+                <span id="dinersCountText">4</span>
+                <button type="button" id="incDinersBtn">+</button>
+              </div>
+            </div>
+
+            <div class="tip-selector">
+              <label>Propina sugerida (opcional):</label>
+              <div class="tip-pills" id="tipPills">
+                <button type="button" class="tip-pill" data-tip="0">Sin propina</button>
+                <button type="button" class="tip-pill active" data-tip="10">10%</button>
+                <button type="button" class="tip-pill" data-tip="15">15%</button>
+              </div>
+            </div>
+
+            <div class="split-result-banner">
+              <div>
+                <small>TOTAL MESA (<span id="tipSummaryLabel">+10% propina</span>)</small>
+                <span class="total-small" id="billGrandTotal">$0</span>
+              </div>
+              <div class="per-person-box">
+                <small>CADA UNO PAGA</small>
+                <strong id="perPersonAmount">$0</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- MODO B: POR CONSUMO INDIVIDUAL -->
+          <div id="itemSplitPanel" class="hidden">
+            <p class="item-split-hint">Marcá los ítems que pediste vos para calcular tu parte exacta:</p>
+            <div class="selectable-items" id="selectableItemsList"></div>
+            <div class="split-result-banner">
+              <div>
+                <small>TU PARTE SELECCIONADA</small>
+                <span class="total-small" id="selectedItemsCount">0 ítems</span>
+              </div>
+              <div class="per-person-box">
+                <small>TU TOTAL (+10% PROP.)</small>
+                <strong id="myCustomAmount">$0</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button type="button" class="btn-pay-table" id="finishBillBtn">
+          Solicitar Cobro en Mesa ✓
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONFIRMACIÓN FINAL -->
+  <div class="modal-backdrop" id="confirmModal" aria-hidden="true">
+    <div class="confirm-card">
+      <div class="confirm-icon">🧾</div>
+      <span class="mono-label">SOLICITUD ENVIADA A CAJA</span>
+      <h3>¡Mozo en camino a Mesa 07!</h3>
+      <p id="confirmModalDesc">Cada comensal abona $9.460 por transferencia, QR o efectivo sin hacer cuentas manuales.</p>
+      <div class="confirm-actions">
+        <button type="button" class="btn-sec" id="closeConfirmBtn">Seguir probando</button>
+        <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20del%20Men%C3%BA%20de%20Mesa%20con%20Divisi%C3%B3n%20de%20Cuenta%20y%20quiero%20uno%20para%20mi%20local." target="_blank" rel="noopener" class="btn-pri">
+          Quiero esta carta
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST DE AVISO EN VIVO -->
+  <div class="toast-msg" id="toastMsg">🔔 ¡Mozo notificado! Se acerca a Mesa 07</div>
+
+  <script src="./js/menu-mesa.js"></script>
+</body>
+</html>

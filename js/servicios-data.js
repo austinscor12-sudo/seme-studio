@@ -72,7 +72,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Agilizá la rotación de mesas y mejorá la experiencia de tus clientes. Cada mesa tiene su QR: ven los platos con fotos, envían pedidos o llaman al mozo con un toque, y al terminar pueden dividir la cuenta exacta entre los comensales sin hacer cuentas manuales.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-menu-mesa.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Men%C3%BA%20Interactivo%20de%20Mesa",
+    demoUrl: "./demos/menu-mesa.html",
     incluye: [
       "Identificación automática por número de mesa",
       "Botón de 'Llamar al mozo' o 'Pedir la cuenta'",
