@@ -91,7 +91,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Cerrá ventas en el momento. Tus vendedores cargan medidas, materiales o servicios desde el teléfono mientras hablan con el cliente, el sistema calcula subtotales e impuestos automáticamente y genera un presupuesto PDF con tu membrete listo para enviar por WhatsApp.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-presupuestos.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Generador%20de%20Presupuestos%20PDF",
+    demoUrl: "./demos/presupuestos.html",
     incluye: [
       "Cálculo automático de medidas, cantidades y descuentos",
       "Exportación directa a PDF con logo y condiciones",

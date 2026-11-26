@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Generador de Presupuestos PDF al Instante | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/presupuestos.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO (NO SE IMPRIME) -->
+  <div class="demo-ribbon no-print">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <main class="container main-wrap">
+
+    <!-- PANEL EDITOR RÁPIDO (NO SE IMPRIME) -->
+    <section class="editor-card no-print">
+      <div class="editor-header">
+        <div>
+          <span class="mono-label">COTIZADOR MÓVIL EN 30 SEGUNDOS</span>
+          <h1>Armá tu Presupuesto al Instante</h1>
+        </div>
+        <span class="badge-live">● Vista A4 en vivo</span>
+      </div>
+
+      <!-- DATOS DEL CLIENTE Y CONDICIONES -->
+      <div class="form-grid-2">
+        <div class="field-group">
+          <label for="clientNameInput">Cliente o Empresa</label>
+          <input type="text" id="clientNameInput" value="Constructora Litoral S.R.L." />
+        </div>
+        <div class="field-group">
+          <label for="clientPhoneInput">WhatsApp / Referencia</label>
+          <input type="text" id="clientPhoneInput" value="Obra Av. Costanera 840" />
+        </div>
+      </div>
+
+      <div class="form-grid-3">
+        <div class="field-group">
+          <label for="validitySelect">Validez oferta</label>
+          <select id="validitySelect">
+            <option value="7 días corridos" selected>7 días corridos</option>
+            <option value="15 días corridos">15 días corridos</option>
+            <option value="30 días corridos">30 días corridos</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="depositSelect">Seña para congelar</label>
+          <select id="depositSelect">
+            <option value="50" selected>50% anticipo</option>
+            <option value="40">40% anticipo</option>
+            <option value="0">Pago contra entrega</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="discountInput">Descuento (%)</label>
+          <input type="number" id="discountInput" min="0" max="50" value="5" />
+        </div>
+      </div>
+
+      <!-- LISTA DE ÍTEMS EDITABLES -->
+      <div class="items-editor-head">
+        <span class="mono-label">ÍTEMS DEL TRABAJO / PRODUCTOS</span>
+        <button type="button" class="btn-add-item" id="addItemBtn">+ Agregar Ítem</button>
+      </div>
+
+      <div class="items-editor-list" id="itemsEditorList"></div>
+
+      <!-- BOTONES DE ACCIÓN PRINCIPAL -->
+      <div class="export-actions">
+        <button type="button" class="btn-pdf-export" id="exportPdfBtn">
+          📄 Guardar / Imprimir PDF A4
+        </button>
+        <button type="button" class="btn-wa-share" id="shareWaBtn">
+          📲 Copiar Resumen WhatsApp
+        </button>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         VISTA PREVIA DOCUMENTO A4 EJECUTIVO (LO QUE SE EXPORTA)
+         ===================================================== -->
+    <section class="a4-preview-wrapper">
+      <div class="preview-label-bar no-print">
+        <span class="mono-label">VISTA PREVIA DEL DOCUMENTO FINAL (FORMATO A4)</span>
+        <span class="hint-text">Se actualiza solo al editar arriba</span>
+      </div>
+
+      <article class="a4-sheet" id="a4Sheet">
+        <!-- MEMBRETE -->
+        <header class="doc-header">
+          <div class="brand-block">
+            <div class="brand-mark">A&amp;D</div>
+            <div>
+              <h2>ALUMETAL &amp; DISEÑO</h2>
+              <p>Aberturas de Aluminio, Herrería &amp; Cerramientos a Medida</p>
+              <small>Corrientes Capital &bull; Tel: (379) 452-8890 &bull; CUIT 30-71684920-4</small>
+            </div>
+          </div>
+
+          <div class="quote-meta-box">
+            <span class="doc-type">PRESUPUESTO</span>
+            <strong id="docNumber">N° 00084-2026</strong>
+            <small id="docDate">Fecha: 25/11/2026</small>
+            <small id="docValidity">Validez: 7 días corridos</small>
+          </div>
+        </header>
+
+        <!-- BLOQUE DESTINATARIO -->
+        <div class="client-strip">
+          <div>
+            <small>PREPARADO PARA:</small>
+            <strong id="docClientName">Constructora Litoral S.R.L.</strong>
+          </div>
+          <div class="client-ref-right">
+            <small>REFERENCIA / OBRA:</small>
+            <strong id="docClientRef">Obra Av. Costanera 840</strong>
+          </div>
+        </div>
+
+        <!-- TABLA DE DETALLE -->
+        <table class="quote-table">
+          <thead>
+            <tr>
+              <th class="col-cant">Cant.</th>
+              <th>Descripción del Trabajo / Material</th>
+              <th class="col-num">Unitario</th>
+              <th class="col-num">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="docTableBody"></tbody>
+        </table>
+
+        <!-- TOTALES Y CONDICIONES -->
+        <div class="doc-bottom-grid">
+          <div class="terms-box">
+            <strong>Condiciones Comerciales y Pago</strong>
+            <ul>
+              <li id="docDepositLine">Seña del 50% para congelar precios y acopio de materiales.</li>
+              <li>Plazo estimado de entrega: 10 días hábiles desde acreditación.</li>
+              <li>Alias transferencia: <strong>ALUMETAL.CTES.MP</strong></li>
+            </ul>
+          </div>
+
+          <div class="totals-box">
+            <div class="tot-row">
+              <span>Subtotal</span>
+              <strong id="docSubtotal">$0</strong>
+            </div>
+            <div class="tot-row discount" id="docDiscountRow">
+              <span id="docDiscountLabel">Bonificación (5%)</span>
+              <strong id="docDiscountVal">-$0</strong>
+            </div>
+            <div class="tot-row grand">
+              <span>TOTAL FINAL</span>
+              <strong id="docGrandTotal">$0</strong>
+            </div>
+            <div class="tot-row deposit" id="docDepositBox">
+              <span id="docDepositPctLabel">Anticipo (50%)</span>
+              <strong id="docDepositVal">$0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- PIE DE DOCUMENTO -->
+        <footer class="doc-footer">
+          <span>Documento no válido como factura fiscal &bull; Generado con sistema web a medida</span>
+          <a href="https://wa.me/5493794048564?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20del%20Generador%20de%20Presupuestos%20PDF%20y%20quiero%20uno%20para%20mi%20negocio." target="_blank" rel="noopener" class="cta-doc-link no-print">
+            Quiero este cotizador →
+          </a>
+        </footer>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- TOAST DE CONFIRMACIÓN -->
+  <div class="toast-msg no-print" id="toastMsg">Resumen copiado para WhatsApp ✓</div>
+
+  <script src="./js/presupuestos.js"></script>
+</body>
+</html>
