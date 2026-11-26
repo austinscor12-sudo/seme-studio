@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo: Control de Asistencia por QR y GPS | SEME STUDIO</title>
+  <meta name="theme-color" content="#060911" />
+  <link rel="icon" type="image/jpeg" href="../assets/img/icono.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/asistencia.css" />
+</head>
+<body>
+
+  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
+  <div class="demo-ribbon">
+    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
+    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
+  </div>
+
+  <!-- CABECERA DE LA EMPRESA DE MUESTRA -->
+  <header class="company-header">
+    <div class="container">
+      <div class="company-card">
+        <div class="company-logo">📍</div>
+        <div class="company-meta">
+          <div class="company-top">
+            <h1>GRUPO NEXO &bull; CONTROL HORARIO</h1>
+            <span class="badge-gps">● Geocerca 50m Activa</span>
+          </div>
+          <p>Sucursal Centro (Junín 1240) &bull; Fichaje QR sin hardware biométrico</p>
+        </div>
+      </div>
+
+      <!-- SELECTOR DE VISTA (EMPLEADO VS DUEÑO) -->
+      <div class="role-switcher" id="roleSwitcher">
+        <button type="button" class="role-btn active" data-view="empleado">
+          📲 Fichaje Empleado (QR + GPS)
+        </button>
+        <button type="button" class="role-btn" data-view="dueno">
+          📊 Panel Dueño / RRHH
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-wrap">
+
+    <!-- =====================================================
+         VISTA 1: TERMINAL DE FICHAJE DEL EMPLEADO
+         ===================================================== -->
+    <section id="employeeView" class="view-block">
+      <div class="punch-card">
+        <!-- RELOJ EN VIVO -->
+        <div class="clock-banner">
+          <div>
+            <span class="mono-label">HORA OFICIAL DEL SERVIDOR</span>
+            <strong class="live-clock" id="liveClock">08:02:15</strong>
+          </div>
+          <div class="branch-pill">
+            <small>PUNTO QR</small>
+            <strong>Suc. Centro #01</strong>
+          </div>
+        </div>
+
+        <!-- SELECCIÓN DE EMPLEADO Y TIPO DE MARCA -->
+        <div class="form-grid">
+          <div class="field-box">
+            <label for="employeeSelect">Empleado que escanea QR</label>
+            <select id="employeeSelect">
+              <option value="Camila Romero">Camila Romero (Caja / Atención)</option>
+              <option value="Lucas Fernández">Lucas Fernández (Depósito)</option>
+              <option value="Valentina Gómez">Valentina Gómez (Encargada)</option>
+              <option value="Enzo Paredes">Enzo Paredes (Ventas)</option>
+            </select>
+          </div>
+
+          <div class="field-box">
+            <label>Movimiento a registrar</label>
+            <div class="type-toggle" id="punchTypeToggle">
+              <button type="button" class="type-btn active" data-type="ENTRADA">🟢 Entrada</button>
+              <button type="button" class="type-btn" data-type="SALIDA">🔵 Salida</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIMULADOR DE VALIDACIÓN GEOGRÁFICA GPS -->
+        <div class="gps-box" id="gpsStatusBox">
+          <div class="gps-top-row">
+            <div class="gps-indicator">
+              <span class="radar-dot ok" id="radarDot"></span>
+              <div>
+                <strong id="gpsHeadline">Ubicación verificada dentro del local</strong>
+                <small id="gpsCoordsText">Distancia al QR: 14 metros &bull; Precisión GPS: ±6m</small>
+              </div>
+            </div>
+            <button type="button" class="btn-real-gps" id="realGpsBtn" title="Probar GPS del navegador">
+              📡 GPS Real
+            </button>
+          </div>
+
+          <div class="geo-sim-pills" id="geoSimPills">
+            <button type="button" class="geo-pill active" data-geo="inside">
+              ✓ Simular en el local (14m)
+            </button>
+            <button type="button" class="geo-pill" data-geo="outside">
+              ✕ Simular desde casa (380m)
+            </button>
+          </div>
+        </div>
+
+        <!-- ESCÁNER VISUAL QR + BOTÓN PRINCIPAL -->
+        <div class="qr-scanner-stage" id="qrScannerStage">
+          <div class="qr-frame">
+            <div class="scan-laser" id="scanLaser"></div>
+            <div class="qr-pattern" aria-hidden="true"></div>
+          </div>
+          <p class="scan-caption" id="scanCaption">Listo para validar código QR de mostrador</p>
+        </div>
+
+        <button type="button" class="btn-punch-main" id="punchSubmitBtn">
+          📲 Validar GPS y Registrar ENTRADA
+        </button>
+
+        <!-- COMPROBANTE INMEDIATO DEL FICHAJE -->
+        <div class="receipt-card hidden" id="punchReceipt">
+          <div class="receipt-head">
+            <span class="mono-label">REGISTRO GUARDADO EN LA NUBE</span>
+            <span class="receipt-badge" id="receiptTimeBadge">08:02 hs</span>
+          </div>
+          <p id="receiptSummaryText">Camila Romero registró ENTRADA verificada a 14m del local.</p>
+          <button type="button" class="btn-go-owner" id="jumpOwnerBtn">
+            Ver reflejado en Panel del Dueño →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         VISTA 2: PANEL DEL DUEÑO / LIQUIDACIÓN RRHH
+         ===================================================== -->
+    <section id="ownerView" class="view-block hidden">
+      <!-- MÉTRICAS RÁPIDAS DEL DÍA -->
+      <div class="kpi-row">
+        <div class="kpi-tile">
+          <small>PRESENTES HOY</small>
+          <strong id="kpiPresent">3 / 4</strong>
+          <span class="kpi-sub green">En turno activo</span>
+        </div>
+        <div class="kpi-tile">
+          <small>PUNTUALIDAD</small>
+          <strong>96%</strong>
+          <span class="kpi-sub cyan">Tolerancia 10 min</span>
+        </div>
+        <div class="kpi-tile">
+          <small>HORAS MES</small>
+          <strong>418 hs</strong>
+          <span class="kpi-sub">Listas para liquidar</span>
+        </div>
+      </div>
+
+      <!-- REGISTRO EN VIVO DE FICHAJES -->
+      <div class="panel-card">
+        <div class="panel-head">
+          <div>
+            <span class="mono-label">AUDITORÍA EN TIEMPO REAL</span>
+            <h2>Fichajes de Hoy</h2>
+          </div>
+          <button type="button" class="btn-export" id="exportReportBtn">
+            📥 Exportar Excel / CSV
+          </button>
+        </div>
+
+        <div class="logs-list" id="attendanceLogsList"></div>
+      </div>
+
+      <!-- TABLA MENSUAL PARA SUELDOS -->
+      <div class="panel-card">
+        <div class="panel-head">
+          <div>
+            <span class="mono-label">CIERRE AUTOMÁTICO DE MES</span>
+            <h2>Resumen para Liquidación de Sueldos</h2>
+          </div>
+        </div>
+
+        <div class="payroll-table-wrap">
+          <table class="payroll-table">
+            <thead>
+              <tr>
+                <th>Empleado</th>
+                <th>Días</th>
+                <th>Horas Totales</th>
+                <th>Llegadas Tarde</th>
+              </tr>
+            </thead>
+            <tbody id="payrollBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST DE NOTIFICACIÓN -->
+  <div class="toast-msg" id="toastMsg">Fichaje registrado con GPS ✓</div>
+
+  <script src="./js/asistencia.js"></script>
+</body>
+</html>

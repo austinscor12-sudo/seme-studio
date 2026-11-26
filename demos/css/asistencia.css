@@ -1,0 +1,653 @@
+:root {
+  --bg: #060911;
+  --surface: #0D1321;
+  --surface-2: #141D30;
+  --primary: #1464F6;
+  --cyan: #16B1FF;
+  --green: #22C55E;
+  --red: #EF4444;
+  --amber: #F59E0B;
+  --text: #FFFFFF;
+  --muted: #94A3B8;
+  --border: rgba(255, 255, 255, 0.09);
+  --radius: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: 3rem;
+  line-height: 1.5;
+}
+
+.container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* CINTA SUPERIOR SEME STUDIO */
+.demo-ribbon {
+  background: linear-gradient(90deg, #091224 0%, #102447 100%);
+  border-bottom: 1px solid rgba(22, 177, 255, 0.3);
+  padding: 0.55rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
+
+.back-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: rgba(20, 100, 246, 0.25);
+  border: 1px solid rgba(22, 177, 255, 0.4);
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+}
+
+.demo-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--cyan);
+  letter-spacing: 0.06em;
+}
+
+/* CABECERA EMPRESA */
+.company-header {
+  padding: 1.2rem 0 0.85rem;
+}
+
+.company-card {
+  background: linear-gradient(135deg, #10182B 0%, #0B101D 100%);
+  border: 1px solid rgba(22, 177, 255, 0.25);
+  border-radius: 20px;
+  padding: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.95rem;
+}
+
+.company-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, var(--primary), var(--cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  flex-shrink: 0;
+  box-shadow: 0 10px 25px rgba(20, 100, 246, 0.35);
+}
+
+.company-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.company-top h1 {
+  font-size: 1.14rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.badge-gps {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4ADE80;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  padding: 0.16rem 0.58rem;
+  border-radius: 999px;
+}
+
+.company-meta p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+/* SWITCHER */
+.role-switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 0.36rem;
+  border-radius: 15px;
+}
+
+.role-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.65rem 0.55rem;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.role-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--cyan));
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(20, 100, 246, 0.35);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* VISTA EMPLEADO */
+.punch-card,
+.panel-card {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  padding: 1.3rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  margin-bottom: 1.15rem;
+}
+
+.clock-banner {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 0.9rem 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.mono-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.67rem;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  display: block;
+}
+
+.live-clock {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.03em;
+}
+
+.branch-pill {
+  text-align: right;
+  background: rgba(20, 100, 246, 0.16);
+  border: 1px solid rgba(22, 177, 255, 0.35);
+  padding: 0.42rem 0.75rem;
+  border-radius: 11px;
+}
+
+.branch-pill small {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.64rem;
+  color: var(--cyan);
+}
+
+.branch-pill strong {
+  font-size: 0.85rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 560px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field-box label {
+  display: block;
+  font-size: 0.79rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.field-box select {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 0.68rem 0.8rem;
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.88rem;
+}
+
+.type-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+}
+
+.type-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.64rem 0.5rem;
+  border-radius: 11px;
+  font-weight: 700;
+  font-size: 0.83rem;
+  cursor: pointer;
+}
+
+.type-btn.active {
+  background: rgba(22, 177, 255, 0.18);
+  border-color: var(--cyan);
+  color: #FFFFFF;
+}
+
+/* CAJA GPS */
+.gps-box {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: 16px;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+  transition: all 0.25s ease;
+}
+
+.gps-box.out-of-range {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.gps-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.gps-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.radar-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.radar-dot.ok {
+  background: var(--green);
+  box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.25);
+}
+
+.radar-dot.bad {
+  background: var(--red);
+  box-shadow: 0 0 0 5px rgba(239, 68, 68, 0.25);
+}
+
+.gps-indicator strong {
+  display: block;
+  font-size: 0.88rem;
+}
+
+.gps-indicator small {
+  font-size: 0.76rem;
+  color: #CBD5E1;
+}
+
+.btn-real-gps {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.4rem 0.68rem;
+  border-radius: 9px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.geo-sim-pills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+}
+
+.geo-pill {
+  background: rgba(6, 9, 17, 0.65);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.45rem 0.5rem;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.geo-pill.active {
+  background: var(--surface-2);
+  border-color: var(--cyan);
+  color: #FFFFFF;
+}
+
+/* ESCÁNER QR VISUAL */
+.qr-scanner-stage {
+  text-align: center;
+  padding: 0.65rem 0 1rem;
+}
+
+.qr-frame {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 0.55rem;
+  border: 2px solid var(--cyan);
+  border-radius: 16px;
+  padding: 10px;
+  background: #FFFFFF;
+  overflow: hidden;
+  box-shadow: 0 0 28px rgba(22, 177, 255, 0.25);
+}
+
+.qr-pattern {
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(45deg, #060911 25%, transparent 25%),
+    linear-gradient(-45deg, #060911 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #060911 75%),
+    linear-gradient(-45deg, transparent 75%, #060911 75%);
+  background-size: 18px 18px;
+  background-position: 0 0, 0 9px, 9px -9px, -9px 0;
+}
+
+.scan-laser {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10%;
+  height: 3px;
+  background: #EF4444;
+  box-shadow: 0 0 10px #EF4444;
+  animation: laserMove 2s ease-in-out infinite;
+}
+
+@keyframes laserMove {
+  0%, 100% { top: 12%; }
+  50% { top: 86%; }
+}
+
+.scan-caption {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.btn-punch-main {
+  width: 100%;
+  background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 14px;
+  padding: 0.92rem 1rem;
+  font-weight: 800;
+  font-size: 0.96rem;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(34, 197, 94, 0.35);
+  transition: all 0.2s ease;
+}
+
+.btn-punch-main.blocked {
+  background: #334155;
+  color: #94A3B8;
+  box-shadow: none;
+}
+
+/* COMPROBANTE */
+.receipt-card {
+  margin-top: 1rem;
+  background: rgba(20, 100, 246, 0.14);
+  border: 1px solid rgba(22, 177, 255, 0.45);
+  border-radius: 15px;
+  padding: 0.95rem;
+}
+
+.receipt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.receipt-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: var(--cyan);
+  color: #050811;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+}
+
+.receipt-card p {
+  font-size: 0.85rem;
+  margin-bottom: 0.65rem;
+}
+
+.btn-go-owner {
+  background: var(--surface-2);
+  border: 1px solid rgba(22, 177, 255, 0.4);
+  color: var(--cyan);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+/* PANEL DUEÑO / RRHH */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-bottom: 1.1rem;
+}
+
+.kpi-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 0.85rem 0.75rem;
+}
+
+.kpi-tile small {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.63rem;
+  color: var(--muted);
+}
+
+.kpi-tile strong {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.25rem;
+  margin: 0.2rem 0;
+}
+
+.kpi-sub {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.kpi-sub.green { color: #4ADE80; }
+.kpi-sub.cyan { color: var(--cyan); }
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.95rem;
+}
+
+.panel-head h2 {
+  font-size: 1.08rem;
+  margin-top: 0.15rem;
+}
+
+.btn-export {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #4ADE80;
+  font-weight: 700;
+  font-size: 0.76rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.logs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.log-row {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.log-row.is-fresh {
+  border-color: rgba(22, 177, 255, 0.55);
+  background: rgba(20, 100, 246, 0.08);
+}
+
+.log-left strong {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.log-left span {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.log-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.log-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.log-status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.14rem 0.5rem;
+  border-radius: 999px;
+}
+
+.log-status.ok {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ADE80;
+}
+
+.log-status.late {
+  background: rgba(245, 158, 11, 0.16);
+  color: #FBBF24;
+}
+
+/* TABLA DE SUELDOS */
+.payroll-table-wrap {
+  overflow-x: auto;
+}
+
+.payroll-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.payroll-table th {
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  padding: 0.55rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.payroll-table td {
+  padding: 0.68rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.payroll-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* TOAST */
+.toast-msg {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(90px);
+  background: #10B981;
+  color: #042F2E;
+  font-weight: 800;
+  font-size: 0.84rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+  opacity: 0;
+  transition: all 0.28s ease;
+  z-index: 150;
+}
+
+.toast-msg.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}

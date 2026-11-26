@@ -171,7 +171,7 @@ window.SERVICIOS_SEME = [
     descripcionLarga: "Controlá la puntualidad de tu personal desde cualquier lugar. Al llegar al comercio u obra, cada empleado escanea el QR desde su celular; la app verifica mediante GPS que esté dentro del rango del local y guarda entrada, salida y horas trabajadas en la nube.",
     imagen: "./assets/img/icono.jpg",
     video: "./assets/video/demo-asistencia.mp4",
-    demoUrl: "./demos/proximamente.html?servicio=Control%20de%20Asistencia%20QR%20y%20GPS",
+    demoUrl: "./demos/asistencia.html",
     incluye: [
       "Validación geográfica por GPS en tiempo real",
       "Registro exacto de ingresos, egresos y llegadas tarde",
