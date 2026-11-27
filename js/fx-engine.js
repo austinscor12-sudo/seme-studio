@@ -303,7 +303,7 @@
   function renderSim(key) {
     const data = simConfig[key];
     if (!data || !simResult) return;
-    const waUrl = `https://wa.me/5493794048564?text=${encodeURIComponent(data.mensajeWa)}`;
+    const waUrl = `https://wa.me/5493794924075?text=${encodeURIComponent(data.mensajeWa)}`;
     simResult.classList.remove("stage-anim");
     void simResult.offsetWidth;
     simResult.innerHTML = `

@@ -17,7 +17,7 @@ const PERFILES_DEMO = {
     web: "https://semestudio.app/card/mateo-benitez",
     slug: "semestudio.app/card/mateo-benitez",
     accesos: [
-      { icono: "💬", titulo: "WhatsApp Directo", sub: "Respuesta inmediata", href: "https://wa.me/5493794048564" },
+      { icono: "💬", titulo: "WhatsApp Directo", sub: "Respuesta inmediata", href: "https://wa.me/5493794924075" },
       { icono: "📞", titulo: "Llamar Ahora", sub: "(379) 455-1290", href: "tel:+5493794551290" },
       { icono: "📍", titulo: "Oficina Central", sub: "9 de Julio 1150, Ctes", href: "https://maps.google.com/?q=Corrientes+Capital" },
       { icono: "✉️", titulo: "Correo Corporativo", sub: "mbenitez@grupovertice", href: "mailto:mbenitez@grupovertice.com.ar" }
@@ -61,9 +61,9 @@ const PERFILES_DEMO = {
     web: "https://semestudio.app/card/sofia-veron",
     slug: "semestudio.app/card/sofia-veron",
     accesos: [
-      { icono: "💬", titulo: "Consultar Proyecto", sub: "WhatsApp del Estudio", href: "https://wa.me/5493794048564" },
+      { icono: "💬", titulo: "Consultar Proyecto", sub: "WhatsApp del Estudio", href: "https://wa.me/5493794924075" },
       { icono: "📸", titulo: "Instagram Obras", sub: "@estudioveron.arq", href: "https://instagram.com" },
-      { icono: "📐", titulo: "Agendar Reunión", sub: "Videollamada o Estudio", href: "https://wa.me/5493794048564" },
+      { icono: "📐", titulo: "Agendar Reunión", sub: "Videollamada o Estudio", href: "https://wa.me/5493794924075" },
       { icono: "✉️", titulo: "Enviar Planos", sub: "hola@estudioveron.arq", href: "mailto:hola@estudioveron.arq" }
     ],
     portfolioEyebrow: "OBRAS Y VISUALIZACIÓN 3D SELECCIONADAS",

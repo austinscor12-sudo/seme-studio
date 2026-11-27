@@ -1,6 +1,6 @@
 import { registrarInteraccionDemo } from "./firebase-config.js";
 
-const WHATSAPP_NUMERO = "5493794048564";
+const WHATSAPP_NUMERO = "5493794924075";
 const servicesGrid = document.getElementById("servicesGrid");
 const filterBar = document.getElementById("filterBar");
 const serviceModal = document.getElementById("serviceModal");
