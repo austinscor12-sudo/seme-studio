@@ -1089,27 +1089,43 @@
       }
     }
 
-    @media (max-width: 520px) {
+    @media (max-width: 640px) {
       .topbar-inner {
-        padding: 9px 12px;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 8px 14px;
+        gap: 8px;
       }
 
-      .qr-tag {
-        display: none;
+      .brand-left {
+        justify-content: space-between;
+        width: 100%;
       }
 
       .resto-brand {
-        font-size: 0.96rem;
+        font-size: 0.98rem;
       }
 
       .btn-back {
-        padding: 6px 10px;
-        font-size: 0.75rem;
+        padding: 6px 11px;
+        font-size: 0.76rem;
+      }
+
+      .topbar-right {
+        justify-content: space-between;
+        width: 100%;
+        padding-top: 7px;
+        border-top: 1px solid rgba(246, 231, 203, 0.1);
+      }
+
+      .table-selector {
+        padding: 6px 12px;
+        font-size: 0.78rem;
       }
 
       .comanda-btn {
-        padding: 7px 11px;
-        font-size: 0.78rem;
+        padding: 7px 14px;
+        font-size: 0.8rem;
       }
     }
   </style>
