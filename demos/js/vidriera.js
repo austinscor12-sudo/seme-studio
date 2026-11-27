@@ -102,10 +102,19 @@ window.VidrieraApp = (function () {
     document.getElementById("hudTag").textContent = prod.tag;
     document.getElementById("hudHeading").textContent = prod.name;
     document.getElementById("hudPrice").textContent = formatARS(prod.price);
-    document.getElementById("hudInstallments").textContent = `3 cuotas sin interés de ${formatARS(prod.price / 3)}`;
+
+    const instEl = document.getElementById("hudInstallments");
+    if (instEl) {
+      if (config.showInstallments === false) {
+        instEl.textContent = prod.prepInfo || "Preparación en el momento";
+      } else {
+        instEl.textContent = `3 cuotas sin interés de ${formatARS(prod.price / 3)}`;
+      }
+    }
+
     document.getElementById("hudDesc").textContent = prod.desc;
     document.getElementById("hudQty").textContent = qty;
-    document.getElementById("hudVariantLabel").textContent = `${config.variantLabel || "Opción"}: ${selectedVariant}`;
+    document.getElementById("hudVariantLabel").textContent = `${prod.variantLabel || config.variantLabel || "Opción"}: ${selectedVariant}`;
 
     const specsEl = document.getElementById("hudSpecs");
     if (specsEl) {
@@ -122,7 +131,7 @@ window.VidrieraApp = (function () {
     variantsGrid.querySelectorAll(".variant-btn:not(:disabled)").forEach(btn => {
       btn.addEventListener("click", () => {
         selectedVariant = btn.dataset.val;
-        document.getElementById("hudVariantLabel").textContent = `${config.variantLabel || "Opción"}: ${selectedVariant}`;
+        document.getElementById("hudVariantLabel").textContent = `${prod.variantLabel || config.variantLabel || "Opción"}: ${selectedVariant}`;
         variantsGrid.querySelectorAll(".variant-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
       });
@@ -132,7 +141,6 @@ window.VidrieraApp = (function () {
     itemEl.classList.add("is-active");
     setCameraMode("normal");
 
-    // 1. Activar clase primero para fijar el stage a 100vh antes de medir coordenadas
     document.body.classList.add("is-zoomed");
 
     if (!isZoomed) {
@@ -145,7 +153,6 @@ window.VidrieraApp = (function () {
     const isMobile = window.innerWidth <= 920;
     const targetScale = isMobile ? 1.85 : 2.55;
 
-    // 2. Centrar sobre el bloque visual (zapatilla + repisa), no sobre el texto oculto de abajo
     const visualEl = itemEl.querySelector(".item-visual");
     const itemCenterX = itemEl.offsetLeft + itemEl.offsetWidth / 2;
     const itemCenterY = itemEl.offsetTop + (visualEl ? visualEl.offsetTop + visualEl.offsetHeight * 0.58 : itemEl.offsetHeight * 0.45);
@@ -169,37 +176,47 @@ window.VidrieraApp = (function () {
     wall.style.transform = "translate(0px, 0px) scale(1)";
   }
 
+  function getActiveStoreTitle() {
+    const tableSel = document.getElementById("tableSelect");
+    if (config.tableMode && tableSel) {
+      return `${config.storeName} • Mesa ${tableSel.value}`;
+    }
+    return config.storeName || "Catálogo 3D";
+  }
+
   function buildWhatsAppMessage() {
-    if (cart.length === 0) return "Agregá productos al pedido para ver la vista previa del mensaje.";
-    const clientName = document.getElementById("clientName").value.trim() || "Cliente Web";
-    const delivery = document.getElementById("deliverySelect").value;
-    const address = document.getElementById("addressField").value.trim();
-    const payment = document.getElementById("paymentSelect").value;
+    if (cart.length === 0) return "Agregá ítems al pedido para ver la vista previa del ticket.";
+    const clientName = document.getElementById("clientName").value.trim() || (config.tableMode ? "Comensal" : "Cliente Web");
+    const deliverySel = document.getElementById("deliverySelect");
+    const delivery = deliverySel.value;
+    const address = document.getElementById("addressField")?.value.trim() || "";
+    const paymentSel = document.getElementById("paymentSelect");
+    const payment = paymentSel.value;
     const notes = document.getElementById("orderNotes").value.trim();
+    const tableSel = document.getElementById("tableSelect");
 
     const lines = cart.map(i =>
-      `• ${i.qty}x ${i.product.name} (${config.variantLabel || "Opción"} ${i.variant}) — ${formatARS(i.product.price * i.qty)}`
+      `• ${i.qty}x ${i.product.name} (${i.product.variantLabel || config.variantLabel || "Opción"}: ${i.variant}) — ${formatARS(i.product.price * i.qty)}`
     ).join("\n");
 
-    const entregaLine = delivery === "envio"
-      ? `Envío a domicilio${address ? ` (${address})` : ""}`
-      : "Retiro en local (Gratis)";
+    let entregaLine = deliverySel.options[deliverySel.selectedIndex]?.text || "";
+    if (delivery === "envio" && address) {
+      entregaLine = `Envío a domicilio (${address})`;
+    } else if (delivery === "mesa" && tableSel) {
+      entregaLine = `Servir en Mesa #${tableSel.value}`;
+    }
 
-    const pagoMap = {
-      transferencia: "Transferencia Bancaria (15% OFF)",
-      efectivo: "Efectivo en mano (10% OFF)",
-      tarjeta: "Tarjeta / Mercado Pago (3 cuotas s/ interés)"
-    };
-
+    const pagoLine = paymentSel.options[paymentSel.selectedIndex]?.text || payment;
     const totalStr = document.getElementById("cartTotal").textContent;
 
     return (
-      `Hola! Quiero confirmar este pedido desde *${config.storeName || "Catálogo 3D"}*:\n\n` +
-      `*Cliente:* ${clientName}\n` +
-      `*Entrega:* ${entregaLine}\n` +
-      `*Pago:* ${pagoMap[payment]}\n` +
-      (notes ? `*Nota:* ${notes}\n` : "") +
-      `\n*Detalle del pedido:*\n${lines}\n\n` +
+      `Hola! Nuevo pedido desde *${getActiveStoreTitle()}*:\n\n` +
+      (config.tableMode && tableSel ? `*Mesa:* #${tableSel.value}\n` : "") +
+      `*Nombre:* ${clientName}\n` +
+      `*Modalidad:* ${entregaLine}\n` +
+      `*Pago:* ${pagoLine}\n` +
+      (notes ? `*Observaciones:* ${notes}\n` : "") +
+      `\n*Detalle:*\n${lines}\n\n` +
       `*Total Final:* ${totalStr}`
     );
   }
@@ -210,14 +227,14 @@ window.VidrieraApp = (function () {
 
     const list = document.getElementById("cartList");
     if (cart.length === 0) {
-      list.innerHTML = `<p style="color:var(--muted);text-align:center;padding:24px 10px;font-size:0.86rem;">Tu carrito está vacío. Tocá cualquier zapatilla en la vitrina para elegir talle y sumarla.</p>`;
+      list.innerHTML = `<p style="color:var(--muted);text-align:center;padding:24px 10px;font-size:0.86rem;">Tu pedido está vacío. Tocá cualquier opción de la vitrina para sumarla.</p>`;
     } else {
       list.innerHTML = cart.map((item, i) => `
         <div class="cart-row">
           <div class="cart-thumb">${item.product.visual}</div>
           <div class="cart-row-info">
             <h4>${item.product.name}</h4>
-            <p>${config.variantLabel || "Talle"} ${item.variant} &bull; ${formatARS(item.product.price)} c/u</p>
+            <p>${item.product.variantLabel || config.variantLabel || "Opción"}: ${item.variant} &bull; ${formatARS(item.product.price)} c/u</p>
             <strong style="font-size:0.82rem;color:#ff9d6e;">${formatARS(item.product.price * item.qty)}</strong>
           </div>
           <div class="cart-row-controls">
@@ -267,14 +284,19 @@ window.VidrieraApp = (function () {
       discountRow.style.display = "none";
     }
 
-    document.getElementById("shippingVal").textContent = shipping > 0 ? formatARS(shipping) : "Gratis";
+    const shippingValEl = document.getElementById("shippingVal");
+    if (shippingValEl) {
+      shippingValEl.textContent = shipping > 0 ? formatARS(shipping) : (config.tableMode ? "Sin cargo" : "Gratis");
+    }
     document.getElementById("cartTotal").textContent = formatARS(finalTotal);
 
     const instEl = document.getElementById("installmentNote");
-    if (payment === "tarjeta" && finalTotal > 0) {
-      instEl.textContent = `O en 3 cuotas sin interés de ${formatARS(finalTotal / 3)}`;
-    } else {
-      instEl.textContent = "";
+    if (instEl) {
+      if (config.showInstallments !== false && payment === "tarjeta" && finalTotal > 0) {
+        instEl.textContent = `O en 3 cuotas sin interés de ${formatARS(finalTotal / 3)}`;
+      } else {
+        instEl.textContent = "";
+      }
     }
 
     document.getElementById("waPreviewBox").textContent = buildWhatsAppMessage();
@@ -287,7 +309,7 @@ window.VidrieraApp = (function () {
     if (found) found.qty += qty;
     else cart.push({ key, product: activeProduct, variant: selectedVariant, qty });
     updateCartUI();
-    showToast(`✓ ${activeProduct.name} (${config.variantLabel || "Talle"} ${selectedVariant}) agregado`);
+    showToast(`✓ ${activeProduct.name} (${selectedVariant}) agregado`);
     if (openAfter) {
       document.getElementById("drawer").classList.add("open");
       document.getElementById("drawerMask").classList.add("open");
@@ -365,11 +387,12 @@ window.VidrieraApp = (function () {
     });
 
     document.getElementById("deliverySelect").addEventListener("change", (e) => {
-      document.getElementById("addressField").style.display = e.target.value === "envio" ? "block" : "none";
+      const addr = document.getElementById("addressField");
+      if (addr) addr.style.display = e.target.value === "envio" ? "block" : "none";
       updateCartUI();
     });
 
-    ["clientName", "addressField", "paymentSelect", "orderNotes"].forEach(id => {
+    ["clientName", "addressField", "paymentSelect", "orderNotes", "tableSelect"].forEach(id => {
       document.getElementById(id)?.addEventListener("input", updateCartUI);
       document.getElementById(id)?.addEventListener("change", updateCartUI);
     });
@@ -377,12 +400,12 @@ window.VidrieraApp = (function () {
     document.getElementById("copyPreviewBtn")?.addEventListener("click", () => {
       if (cart.length === 0) return;
       navigator.clipboard?.writeText(buildWhatsAppMessage());
-      showToast("✓ Resumen copiado al portapapeles");
+      showToast("✓ Ticket copiado al portapapeles");
     });
 
     document.getElementById("sendWaBtn").addEventListener("click", () => {
       if (cart.length === 0) {
-        showToast("Agregá al menos una zapatilla primero");
+        showToast("Agregá al menos un ítem primero");
         return;
       }
       const msg = buildWhatsAppMessage();

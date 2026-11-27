@@ -3,198 +3,1946 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Demo: Menú de Mesa + División de Cuenta | SEME STUDIO</title>
-  <meta name="theme-color" content="#060911" />
-  <link rel="icon" type="image/png" href="../assets/img/icono.png" />
+  <title>BRASA &amp; BAR | Carta Interactiva en Mesa — SEME Studio</title>
+  <meta name="theme-color" content="#0d0c0f" />
+  <link rel="icon" type="image/png" href="../assets/img/icono.png?v=3" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/menu-mesa.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* 3 COLORES EXCLUSIVOS DE ESTA DEMO */
+      --c-crimson: #ff4d3d;   /* Color 1: Carmesí Brasa */
+      --c-mint: #2dd4bf;      /* Color 2: Turquesa Menta */
+      --c-cream: #f6e7cb;     /* Color 3: Crema Vainilla */
+
+      --bg: #0d0c0f;
+      --card: rgba(22, 20, 26, 0.88);
+      --border: rgba(246, 231, 203, 0.14);
+      --text: #fbf8f3;
+      --muted: #a69f98;
+      --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* =========================================================
+       TOPBAR DE MESA
+       ========================================================= */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(13, 12, 15, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: 0.2s ease;
+    }
+
+    .btn-back:hover {
+      color: var(--c-cream);
+      border-color: var(--c-crimson);
+    }
+
+    .resto-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Fraunces', serif;
+      font-size: 1.08rem;
+      letter-spacing: 0.03em;
+      color: var(--c-cream);
+      white-space: nowrap;
+    }
+
+    .qr-tag {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.64rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 77, 61, 0.16);
+      color: var(--c-crimson);
+      border: 1px solid rgba(255, 77, 61, 0.35);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .table-selector {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(246, 231, 203, 0.06);
+      border: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--c-cream);
+      font-weight: 700;
+    }
+
+    .table-selector select {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 0.8rem;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .table-selector select option {
+      background: #16141a;
+    }
+
+    .comanda-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 15px;
+      border-radius: 999px;
+      border: 1px solid rgba(45, 212, 191, 0.45);
+      background: linear-gradient(135deg, rgba(45, 212, 191, 0.22), rgba(20, 184, 166, 0.12));
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.2s ease;
+    }
+
+    .comanda-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .badge-count {
+      background: var(--c-mint);
+      color: #042420;
+      font-weight: 800;
+      font-size: 0.74rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+
+    /* =========================================================
+       CATEGORÍAS DE LA CARTA
+       ========================================================= */
+    .cats-strip {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 12px 20px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cats-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+
+    .cats-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-pill {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: 0.22s ease;
+    }
+
+    .cat-pill:hover {
+      color: var(--c-cream);
+      border-color: rgba(255, 77, 61, 0.45);
+    }
+
+    .cat-pill.active {
+      background: var(--c-crimson);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(255, 77, 61, 0.38);
+    }
+
+    .table-hint {
+      font-size: 0.76rem;
+      color: var(--c-cream);
+      opacity: 0.75;
+    }
+
+    /* =========================================================
+       LAYOUT PRINCIPAL: MESA CON PLATO MÓVIL + FICHA DE PEDIDO
+       ========================================================= */
+    .workspace {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 12px 20px 36px;
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .table-stage {
+      position: relative;
+      border-radius: 28px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255, 77, 61, 0.14), transparent 55%),
+        radial-gradient(circle at 80% 20%, rgba(45, 212, 191, 0.08), transparent 45%),
+        repeating-radial-gradient(circle at 50% 50%, rgba(246, 231, 203, 0.015) 0px, rgba(0, 0, 0, 0.04) 3px, transparent 6px),
+        linear-gradient(160deg, #16141a 0%, #0b0a0d 100%);
+      box-shadow: inset 0 1px 0 rgba(246, 231, 203, 0.08), 0 24px 60px rgba(0, 0, 0, 0.65);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 565px;
+      touch-action: pan-y;
+    }
+
+    .stage-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      z-index: 5;
+    }
+
+    .prep-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(13, 12, 15, 0.65);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--c-mint);
+    }
+
+    .view-toggle {
+      padding: 6px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(246, 231, 203, 0.06);
+      color: var(--c-cream);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .view-toggle:hover {
+      border-color: var(--c-crimson);
+      background: rgba(255, 77, 61, 0.16);
+    }
+
+    /* Zona del plato que se mueve de lado a lado */
+    .turntable-area {
+      position: relative;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 0;
+      perspective: 1000px;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(18, 16, 22, 0.85);
+      backdrop-filter: blur(8px);
+      color: var(--c-cream);
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .nav-arrow:hover {
+      border-color: var(--c-crimson);
+      background: var(--c-crimson);
+      color: #fff;
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .nav-arrow.prev { left: 6px; }
+    .nav-arrow.next { right: 6px; }
+
+    /* Contenedor que traslada y gira TODO EL PLATO sobre la mesa */
+    .plate-mover {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      will-change: transform, opacity;
+      transition: transform 0.34s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+    }
+
+    .plate-mover.leave-left {
+      opacity: 0;
+      transform: translateX(-165px) rotate(-52deg) scale(0.76);
+    }
+
+    .plate-mover.leave-right {
+      opacity: 0;
+      transform: translateX(165px) rotate(52deg) scale(0.76);
+    }
+
+    .plate-mover.enter-from-right {
+      animation: plateSlideFromRight 0.56s var(--ease-spring) forwards;
+    }
+
+    .plate-mover.enter-from-left {
+      animation: plateSlideFromLeft 0.56s var(--ease-spring) forwards;
+    }
+
+    @keyframes plateSlideFromRight {
+      0% {
+        opacity: 0;
+        transform: translateX(175px) rotate(58deg) scale(0.76);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
+    }
+
+    @keyframes plateSlideFromLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-175px) rotate(-58deg) scale(0.76);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) rotate(0deg) scale(1);
+      }
+    }
+
+    /* Plato físico de gres + porcelana crema */
+    .ceramic-plate {
+      --rx: 0deg;
+      --ry: 0deg;
+      --tilt: 0deg;
+      position: relative;
+      width: min(330px, 68vw);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #2b2733 0%, #17151c 68%, #0c0b0f 100%);
+      box-shadow:
+        0 28px 45px rgba(0, 0, 0, 0.85),
+        0 0 0 2px rgba(246, 231, 203, 0.18),
+        inset 0 2px 8px rgba(246, 231, 203, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotateX(var(--tilt)) rotateX(var(--rx)) rotateY(var(--ry));
+      transition: transform 0.45s var(--ease-spring), box-shadow 0.45s ease;
+    }
+
+    .ceramic-plate.is-3d {
+      --tilt: 24deg;
+      box-shadow:
+        0 42px 55px rgba(0, 0, 0, 0.92),
+        0 9px 0 #0b0a0e,
+        0 0 0 2px rgba(246, 231, 203, 0.24);
+    }
+
+    /* Aro interior de porcelana crema vainilla */
+    .ceramic-plate::before {
+      content: "";
+      position: absolute;
+      inset: 10.5%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 28%, #fffdf9 0%, var(--c-cream) 68%, #d8c3a0 100%);
+      box-shadow:
+        inset 0 4px 12px rgba(0, 0, 0, 0.2),
+        0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .dish-visual-box {
+      position: relative;
+      z-index: 3;
+      width: 78%;
+      height: 78%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dish-visual-box svg,
+    .dish-visual-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 14px rgba(0, 0, 0, 0.45));
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Ondas de vapor animado para platos calientes */
+    .steam-layer {
+      position: absolute;
+      top: 6%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 70px;
+      pointer-events: none;
+      z-index: 6;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .steam-layer.active {
+      opacity: 1;
+    }
+
+    .steam-wisp {
+      position: absolute;
+      bottom: 0;
+      width: 14px;
+      height: 46px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(246, 231, 203, 0.36) 0%, transparent 72%);
+      filter: blur(5px);
+      animation: steamRise 3.2s ease-in-out infinite;
+    }
+
+    .steam-wisp:nth-child(1) { left: 24px; animation-delay: 0s; }
+    .steam-wisp:nth-child(2) { left: 54px; animation-delay: 1.1s; height: 54px; }
+    .steam-wisp:nth-child(3) { left: 82px; animation-delay: 2.1s; }
+
+    @keyframes steamRise {
+      0% { transform: translateY(8px) scaleX(0.8); opacity: 0; }
+      40% { opacity: 0.78; }
+      100% { transform: translateY(-38px) scaleX(1.45); opacity: 0; }
+    }
+
+    /* Carrusel inferior de platos en la mesa */
+    .dish-dock {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 6px 2px 2px;
+      scrollbar-width: none;
+      z-index: 5;
+    }
+
+    .dish-dock::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dock-card {
+      flex: 0 0 132px;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(246, 231, 203, 0.1);
+      background: rgba(15, 14, 19, 0.78);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.25s var(--ease-spring);
+    }
+
+    .dock-card:hover {
+      border-color: rgba(255, 77, 61, 0.5);
+      transform: translateY(-3px);
+    }
+
+    .dock-card.active {
+      background: rgba(255, 77, 61, 0.15);
+      border-color: var(--c-crimson);
+      box-shadow: 0 8px 20px rgba(255, 77, 61, 0.22);
+    }
+
+    .dock-thumb {
+      width: 58px;
+      height: 58px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dock-thumb svg,
+    .dock-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .dock-card h4 {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--c-cream);
+      line-height: 1.2;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .dock-card span {
+      margin-top: 4px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--c-mint);
+    }
+
+    /* =========================================================
+       PANEL DERECHO: PERSONALIZACIÓN DE PLATO Y MARIDAJE
+       ========================================================= */
+    .order-card {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.6);
+    }
+
+    .dish-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--c-crimson);
+    }
+
+    .dish-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.55rem, 2.5vw, 2.05rem);
+      line-height: 1.12;
+      color: var(--c-cream);
+      margin: 6px 0 8px;
+    }
+
+    .dish-price-line {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .dish-price {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .dish-portion {
+      font-size: 0.78rem;
+      color: var(--c-mint);
+      font-weight: 700;
+    }
+
+    .dish-desc {
+      font-size: 0.87rem;
+      line-height: 1.55;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .food-tag {
+      font-size: 0.71rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(246, 231, 203, 0.06);
+      border: 1px solid rgba(246, 231, 203, 0.14);
+      color: var(--c-cream);
+    }
+
+    .section-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--c-cream);
+      margin-bottom: 8px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .opt-btn {
+      padding: 9px 6px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      color: #fff;
+      font-size: 0.79rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.2s ease;
+    }
+
+    .opt-btn small {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .opt-btn.active {
+      background: var(--c-crimson);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(255, 77, 61, 0.3);
+    }
+
+    .opt-btn.active small {
+      color: var(--c-cream);
+    }
+
+    .extras-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+
+    .extra-chip {
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(246, 231, 203, 0.16);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .extra-chip.selected {
+      background: rgba(45, 212, 191, 0.16);
+      border-color: var(--c-mint);
+      color: #fff;
+    }
+
+    .pairing-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 13px;
+      border-radius: 14px;
+      background: rgba(45, 212, 191, 0.08);
+      border: 1px dashed rgba(45, 212, 191, 0.38);
+      margin-bottom: 18px;
+    }
+
+    .pairing-info span {
+      display: block;
+      font-size: 0.66rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--c-mint);
+    }
+
+    .pairing-info strong {
+      font-size: 0.83rem;
+      color: var(--c-cream);
+    }
+
+    .btn-add-pairing {
+      padding: 7px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(45, 212, 191, 0.5);
+      background: rgba(45, 212, 191, 0.16);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: 0.2s ease;
+    }
+
+    .btn-add-pairing:hover {
+      background: var(--c-mint);
+      color: #042420;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .qty-box {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 13px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .qty-box button {
+      width: 36px;
+      height: 46px;
+      border: none;
+      background: transparent;
+      color: var(--c-cream);
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .qty-box span {
+      min-width: 26px;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .btn-submit-dish {
+      flex: 1;
+      height: 46px;
+      border: none;
+      border-radius: 13px;
+      background: var(--c-crimson);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(255, 77, 61, 0.35);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-submit-dish:hover {
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       DRAWER COMANDA + DIVISIÓN DE CUENTA
+       ========================================================= */
+    .drawer-mask {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(6, 5, 8, 0.78);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .drawer-mask.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 65;
+      width: 100%;
+      max-width: 450px;
+      background: #131117;
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease-spring);
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--c-cream);
+    }
+
+    .drawer-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 1.15rem;
+      cursor: pointer;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .comanda-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(246, 231, 203, 0.09);
+    }
+
+    .comanda-thumb {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comanda-thumb svg,
+    .comanda-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .comanda-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .comanda-info h4 {
+      font-size: 0.86rem;
+      color: var(--c-cream);
+    }
+
+    .comanda-info p {
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .mini-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .split-bill-box {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 77, 61, 0.09);
+      border: 1px solid rgba(255, 77, 61, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .split-bill-box span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--c-cream);
+    }
+
+    .split-bill-box small {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--c-mint);
+      font-weight: 700;
+    }
+
+    .split-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.84rem;
+    }
+
+    .field-input option {
+      background: #131117;
+    }
+
+    .two-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .ticket-preview {
+      background: #0b1918;
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .ticket-preview-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--c-mint);
+      margin-bottom: 6px;
+    }
+
+    .btn-copy {
+      background: rgba(45, 212, 191, 0.16);
+      border: 1px solid rgba(45, 212, 191, 0.38);
+      color: #ccfbf1;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .ticket-body {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.73rem;
+      line-height: 1.45;
+      color: #ccfbf1;
+      white-space: pre-wrap;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    .drawer-foot {
+      padding: 14px 20px 18px;
+      border-top: 1px solid var(--border);
+      background: #0d0c0f;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--c-cream);
+    }
+
+    .btn-send-kitchen {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      background: var(--c-mint);
+      color: #042420;
+      font-weight: 800;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(60px);
+      z-index: 80;
+      background: #16141a;
+      border: 1px solid var(--c-crimson);
+      color: var(--c-cream);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s var(--ease-spring);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =========================================================
+       RESPONSIVE CELULAR
+       ========================================================= */
+    @media (max-width: 960px) {
+      .workspace {
+        grid-template-columns: 1fr;
+        padding: 10px 14px 30px;
+      }
+
+      .table-stage {
+        min-height: 410px;
+        padding: 16px;
+      }
+
+      .ceramic-plate {
+        width: min(250px, 64vw);
+      }
+
+      .table-hint {
+        display: none;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .topbar-inner {
+        padding: 9px 12px;
+      }
+
+      .qr-tag {
+        display: none;
+      }
+
+      .resto-brand {
+        font-size: 0.96rem;
+      }
+
+      .btn-back {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+      }
+
+      .comanda-btn {
+        padding: 7px 11px;
+        font-size: 0.78rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
-  <div class="demo-ribbon">
-    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
-    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
-  </div>
-
-  <!-- CABECERA DE LA MESA -->
-  <header class="table-header">
-    <div class="container">
-      <div class="table-card">
-        <div class="table-top">
-          <div class="venue-info">
-            <span class="table-badge">📍 MESA 07 &bull; TERRAZA</span>
-            <h1>BARRA &amp; FUEGO</h1>
-            <p>Carta Digital &bull; Pedidos directos sin esperar</p>
-          </div>
-          <div class="table-status-box">
-            <small>CONSUMO MESA</small>
-            <strong id="headerTableTotal">$0</strong>
-          </div>
-        </div>
-
-        <!-- BOTONES RÁPIDOS DE ATENCIÓN EN MESA -->
-        <div class="quick-table-actions">
-          <button type="button" class="btn-call-waiter" id="callWaiterBtn">
-            🔔 Llamar al Mozo
-          </button>
-          <button type="button" class="btn-split-bill" id="openBillBtn">
-            🧾 Dividir Cuenta
-          </button>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-left">
+        <a href="../index.html#servicios" class="btn-back">← Volver</a>
+        <div class="resto-brand">
+          <span>BRASA &amp; BAR</span>
+          <span class="qr-tag">Carta QR</span>
         </div>
       </div>
 
-      <!-- CATEGORÍAS DE LA CARTA -->
-      <nav class="menu-cats" id="menuCats">
-        <button type="button" class="cat-btn active" data-cat="todos">Todo</button>
-        <button type="button" class="cat-btn" data-cat="tapas">Para Picar</button>
-        <button type="button" class="cat-btn" data-cat="principales">Principales</button>
-        <button type="button" class="cat-btn" data-cat="tragos">Tragos &amp; Birras</button>
-        <button type="button" class="cat-btn" data-cat="postres">Postres</button>
-      </nav>
-    </div>
-  </header>
+      <div class="topbar-right">
+        <label class="table-selector">
+          <span>Mesa</span>
+          <select id="tableSelect">
+            <option value="01">#01</option>
+            <option value="02">#02</option>
+            <option value="03">#03</option>
+            <option value="04">#04</option>
+            <option value="05">#05</option>
+            <option value="06">#06</option>
+            <option value="07" selected>#07</option>
+            <option value="08">#08</option>
+          </select>
+        </label>
 
-  <!-- GRILLA DE PLATOS Y TRAGOS -->
-  <main class="container menu-main">
-    <div class="dishes-grid" id="dishesGrid"></div>
-  </main>
-
-  <!-- BARRA FLOTANTE INFERIOR (RONDA NUEVA O VER CUENTA) -->
-  <div class="bottom-dock">
-    <div class="dock-inner">
-      <div class="dock-info">
-        <small id="dockSubLabel">Cuenta activa Mesa 07</small>
-        <strong id="dockMainLabel">$34.400 acumulado</strong>
-      </div>
-      <button type="button" class="btn-dock-action" id="dockActionBtn">
-        Ver Cuenta y Dividir →
-      </button>
-    </div>
-  </div>
-
-  <!-- DRAWER: CUENTA DE LA MESA Y DIVISIÓN ENTRE COMENSALES -->
-  <div class="modal-backdrop" id="billDrawer" aria-hidden="true">
-    <div class="drawer-panel">
-      <div class="drawer-header">
-        <div>
-          <span class="mono-label">MESA 07 &bull; CUENTA EN VIVO</span>
-          <h2>Consumo y División</h2>
-        </div>
-        <button type="button" class="close-btn" id="closeBillBtn" aria-label="Cerrar">&times;</button>
-      </div>
-
-      <div class="drawer-body">
-        <!-- RONDA PENDIENTE (SI AGREGÓ PLATOS NUEVOS) -->
-        <div class="pending-round-box hidden" id="pendingRoundBox">
-          <div class="pending-head">
-            <span>🔥 Nueva ronda lista para enviar a cocina</span>
-            <button type="button" class="btn-send-kitchen" id="sendKitchenBtn">
-              Enviar Ronda ✓
-            </button>
-          </div>
-          <div id="pendingItemsList"></div>
-        </div>
-
-        <!-- CONSUMO YA SERVIDO EN LA MESA -->
-        <div class="consumed-section">
-          <span class="mono-label">PEDIDOS CARGADOS EN LA MESA:</span>
-          <div class="consumed-list" id="consumedList"></div>
-        </div>
-
-        <!-- SELECTOR DE MODO DE DIVISIÓN -->
-        <div class="splitter-card">
-          <div class="split-mode-tabs" id="splitModeTabs">
-            <button type="button" class="split-tab active" data-mode="equal">
-              👥 Partes Iguales
-            </button>
-            <button type="button" class="split-tab" data-mode="items">
-              🍽️ Por lo que consumí
-            </button>
-          </div>
-
-          <!-- MODO A: PARTES IGUALES -->
-          <div id="equalSplitPanel">
-            <div class="diners-row">
-              <div>
-                <strong>¿Entre cuántos dividen?</strong>
-                <small>Calcula el monto exacto por persona</small>
-              </div>
-              <div class="diners-stepper">
-                <button type="button" id="decDinersBtn">−</button>
-                <span id="dinersCountText">4</span>
-                <button type="button" id="incDinersBtn">+</button>
-              </div>
-            </div>
-
-            <div class="tip-selector">
-              <label>Propina sugerida (opcional):</label>
-              <div class="tip-pills" id="tipPills">
-                <button type="button" class="tip-pill" data-tip="0">Sin propina</button>
-                <button type="button" class="tip-pill active" data-tip="10">10%</button>
-                <button type="button" class="tip-pill" data-tip="15">15%</button>
-              </div>
-            </div>
-
-            <div class="split-result-banner">
-              <div>
-                <small>TOTAL MESA (<span id="tipSummaryLabel">+10% propina</span>)</small>
-                <span class="total-small" id="billGrandTotal">$0</span>
-              </div>
-              <div class="per-person-box">
-                <small>CADA UNO PAGA</small>
-                <strong id="perPersonAmount">$0</strong>
-              </div>
-            </div>
-          </div>
-
-          <!-- MODO B: POR CONSUMO INDIVIDUAL -->
-          <div id="itemSplitPanel" class="hidden">
-            <p class="item-split-hint">Marcá los ítems que pediste vos para calcular tu parte exacta:</p>
-            <div class="selectable-items" id="selectableItemsList"></div>
-            <div class="split-result-banner">
-              <div>
-                <small>TU PARTE SELECCIONADA</small>
-                <span class="total-small" id="selectedItemsCount">0 ítems</span>
-              </div>
-              <div class="per-person-box">
-                <small>TU TOTAL (+10% PROP.)</small>
-                <strong id="myCustomAmount">$0</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="drawer-footer">
-        <button type="button" class="btn-pay-table" id="finishBillBtn">
-          Solicitar Cobro en Mesa ✓
+        <button type="button" class="comanda-btn" id="openDrawerBtn">
+          <span>Comanda</span>
+          <span class="badge-count" id="cartCount">0</span>
         </button>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- MODAL DE CONFIRMACIÓN FINAL -->
-  <div class="modal-backdrop" id="confirmModal" aria-hidden="true">
-    <div class="confirm-card">
-      <div class="confirm-icon">🧾</div>
-      <span class="mono-label">SOLICITUD ENVIADA A CAJA</span>
-      <h3>¡Mozo en camino a Mesa 07!</h3>
-      <p id="confirmModalDesc">Cada comensal abona $9.460 por transferencia, QR o efectivo sin hacer cuentas manuales.</p>
-      <div class="confirm-actions">
-        <button type="button" class="btn-sec" id="closeConfirmBtn">Seguir probando</button>
-        <a href="https://wa.me/5493794924075?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20del%20Men%C3%BA%20de%20Mesa%20con%20Divisi%C3%B3n%20de%20Cuenta%20y%20quiero%20uno%20para%20mi%20local." target="_blank" rel="noopener" class="btn-pri">
-          Quiero esta carta
-        </a>
+  <section class="cats-strip">
+    <div class="cats-pills" id="catsPills">
+      <button type="button" class="cat-pill active" data-cat="todos">Carta Completa</button>
+      <button type="button" class="cat-pill" data-cat="brasas">Brasas &amp; Burgers</button>
+      <button type="button" class="cat-pill" data-cat="horno">Horno &amp; Tablas</button>
+      <button type="button" class="cat-pill" data-cat="barra">Barra &amp; Postres</button>
+    </div>
+    <span class="table-hint">Tocá un plato abajo, las flechas o deslizá el plato en la mesa</span>
+  </section>
+
+  <main class="workspace">
+    <!-- MESA CON PLATO QUE SE DESPLAZA Y GIRA -->
+    <section class="table-stage" id="tableStage">
+      <div class="stage-top-bar">
+        <span class="prep-badge" id="prepBadge">⏱ 14 min • Sale caliente</span>
+        <button type="button" class="view-toggle" id="toggle3DBtn">Vista 3D: Inclinada</button>
+      </div>
+
+      <div class="turntable-area">
+        <button type="button" class="nav-arrow prev" id="prevDishBtn" aria-label="Plato anterior">‹</button>
+
+        <div class="plate-mover" id="plateMover">
+          <div class="ceramic-plate is-3d" id="ceramicPlate">
+            <div class="steam-layer active" id="steamLayer">
+              <div class="steam-wisp"></div>
+              <div class="steam-wisp"></div>
+              <div class="steam-wisp"></div>
+            </div>
+            <div class="dish-visual-box" id="dishVisualBox"></div>
+          </div>
+        </div>
+
+        <button type="button" class="nav-arrow next" id="nextDishBtn" aria-label="Siguiente plato">›</button>
+      </div>
+
+      <div class="dish-dock" id="dishDock"></div>
+    </section>
+
+    <!-- FICHA DE PERSONALIZACIÓN DEL PLATO -->
+    <aside class="order-card">
+      <span class="dish-eyebrow" id="dishEyebrow">BRASAS &amp; BURGERS</span>
+      <h1 class="dish-title" id="dishTitle">Double Oklahoma Smash</h1>
+
+      <div class="dish-price-line">
+        <span class="dish-price" id="dishPrice">$ 14.500</span>
+        <span class="dish-portion" id="dishPortion">Incluye papas rústicas</span>
+      </div>
+
+      <p class="dish-desc" id="dishDesc"></p>
+      <div class="tags-row" id="dishTags"></div>
+
+      <div class="section-label">
+        <span id="optGroupTitle">Elegí tamaño</span>
+        <span id="optSelectedText">Doble</span>
+      </div>
+      <div class="options-grid" id="optionsGrid"></div>
+
+      <div class="section-label">
+        <span>Sumar extras opcionales</span>
+      </div>
+      <div class="extras-wrap" id="extrasWrap"></div>
+
+      <div class="pairing-box" id="pairingBox">
+        <div class="pairing-info">
+          <span>Maridaje sugerido del chef</span>
+          <strong id="pairingTitle">Negroni Ahumado en Roble ($ 8.900)</strong>
+        </div>
+        <button type="button" class="btn-add-pairing" id="addPairingBtn">+ Sumar</button>
+      </div>
+
+      <div class="cta-row">
+        <div class="qty-box">
+          <button type="button" id="qtyDec">−</button>
+          <span id="qtyNum">1</span>
+          <button type="button" id="qtyInc">+</button>
+        </div>
+        <button type="button" class="btn-submit-dish" id="addDishBtn">Sumar a la Mesa</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- DRAWER COMANDA + DIVISIÓN DE CUENTA -->
+  <div class="drawer-mask" id="drawerMask"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer-head">
+      <strong>Comanda de Mesa</strong>
+      <button type="button" class="drawer-close" id="closeDrawerBtn">&times;</button>
+    </div>
+
+    <div class="drawer-body">
+      <div id="comandaList" style="display:flex;flex-direction:column;gap:10px;"></div>
+
+      <div class="split-bill-box">
+        <div>
+          <span>Dividir cuenta entre amigos</span>
+          <small id="splitPerPersonText">1 persona: $ 0 c/u</small>
+        </div>
+        <div class="split-controls">
+          <button type="button" class="mini-btn" id="splitDec">−</button>
+          <strong id="splitCount" style="min-width:18px;text-align:center;">1</strong>
+          <button type="button" class="mini-btn" id="splitInc">+</button>
+        </div>
+      </div>
+
+      <input type="text" class="field-input" id="dinerName" placeholder="Tu nombre (ej: Lucas / Mesa 7)" />
+
+      <div class="two-grid">
+        <select class="field-input" id="serviceMode">
+          <option value="mesa">Servir en Mesa</option>
+          <option value="llevar">Para llevar (Take Away)</option>
+        </select>
+
+        <select class="field-input" id="payMode">
+          <option value="efectivo">Efectivo en mesa (10% OFF)</option>
+          <option value="qr">QR / Mercado Pago</option>
+          <option value="tarjeta">Tarjeta en mesa</option>
+        </select>
+      </div>
+
+      <input type="text" class="field-input" id="kitchenNote" placeholder="Nota para cocina (ej: sin cebolla, bien cocido...)" />
+
+      <div class="ticket-preview">
+        <div class="ticket-preview-head">
+          <span>VISTA PREVIA TICKET COCINA / WHATSAPP</span>
+          <button type="button" class="btn-copy" id="copyTicketBtn">Copiar</button>
+        </div>
+        <div class="ticket-body" id="ticketPreview"></div>
       </div>
     </div>
-  </div>
 
-  <!-- TOAST DE AVISO EN VIVO -->
-  <div class="toast-msg" id="toastMsg">🔔 ¡Mozo notificado! Se acerca a Mesa 07</div>
+    <div class="drawer-foot">
+      <div class="total-line">
+        <span>Total Mesa</span>
+        <span id="finalTotalText">$ 0</span>
+      </div>
+      <button type="button" class="btn-send-kitchen" id="sendKitchenBtn">Enviar Comanda por WhatsApp →</button>
+    </div>
+  </aside>
 
-  <script src="./js/menu-mesa.js"></script>
+  <div class="toast" id="toast">Agregado</div>
+
+  <script>
+    const PLATED_SVGS = {
+      burger: `
+        <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#facc15" stroke="#ca8a04" stroke-width="1.5">
+            <rect x="34" y="138" width="44" height="12" rx="5" transform="rotate(-24 34 138)" />
+            <rect x="44" y="162" width="48" height="12" rx="5" transform="rotate(14 44 162)" />
+            <rect x="176" y="148" width="46" height="12" rx="5" transform="rotate(22 176 148)" />
+            <rect x="168" y="172" width="44" height="12" rx="5" transform="rotate(-12 168 172)" />
+          </g>
+          <circle cx="192" cy="96" r="24" fill="#1e293b" />
+          <circle cx="192" cy="96" r="18" fill="#ff4d3d" />
+          <ellipse cx="118" cy="144" rx="66" ry="44" fill="#b45309" />
+          <path d="M52 136 Q84 152 118 138 T184 136" stroke="#2dd4bf" stroke-width="10" stroke-linecap="round" />
+          <ellipse cx="118" cy="128" rx="64" ry="40" fill="#451a03" />
+          <path d="M62 124 L118 144 L172 120 L146 104 L88 106 Z" fill="#facc15" />
+          <ellipse cx="118" cy="112" rx="62" ry="42" fill="#d97706" />
+          <g fill="#f6e7cb">
+            <ellipse cx="102" cy="96" rx="4" ry="2.2" transform="rotate(-18 102 96)" />
+            <ellipse cx="122" cy="92" rx="4" ry="2.2" transform="rotate(12 122 92)" />
+            <ellipse cx="140" cy="99" rx="4" ry="2.2" transform="rotate(24 140 99)" />
+          </g>
+        </svg>`,
+      bife: `
+        <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M52 138 C46 92, 92 66, 148 74 C192 80, 214 112, 198 148 C184 176, 66 176, 52 138 Z" fill="#7f1d1d" />
+          <path d="M62 132 C58 96, 98 74, 146 80 C182 86, 200 112, 186 142 C174 164, 74 164, 62 132 Z" fill="#991b1b" />
+          <g stroke="#290d0a" stroke-width="5" stroke-linecap="round">
+            <line x1="82" y1="88" x2="108" y2="152" />
+            <line x1="112" y1="84" x2="138" y2="154" />
+            <line x1="142" y1="86" x2="168" y2="150" />
+          </g>
+          <circle cx="126" cy="118" r="15" fill="#f6e7cb" />
+          <path d="M148 168 L204 134" stroke="#2dd4bf" stroke-width="4" stroke-linecap="round" />
+          <circle cx="94" cy="176" r="14" fill="#d97706" />
+          <circle cx="122" cy="182" r="13" fill="#b45309" />
+          <circle cx="148" cy="175" r="12" fill="#d97706" />
+        </svg>`,
+      pizza: `
+        <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="130" cy="130" r="96" fill="#d97706" />
+          <circle cx="130" cy="130" r="82" fill="#ff4d3d" />
+          <circle cx="130" cy="130" r="76" fill="#f6e7cb" />
+          <circle cx="102" cy="96" r="13" fill="#b91c1c" />
+          <circle cx="158" cy="98" r="13" fill="#b91c1c" />
+          <circle cx="96" cy="154" r="13" fill="#b91c1c" />
+          <circle cx="160" cy="156" r="13" fill="#b91c1c" />
+          <circle cx="130" cy="128" r="12" fill="#b91c1c" />
+          <ellipse cx="116" cy="116" rx="10" ry="5" fill="#14b8a6" transform="rotate(-30 116 116)" />
+          <ellipse cx="146" cy="142" rx="10" ry="5" fill="#14b8a6" transform="rotate(25 146 142)" />
+        </svg>`,
+      tabla: `
+        <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="44" y="64" width="172" height="132" rx="22" fill="#78350f" />
+          <polygon points="64,84 122,84 102,134 64,124" fill="#facc15" />
+          <circle cx="164" cy="108" r="24" fill="#ff4d3d" />
+          <circle cx="176" cy="122" r="22" fill="#be123c" />
+          <circle cx="92" cy="162" r="24" fill="#f6e7cb" />
+          <circle cx="86" cy="158" r="6" fill="#14b8a6" />
+          <circle cx="98" cy="156" r="6" fill="#0f766e" />
+          <ellipse cx="162" cy="166" rx="30" ry="16" fill="#d97706" />
+        </svg>`,
+      negroni: `
+        <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="130" cy="130" r="66" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.5)" stroke-width="4" />
+          <circle cx="130" cy="130" r="58" fill="#ff4d3d" opacity="0.92" />
+          <rect x="98" y="98" width="54" height="54" rx="10" fill="rgba(255,255,255,0.34)" transform="rotate(-12 98 98)" />
+          <circle cx="158" cy="104" r="26" fill="#f97316" stroke="#f6e7cb" stroke-width="3.5" />
+        </svg>`,
+      mojito: `
+        <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="130" cy="130" r="64" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.5)" stroke-width="4" />
+          <circle cx="130" cy="130" r="56" fill="#2dd4bf" opacity="0.82" />
+          <circle cx="114" cy="116" r="22" fill="#a3e635" stroke="#f6e7cb" stroke-width="3" />
+          <ellipse cx="148" cy="122" rx="18" ry="9" fill="#0d9488" transform="rotate(28 148 122)" />
+        </svg>`,
+      volcan: `
+        <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="130" cy="134" r="54" fill="#3e1f14" />
+          <path d="M98 118 Q130 144 162 118 Q172 152 130 166 Q88 152 98 118 Z" fill="#7c2d12" />
+          <circle cx="130" cy="114" r="26" fill="#f6e7cb" />
+          <circle cx="130" cy="112" r="7" fill="#ff4d3d" />
+          <ellipse cx="172" cy="166" rx="11" ry="6" fill="#2dd4bf" transform="rotate(-25 172 166)" />
+        </svg>`
+    };
+
+    const DISHES = [
+      {
+        id: "m1",
+        cat: "brasas",
+        eyebrow: "BRASAS & BURGERS",
+        name: "Double Oklahoma Smash",
+        basePrice: 14500,
+        prep: "⏱ 14 min • Sale caliente",
+        portion: "Incluye papas rústicas",
+        isHot: true,
+        desc: "Doble medallón de roast beef aplastado sobre cebolla caramelizada, cheddar fundido, panceta ahumada y salsa secreta en pan brioche.",
+        tags: ["Carne 100% Novillo", "Pan Brioche", "Con Papas"],
+        optLabel: "Tamaño de burger",
+        options: [
+          { name: "Simple", delta: -2000 },
+          { name: "Doble", delta: 0 },
+          { name: "Triple", delta: 3200 }
+        ],
+        extras: [
+          { name: "+ Cheddar & Bacon", price: 2200 },
+          { name: "+ Huevo a la plancha", price: 1400 },
+          { name: "+ Pepinillos", price: 900 }
+        ],
+        pairingId: "m5",
+        imgSrc: "../assets/img/plato-burger.png",
+        fallbackSvg: PLATED_SVGS.burger
+      },
+      {
+        id: "m2",
+        cat: "brasas",
+        eyebrow: "PARRILLA AL QUEBRACHO",
+        name: "Ojo de Bife 400g",
+        basePrice: 22900,
+        prep: "⏱ 22 min • A las brasas",
+        portion: "Con papines al romero",
+        isHot: true,
+        desc: "Corte madurado sellado a fuego vivo con manteca de hierbas frescas, ajo confitado y papines dorados.",
+        tags: ["Sin TACC", "400 gramos", "Corte Seleccionado"],
+        optLabel: "Punto de cocción",
+        options: [
+          { name: "Jugoso", delta: 0 },
+          { name: "A punto", delta: 0 },
+          { name: "Bien cocido", delta: 0 }
+        ],
+        extras: [
+          { name: "+ Salsa Chimichurri", price: 1100 },
+          { name: "+ Provoleta fundida", price: 3800 },
+          { name: "+ Ensalada mixta", price: 2400 }
+        ],
+        pairingId: "m5",
+        imgSrc: "../assets/img/plato-bife.png",
+        fallbackSvg: PLATED_SVGS.bife
+      },
+      {
+        id: "m3",
+        cat: "horno",
+        eyebrow: "HORNO DE BARRO",
+        name: "Pizza Napolitana Masa Madre",
+        basePrice: 16800,
+        prep: "⏱ 16 min • Fermentación 48hs",
+        portion: "8 porciones al molde",
+        isHot: true,
+        desc: "Tomates italianos triturados, muzzarella fior di latte, rodajas de tomate fresco, ajo confitado y hojas de albahaca.",
+        tags: ["Masa Madre", "Vegetariana", "Horno de Barro"],
+        optLabel: "Tamaño",
+        options: [
+          { name: "Individual (4p)", delta: -4500 },
+          { name: "Grande (8p)", delta: 0 },
+          { name: "XL + Fainá", delta: 3500 }
+        ],
+        extras: [
+          { name: "+ Extra Muzzarella", price: 2500 },
+          { name: "+ Pepperoni", price: 2900 },
+          { name: "+ Aceitunas negras", price: 1300 }
+        ],
+        pairingId: "m6",
+        imgSrc: "../assets/img/plato-pizza.png",
+        fallbackSvg: PLATED_SVGS.pizza
+      },
+      {
+        id: "m4",
+        cat: "horno",
+        eyebrow: "PARA COMPARTIR",
+        name: "Tabla Brasa & Campo",
+        basePrice: 24500,
+        prep: "⏱ 10 min • Ideal picada",
+        portion: "Rinde 2 a 4 personas",
+        isHot: false,
+        desc: "Selección de quesos estacionados, bondiola serrana, salame picado grueso, aceitunas marinadas y focaccia tibia.",
+        tags: ["Para Compartir", "Fiambres Artesanales", "Focaccia"],
+        optLabel: "Porción",
+        options: [
+          { name: "Para 2", delta: 0 },
+          { name: "Para 4", delta: 11500 },
+          { name: "Con Empanadas", delta: 5800 }
+        ],
+        extras: [
+          { name: "+ Pan de campo", price: 1500 },
+          { name: "+ Dip Alioli", price: 1100 }
+        ],
+        pairingId: "m5",
+        imgSrc: "../assets/img/plato-tabla.png",
+        fallbackSvg: PLATED_SVGS.tabla
+      },
+      {
+        id: "m5",
+        cat: "barra",
+        eyebrow: "COCTELERÍA DE AUTOR",
+        name: "Negroni Ahumado en Roble",
+        basePrice: 8900,
+        prep: "⏱ 4 min • Servicio en mesa",
+        portion: "Vaso Old Fashioned",
+        isHot: false,
+        desc: "Gin macerado en botánicos, vermouth rosso, bitter italiano y rodaja de naranja deshidratada con perfume de roble.",
+        tags: ["Clásico", "Hielo Cristalino", "Autor"],
+        optLabel: "Estilo",
+        options: [
+          { name: "Clásico", delta: 0 },
+          { name: "Ahumado", delta: 800 },
+          { name: "Doble", delta: 3400 }
+        ],
+        extras: [
+          { name: "+ Hielo cristal tallado", price: 600 },
+          { name: "+ Maní especiado", price: 1200 }
+        ],
+        pairingId: "m4",
+        imgSrc: "../assets/img/trago-negroni.png",
+        fallbackSvg: PLATED_SVGS.negroni
+      },
+      {
+        id: "m6",
+        cat: "barra",
+        eyebrow: "TRAGOS FRESCOS",
+        name: "Mojito Maracuyá & Menta",
+        basePrice: 8400,
+        prep: "⏱ 5 min • Bien frío",
+        portion: "Copa 400ml",
+        isHot: false,
+        desc: "Pulpa natural de maracuyá, menta fresca machacada, lima sutil y ron dorado (o versión Mocktail 0% alcohol).",
+        tags: ["Fruta Natural", "Refrescante", "Opción Sin Alcohol"],
+        optLabel: "Versión",
+        options: [
+          { name: "Con Ron", delta: 0 },
+          { name: "Sin Alcohol", delta: -1200 },
+          { name: "Jarra 1L", delta: 7900 }
+        ],
+        extras: [
+          { name: "+ Extra Maracuyá", price: 1000 }
+        ],
+        pairingId: "m3",
+        imgSrc: "../assets/img/trago-mojito.png",
+        fallbackSvg: PLATED_SVGS.mojito
+      },
+      {
+        id: "m7",
+        cat: "barra",
+        eyebrow: "PATISSERIE",
+        name: "Volcán Tibio de Chocolate 70%",
+        basePrice: 9200,
+        prep: "⏱ 14 min • Horneado al momento",
+        portion: "Con bocha de helado",
+        isHot: true,
+        desc: "Bizcocho húmedo de cacao amargo con corazón líquido tibio, crema americana y frutos rojos.",
+        tags: ["Sale Tibio", "Cacao 70%", "Con Helado"],
+        optLabel: "Helado",
+        options: [
+          { name: "Americana", delta: 0 },
+          { name: "Dulce de Leche", delta: 0 },
+          { name: "Sin Helado", delta: -1000 }
+        ],
+        extras: [
+          { name: "+ Salsa frutos rojos", price: 1100 }
+        ],
+        pairingId: "m6",
+        imgSrc: "../assets/img/postre-volcan.png",
+        fallbackSvg: PLATED_SVGS.volcan
+      }
+    ];
+
+    let activeCat = "todos";
+    let currentIdx = 0;
+    let selectedOptIdx = 1;
+    let selectedExtras = new Set();
+    let qty = 1;
+    let comanda = [];
+    let splitGuests = 1;
+    let isTransitioning = false;
+
+    const plateMoverEl = document.getElementById("plateMover");
+    const plateEl = document.getElementById("ceramicPlate");
+    const visualBoxEl = document.getElementById("dishVisualBox");
+    const steamEl = document.getElementById("steamLayer");
+    const toastEl = document.getElementById("toast");
+
+    function formatARS(n) {
+      return "$ " + Math.round(n).toLocaleString("es-AR");
+    }
+
+    function showToast(txt) {
+      toastEl.textContent = txt;
+      toastEl.classList.add("show");
+      clearTimeout(window._menuToast);
+      window._menuToast = setTimeout(() => toastEl.classList.remove("show"), 2200);
+    }
+
+    /* Carga foto real desde assets/img/ y si aún no existe muestra la ilustración */
+    function renderDishVisual(container, dish) {
+      container.innerHTML = "";
+      const img = document.createElement("img");
+      img.src = dish.imgSrc;
+      img.alt = dish.name;
+      img.onerror = () => {
+        container.innerHTML = dish.fallbackSvg;
+      };
+      container.appendChild(img);
+    }
+
+    function getFilteredDishes() {
+      return activeCat === "todos" ? DISHES : DISHES.filter(d => d.cat === activeCat);
+    }
+
+    function getCurrentUnitPrice(dish) {
+      const optDelta = dish.options[selectedOptIdx]?.delta || 0;
+      let extrasSum = 0;
+      selectedExtras.forEach(idx => {
+        extrasSum += dish.extras[idx]?.price || 0;
+      });
+      return dish.basePrice + optDelta + extrasSum;
+    }
+
+    function renderDock() {
+      const list = getFilteredDishes();
+      const dock = document.getElementById("dishDock");
+      dock.innerHTML = list.map((d, idx) => `
+        <div class="dock-card ${idx === currentIdx ? "active" : ""}" data-idx="${idx}">
+          <div class="dock-thumb" id="dockThumb_${d.id}"></div>
+          <h4>${d.name}</h4>
+          <span>${formatARS(d.basePrice)}</span>
+        </div>
+      `).join("");
+
+      list.forEach(d => {
+        const thumbBox = document.getElementById(`dockThumb_${d.id}`);
+        if (thumbBox) renderDishVisual(thumbBox, d);
+      });
+
+      dock.querySelectorAll(".dock-card").forEach(card => {
+        card.addEventListener("click", () => {
+          const targetIdx = Number(card.dataset.idx);
+          if (targetIdx === currentIdx) return;
+          const dir = targetIdx > currentIdx ? 1 : -1;
+          selectDish(targetIdx, dir);
+        });
+      });
+    }
+
+    function updateInfoPanel(dish) {
+      document.getElementById("prepBadge").textContent = dish.prep;
+      document.getElementById("dishEyebrow").textContent = dish.eyebrow;
+      document.getElementById("dishTitle").textContent = dish.name;
+      document.getElementById("dishPortion").textContent = dish.portion;
+      document.getElementById("dishDesc").textContent = dish.desc;
+      document.getElementById("dishTags").innerHTML = dish.tags.map(t => `<span class="food-tag">${t}</span>`).join("");
+
+      steamEl.classList.toggle("active", Boolean(dish.isHot));
+
+      document.getElementById("optGroupTitle").textContent = dish.optLabel;
+      document.getElementById("optSelectedText").textContent = dish.options[selectedOptIdx]?.name || "";
+      const optGrid = document.getElementById("optionsGrid");
+      optGrid.innerHTML = dish.options.map((o, i) => {
+        const diff = o.delta === 0 ? "Incluido" : (o.delta > 0 ? `+${formatARS(o.delta)}` : formatARS(o.delta));
+        return `
+          <button type="button" class="opt-btn ${i === selectedOptIdx ? "active" : ""}" data-i="${i}">
+            ${o.name}
+            <small>${diff}</small>
+          </button>
+        `;
+      }).join("");
+
+      optGrid.querySelectorAll(".opt-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          selectedOptIdx = Number(btn.dataset.i);
+          updateInfoPanel(dish);
+        });
+      });
+
+      const extrasWrap = document.getElementById("extrasWrap");
+      extrasWrap.innerHTML = dish.extras.map((ex, i) => `
+        <button type="button" class="extra-chip ${selectedExtras.has(i) ? "selected" : ""}" data-i="${i}">
+          ${ex.name} (${formatARS(ex.price)})
+        </button>
+      `).join("");
+
+      extrasWrap.querySelectorAll(".extra-chip").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const i = Number(btn.dataset.i);
+          if (selectedExtras.has(i)) selectedExtras.delete(i);
+          else selectedExtras.add(i);
+          updateInfoPanel(dish);
+        });
+      });
+
+      const pairing = DISHES.find(d => d.id === dish.pairingId);
+      if (pairing) {
+        document.getElementById("pairingTitle").textContent = `${pairing.name} (${formatARS(pairing.basePrice)})`;
+        document.getElementById("addPairingBtn").onclick = () => {
+          addToComanda(pairing, pairing.options[0].name, [], pairing.basePrice, 1);
+          showToast(`✓ Maridaje ${pairing.name} sumado`);
+        };
+      }
+
+      document.getElementById("dishPrice").textContent = formatARS(getCurrentUnitPrice(dish));
+      document.getElementById("qtyNum").textContent = qty;
+    }
+
+    /* Mueve TODO EL PLATO hacia la izquierda o derecha al cambiar */
+    function selectDish(idx, direction = 0) {
+      const list = getFilteredDishes();
+      const nextIndex = (idx + list.length) % list.length;
+      const dish = list[nextIndex];
+      if (!dish) return;
+
+      currentIdx = nextIndex;
+      selectedOptIdx = Math.min(1, dish.options.length - 1);
+      selectedExtras = new Set();
+      qty = 1;
+
+      updateInfoPanel(dish);
+      renderDock();
+
+      if (direction === 0) {
+        renderDishVisual(visualBoxEl, dish);
+        return;
+      }
+
+      if (isTransitioning) {
+        renderDishVisual(visualBoxEl, dish);
+        return;
+      }
+
+      isTransitioning = true;
+      plateMoverEl.classList.remove("enter-from-right", "enter-from-left", "leave-left", "leave-right");
+
+      // Si avanza (direction > 0), el plato actual sale hacia la izquierda y el nuevo entra desde la derecha
+      const leaveClass = direction > 0 ? "leave-left" : "leave-right";
+      const enterClass = direction > 0 ? "enter-from-right" : "enter-from-left";
+
+      plateMoverEl.classList.add(leaveClass);
+
+      setTimeout(() => {
+        renderDishVisual(visualBoxEl, dish);
+        plateMoverEl.classList.remove(leaveClass);
+        void plateMoverEl.offsetWidth; // Reinicia animación CSS
+        plateMoverEl.classList.add(enterClass);
+
+        setTimeout(() => {
+          plateMoverEl.classList.remove(enterClass);
+          isTransitioning = false;
+        }, 560);
+      }, 260);
+    }
+
+    function addToComanda(dish, optionName, extrasArr, unitPrice, amount) {
+      const extrasLabel = extrasArr.length ? ` • ${extrasArr.join(", ")}` : "";
+      const key = `${dish.id}-${optionName}-${extrasLabel}`;
+      const existing = comanda.find(c => c.key === key);
+      if (existing) {
+        existing.qty += amount;
+      } else {
+        comanda.push({
+          key,
+          dish,
+          optionName,
+          extrasLabel,
+          unitPrice,
+          qty: amount
+        });
+      }
+      updateComandaUI();
+    }
+
+    function buildKitchenTicket() {
+      if (comanda.length === 0) return "Sumá platos o tragos para generar el ticket de comanda.";
+      const mesa = document.getElementById("tableSelect").value;
+      const nombre = document.getElementById("dinerName").value.trim() || "Comensal";
+      const servSel = document.getElementById("serviceMode");
+      const paySel = document.getElementById("payMode");
+      const nota = document.getElementById("kitchenNote").value.trim();
+
+      const itemsTxt = comanda.map(c =>
+        `• ${c.qty}x ${c.dish.name} [${c.optionName}]${c.extrasLabel} — ${formatARS(c.unitPrice * c.qty)}`
+      ).join("\n");
+
+      const totalTxt = document.getElementById("finalTotalText").textContent;
+      const splitInfo = splitGuests > 1 ? `\n*División:* ${splitGuests} personas (${document.getElementById("splitPerPersonText").textContent.split(": ")[1]})` : "";
+
+      return (
+        `*COMANDA MESA #${mesa} — BRASA & BAR*\n` +
+        `*Cliente:* ${nombre}\n` +
+        `*Servicio:* ${servSel.options[servSel.selectedIndex].text}\n` +
+        `*Pago:* ${paySel.options[paySel.selectedIndex].text}\n` +
+        (nota ? `*Nota Cocina:* ${nota}\n` : "") +
+        `\n*Pedido:*\n${itemsTxt}\n\n` +
+        `*Total:* ${totalTxt}${splitInfo}`
+      );
+    }
+
+    function updateComandaUI() {
+      const totalItems = comanda.reduce((s, c) => s + c.qty, 0);
+      document.getElementById("cartCount").textContent = totalItems;
+
+      const listEl = document.getElementById("comandaList");
+      if (comanda.length === 0) {
+        listEl.innerHTML = `<p style="color:var(--muted);text-align:center;padding:24px 10px;font-size:0.85rem;">Todavía no agregaste platos a la mesa.</p>`;
+      } else {
+        listEl.innerHTML = comanda.map((c, i) => `
+          <div class="comanda-item">
+            <div class="comanda-thumb" id="comandaThumb_${i}"></div>
+            <div class="comanda-info">
+              <h4>${c.dish.name}</h4>
+              <p>${c.optionName}${c.extrasLabel}</p>
+              <strong style="font-size:0.8rem;color:var(--c-mint);">${formatARS(c.unitPrice * c.qty)}</strong>
+            </div>
+            <button type="button" class="mini-btn" data-i="${i}" data-d="-1">−</button>
+            <span style="font-weight:800;font-size:0.84rem;">${c.qty}</span>
+            <button type="button" class="mini-btn" data-i="${i}" data-d="1">+</button>
+          </div>
+        `).join("");
+
+        comanda.forEach((c, i) => {
+          const box = document.getElementById(`comandaThumb_${i}`);
+          if (box) renderDishVisual(box, c.dish);
+        });
+
+        listEl.querySelectorAll(".mini-btn").forEach(b => {
+          b.addEventListener("click", () => {
+            const idx = Number(b.dataset.i);
+            comanda[idx].qty += Number(b.dataset.d);
+            if (comanda[idx].qty <= 0) comanda.splice(idx, 1);
+            updateComandaUI();
+          });
+        });
+      }
+
+      const rawSum = comanda.reduce((s, c) => s + c.unitPrice * c.qty, 0);
+      const isCash = document.getElementById("payMode").value === "efectivo";
+      const finalTotal = isCash ? Math.round(rawSum * 0.9) : rawSum;
+
+      document.getElementById("finalTotalText").textContent = formatARS(finalTotal);
+      document.getElementById("splitCount").textContent = splitGuests;
+      const perPerson = splitGuests > 0 ? finalTotal / splitGuests : finalTotal;
+      document.getElementById("splitPerPersonText").textContent = `${splitGuests} ${splitGuests === 1 ? "persona" : "personas"}: ${formatARS(perPerson)} c/u`;
+
+      document.getElementById("ticketPreview").textContent = buildKitchenTicket();
+    }
+
+    // Eventos de navegación y categorías
+    document.getElementById("catsPills").addEventListener("click", e => {
+      const btn = e.target.closest(".cat-pill");
+      if (!btn) return;
+      activeCat = btn.dataset.cat;
+      document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      selectDish(0, 1);
+    });
+
+    document.getElementById("prevDishBtn").addEventListener("click", () => selectDish(currentIdx - 1, -1));
+    document.getElementById("nextDishBtn").addEventListener("click", () => selectDish(currentIdx + 1, 1));
+
+    // Deslizar con el dedo sobre la mesa (swipe táctil en celular)
+    const tableStage = document.getElementById("tableStage");
+    let touchStartX = 0;
+    tableStage.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    tableStage.addEventListener("touchend", (e) => {
+      const diffX = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(diffX) > 45) {
+        if (diffX < 0) selectDish(currentIdx + 1, 1);
+        else selectDish(currentIdx - 1, -1);
+      }
+    }, { passive: true });
+
+    // Vista 3D vs Cenital
+    let is3DView = true;
+    document.getElementById("toggle3DBtn").addEventListener("click", (e) => {
+      is3DView = !is3DView;
+      plateEl.classList.toggle("is-3d", is3DView);
+      e.target.textContent = is3DView ? "Vista 3D: Inclinada" : "Vista 3D: Cenital";
+    });
+
+    // Efecto parallax sutil con el mouse
+    tableStage.addEventListener("mousemove", (e) => {
+      const rect = tableStage.getBoundingClientRect();
+      const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 14;
+      const ny = ((e.clientY - rect.top) / rect.height - 0.5) * -12;
+      plateEl.style.setProperty("--rx", `${ny.toFixed(1)}deg`);
+      plateEl.style.setProperty("--ry", `${nx.toFixed(1)}deg`);
+    });
+    tableStage.addEventListener("mouseleave", () => {
+      plateEl.style.setProperty("--rx", "0deg");
+      plateEl.style.setProperty("--ry", "0deg");
+    });
+
+    document.getElementById("qtyDec").addEventListener("click", () => {
+      if (qty > 1) { qty--; document.getElementById("qtyNum").textContent = qty; }
+    });
+    document.getElementById("qtyInc").addEventListener("click", () => {
+      if (qty < 12) { qty++; document.getElementById("qtyNum").textContent = qty; }
+    });
+
+    document.getElementById("addDishBtn").addEventListener("click", () => {
+      const dish = getFilteredDishes()[currentIdx];
+      const optName = dish.options[selectedOptIdx]?.name || "";
+      const extrasArr = Array.from(selectedExtras).map(i => dish.extras[i].name);
+      const unitPrice = getCurrentUnitPrice(dish);
+      addToComanda(dish, optName, extrasArr, unitPrice, qty);
+      showToast(`✓ ${qty}x ${dish.name} sumado a la mesa`);
+    });
+
+    // Drawer Comanda
+    const drawer = document.getElementById("drawer");
+    const mask = document.getElementById("drawerMask");
+    document.getElementById("openDrawerBtn").addEventListener("click", () => {
+      updateComandaUI();
+      drawer.classList.add("open");
+      mask.classList.add("open");
+    });
+    document.getElementById("closeDrawerBtn").addEventListener("click", () => {
+      drawer.classList.remove("open");
+      mask.classList.remove("open");
+    });
+    mask.addEventListener("click", () => {
+      drawer.classList.remove("open");
+      mask.classList.remove("open");
+    });
+
+    document.getElementById("splitDec").addEventListener("click", () => {
+      if (splitGuests > 1) { splitGuests--; updateComandaUI(); }
+    });
+    document.getElementById("splitInc").addEventListener("click", () => {
+      if (splitGuests < 10) { splitGuests++; updateComandaUI(); }
+    });
+
+    ["tableSelect", "dinerName", "serviceMode", "payMode", "kitchenNote"].forEach(id => {
+      document.getElementById(id).addEventListener("input", updateComandaUI);
+      document.getElementById(id).addEventListener("change", updateComandaUI);
+    });
+
+    document.getElementById("copyTicketBtn").addEventListener("click", () => {
+      if (comanda.length === 0) return;
+      navigator.clipboard?.writeText(buildKitchenTicket());
+      showToast("✓ Ticket copiado");
+    });
+
+    document.getElementById("sendKitchenBtn").addEventListener("click", () => {
+      if (comanda.length === 0) {
+        showToast("Sumá al menos un plato primero");
+        return;
+      }
+      const msg = buildKitchenTicket();
+      window.open(`https://wa.me/5493794860604?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+
+    // Inicializar
+    selectDish(0, 0);
+    updateComandaUI();
+  </script>
 </body>
 </html>
