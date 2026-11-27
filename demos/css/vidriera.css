@@ -1096,18 +1096,82 @@ body.is-zoomed .hud-panel {
 }
 
 @media (max-width: 920px) {
+  .topbar-inner {
+    padding: 9px 14px;
+    gap: 8px;
+  }
+
+  .brand-group {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .back-studio {
+    padding: 6px 11px;
+    font-size: 0.76rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .store-title strong {
+    font-size: 0.86rem;
+    white-space: nowrap;
+  }
+
+  /* Oculta el subtítulo largo en celular para que la barra mida siempre 52px */
+  .store-title span {
+    display: none;
+  }
+
+  .cart-btn {
+    padding: 7px 12px;
+    font-size: 0.78rem;
+    gap: 7px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Barra de secciones justo debajo del header, en 1 sola fila deslizable */
+  .filter-bar {
+    top: 52px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 8px 14px;
+    gap: 7px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    background: linear-gradient(180deg, rgba(10, 8, 7, 0.75) 0%, transparent 100%);
+  }
+
+  .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cat-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 6px 13px;
+    font-size: 0.75rem;
+  }
+
+  .stage {
+    padding: 106px 14px 64px;
+  }
+
   .wall {
     grid-template-columns: repeat(2, 1fr);
-    gap: 42px 14px;
+    gap: 38px 14px;
   }
 
   .item-visual {
-    height: 108px;
+    height: 104px;
   }
 
   .hud-top-left {
-    top: 68px;
-    left: 16px;
+    top: 64px;
+    left: 14px;
+    right: 14px;
   }
 
   .camera-controls {
@@ -1126,5 +1190,12 @@ body.is-zoomed .hud-panel {
 
   body.is-zoomed .hud-panel {
     transform: translateY(0);
+  }
+}
+
+/* En celulares muy angostos (320px-380px) oculta la etiqueta "Showroom 3D" para que nunca se encime */
+@media (max-width: 430px) {
+  .demo-badge {
+    display: none;
   }
 }
