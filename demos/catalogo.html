@@ -3,155 +3,311 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Demo: Catálogo Digital + WhatsApp | SEME STUDIO</title>
-  <meta name="theme-color" content="#07090E" />
-  <link rel="icon" type="image/png" href="../assets/img/icono.png" />
+  <title>KICKS LAB | Showroom 3D — SEME Studio</title>
+  <meta name="theme-color" content="#090706" />
+  <link rel="icon" type="image/png" href="../assets/img/icono.png?v=3" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/catalogo.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/vidriera.css" />
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR DE MODO DEMO SEME STUDIO -->
-  <div class="demo-ribbon">
-    <a href="../index.html#servicios" class="back-link">← Volver a SEME Studio</a>
-    <span class="demo-tag">MUESTRA INTERACTIVA EN VIVO</span>
-  </div>
-
-  <!-- CABECERA DEL COMERCIO DE MUESTRA -->
-  <header class="store-header">
-    <div class="store-container">
-      <div class="store-brand">
-        <div class="store-avatar">🔥</div>
-        <div>
-          <div class="store-title-row">
-            <h1>BRASA & CO.</h1>
-            <span class="status-open">● Abierto ahora</span>
-          </div>
-          <p>Burgers Artesanales &bull; Envíos y Retiro en Local</p>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-group">
+        <a href="../index.html#servicios" class="back-studio">← Volver</a>
+        <div class="store-title">
+          <strong>KICKS LAB <span class="demo-badge">Showroom 3D</span></strong>
+          <span>Pasá el cursor o tocá una zapatilla para acercarte</span>
         </div>
       </div>
 
-      <!-- Buscador instantáneo -->
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="search" id="searchInput" placeholder="Buscar burger, papas, bebidas..." autocomplete="off" />
-      </div>
-
-      <!-- Categorías -->
-      <nav class="cat-pills" id="catPills">
-        <button type="button" class="cat-pill active" data-cat="todos">Todos</button>
-        <button type="button" class="cat-pill" data-cat="burgers">Burgers</button>
-        <button type="button" class="cat-pill" data-cat="combos">Combos</button>
-        <button type="button" class="cat-pill" data-cat="acompanamientos">Papas & Extras</button>
-        <button type="button" class="cat-pill" data-cat="bebidas">Bebidas</button>
-      </nav>
+      <button type="button" class="cart-btn" id="openCartBtn">
+        <span>Ver Pedido</span>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
     </div>
   </header>
 
-  <!-- GRILLA DE PRODUCTOS -->
-  <main class="store-container store-main">
-    <div class="products-grid" id="productsGrid"></div>
+  <nav class="filter-bar" id="filterBar">
+    <button type="button" class="cat-btn active" data-cat="todos">Vitrina Completa (8)</button>
+    <button type="button" class="cat-btn" data-cat="air">Air Max Series</button>
+    <button type="button" class="cat-btn" data-cat="urban">Urban Court</button>
+    <button type="button" class="cat-btn" data-cat="trail">Trail &amp; Tech</button>
+  </nav>
+
+  <main class="stage" id="stage">
+    <section class="wall" id="wall"></section>
   </main>
 
-  <!-- BARRA FLOTANTE INFERIOR DEL CARRITO -->
-  <div class="cart-bar hidden" id="cartBar">
-    <div class="cart-bar-inner">
-      <div class="cart-summary-info">
-        <span class="cart-badge-count" id="cartCount">0</span>
-        <div>
-          <small>Tu pedido actual</small>
-          <strong id="cartTotalBar">$0</strong>
-        </div>
-      </div>
-      <button type="button" class="btn-view-cart" id="openCartBtn">
-        Ver Pedido →
-      </button>
-    </div>
-  </div>
-
-  <!-- MODAL / DRAWER DEL CARRITO Y CHECKOUT -->
-  <div class="drawer-backdrop" id="cartDrawer" aria-hidden="true">
-    <div class="drawer-panel">
-      <div class="drawer-header">
-        <div>
-          <span class="mono-label">RESUMEN DE COMPRA</span>
-          <h2>Tu Pedido</h2>
-        </div>
-        <button type="button" class="close-drawer" id="closeCartBtn" aria-label="Cerrar">&times;</button>
-      </div>
-
-      <div class="drawer-body">
-        <div class="cart-items-list" id="cartItemsList"></div>
-
-        <!-- Opciones de entrega y pago -->
-        <div class="checkout-form" id="checkoutForm">
-          <div class="form-group">
-            <label>Modalidad de entrega</label>
-            <div class="toggle-group" id="deliveryToggle">
-              <button type="button" class="toggle-btn active" data-mode="Envío a domicilio">🛵 Delivery (+$1.500)</button>
-              <button type="button" class="toggle-btn" data-mode="Retiro en local">🏪 Retiro en local</button>
-            </div>
-          </div>
-
-          <div class="form-group" id="addressGroup">
-            <label for="clientAddress">Dirección de envío</label>
-            <input type="text" id="clientAddress" placeholder="Ej: Av. Costanera 1420, Depto 2B" value="San Martín 850" />
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="clientName">Tu nombre</label>
-              <input type="text" id="clientName" placeholder="Ej: Lucas" value="Lucas" />
-            </div>
-            <div class="form-group">
-              <label for="paymentMethod">Forma de pago</label>
-              <select id="paymentMethod">
-                <option value="Transferencia / Mercado Pago">Transferencia / MP</option>
-                <option value="Efectivo">Efectivo</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="totals-box">
-            <div class="total-line"><span>Subtotal</span><span id="subTotalText">$0</span></div>
-            <div class="total-line"><span>Envío</span><span id="shippingText">$1.500</span></div>
-            <div class="total-line grand"><span>Total a pagar</span><strong id="grandTotalText">$0</strong></div>
-          </div>
-
-          <!-- Vista previa del mensaje que recibe el comercio -->
-          <div class="wa-preview-box">
-            <span class="mono-label">VISTA PREVIA DEL MENSAJE QUE RECIBE TU WHATSAPP:</span>
-            <pre id="waMessagePreview"></pre>
-          </div>
-        </div>
-      </div>
-
-      <div class="drawer-footer">
-        <button type="button" class="btn-wa-send" id="simulateOrderBtn">
-          Simular Envío por WhatsApp ✓
-        </button>
+  <aside class="hud">
+    <div class="hud-top-left">
+      <button type="button" class="btn-back-wall" id="btnBackWall">← Volver a la vitrina</button>
+      <div>
+        <span class="hud-tag" id="hudTag">HANGAR 01</span>
+        <h1 class="hud-heading" id="hudHeading">Modelo</h1>
       </div>
     </div>
-  </div>
 
-  <!-- MODAL DE CONFIRMACIÓN DE DEMO -->
-  <div class="drawer-backdrop" id="successModal" aria-hidden="true">
-    <div class="success-card">
-      <div class="success-icon">✓</div>
-      <span class="mono-label">DEMOSTRACIÓN COMPLETADA</span>
-      <h3>¡Así recibe el pedido tu cliente!</h3>
-      <p>En la versión real de tu negocio, al tocar ese botón se abre WhatsApp con todo el detalle cargado y listo para enviar en 1 segundo.</p>
-      <div class="success-actions">
-        <button type="button" class="btn-secondary-demo" id="closeSuccessBtn">Seguir probando</button>
-        <a href="https://wa.me/5493794924075?text=Hola%20SEME%20Studio!%20Prob%C3%A9%20la%20demo%20del%20Cat%C3%A1logo%20Digital%20y%20quiero%20uno%20para%20mi%20negocio." target="_blank" rel="noopener" class="btn-primary-demo">
-          Quiero este catálogo
-        </a>
+    <div class="camera-controls">
+      <button type="button" class="cam-pill active" id="camNormalBtn">Perfil Derecho</button>
+      <button type="button" class="cam-pill" id="camFlipBtn">Invertir Perfil</button>
+      <button type="button" class="cam-pill" id="camMacroBtn">Acercar Detalle</button>
+    </div>
+
+    <div class="hud-panel">
+      <div class="hud-price-row">
+        <div class="hud-price" id="hudPrice">$ 0</div>
+      </div>
+      <div class="hud-installments" id="hudInstallments">3 cuotas sin interés</div>
+      <p class="hud-desc" id="hudDesc"></p>
+      <div class="hud-specs" id="hudSpecs"></div>
+
+      <div class="hud-label">
+        <span>Seleccioná tu talle (AR)</span>
+        <span id="hudVariantLabel">Talle: 41</span>
+      </div>
+      <div class="variants-grid" id="variantsGrid"></div>
+
+      <div class="hud-actions">
+        <div class="qty-control">
+          <button type="button" id="qtyMinus">−</button>
+          <span id="hudQty">1</span>
+          <button type="button" id="qtyPlus">+</button>
+        </div>
+        <button type="button" class="btn-primary-action" id="btnAddCart">Agregar al Pedido</button>
+      </div>
+      <button type="button" class="btn-buy-now" id="btnBuyNow">Agregar y Ver Ticket WhatsApp →</button>
+    </div>
+  </aside>
+
+  <!-- DRAWER VER PEDIDO COMPLETO -->
+  <div class="drawer-mask" id="drawerMask"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer-header">
+      <strong>Resumen de tu Pedido</strong>
+      <div class="drawer-header-actions">
+        <button type="button" class="btn-clear-cart" id="clearCartBtn">Vaciar</button>
+        <button type="button" class="drawer-close" id="closeCartBtn">&times;</button>
       </div>
     </div>
-  </div>
 
-  <script src="./js/catalogo.js"></script>
+    <div class="drawer-scroll">
+      <div class="cart-items-wrap" id="cartList"></div>
+
+      <div class="checkout-block">
+        <span class="block-title">Datos de Entrega y Pago</span>
+        <input type="text" class="field-dark" id="clientName" placeholder="Tu nombre completo (ej: Martín Gómez)" />
+
+        <div class="two-cols">
+          <select class="field-dark" id="deliverySelect">
+            <option value="retiro">Retiro en Local (Gratis)</option>
+            <option value="envio">Envío a Domicilio (+$4.500)</option>
+          </select>
+
+          <select class="field-dark" id="paymentSelect">
+            <option value="transferencia">Transferencia (15% OFF)</option>
+            <option value="efectivo">Efectivo (10% OFF)</option>
+            <option value="tarjeta">Tarjeta (3 cuotas s/ int.)</option>
+          </select>
+        </div>
+
+        <input type="text" class="field-dark" id="addressField" placeholder="Calle, altura y barrio para el envío" style="display:none;" />
+        <input type="text" class="field-dark" id="orderNotes" placeholder="Nota opcional (ej: tocar timbre 2B, horario...)" />
+      </div>
+
+      <div class="wa-preview-card">
+        <div class="wa-preview-head">
+          <span>VISTA PREVIA MENSAJE WHATSAPP</span>
+          <button type="button" class="btn-copy-preview" id="copyPreviewBtn">Copiar</button>
+        </div>
+        <div class="wa-preview-text" id="waPreviewBox"></div>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <div class="summary-line"><span>Subtotal productos</span><span id="subTotalVal">$ 0</span></div>
+      <div class="summary-line discount" id="discountRow"><span><span id="discountLabel">Descuento</span></span><span id="discountVal">-$ 0</span></div>
+      <div class="summary-line"><span>Costo de envío</span><span id="shippingVal">Gratis</span></div>
+      <div class="total-row"><span>Total Final</span><span id="cartTotal">$ 0</span></div>
+      <div class="installment-sub" id="installmentNote"></div>
+      <button type="button" class="btn-whatsapp" id="sendWaBtn">Enviar Pedido por WhatsApp →</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast">Agregado</div>
+
+  <script src="./js/vidriera.js"></script>
+  <script>
+    function shoeMedia(imgPath, altText, fallbackSvg) {
+      return `
+        <img src="${imgPath}" alt="${altText}"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <div style="display:none; width:100%; height:100%;">${fallbackSvg}</div>
+      `;
+    }
+
+    function detailedShoeSVG({ id, upper1, upper2, upperDark, overlay, accent, soleMain, soleBottom, airGlow, style = "air" }) {
+      const isHigh = style === "high";
+      const isTrail = style === "trail";
+      const collarPath = isHigh
+        ? "M66 142 C62 102, 72 52, 88 26 C102 18, 126 22, 136 44 C144 64, 158 68, 178 48 L198 30 C206 24, 218 28, 224 40 L264 96 C292 106, 326 116, 336 136 C339 143, 332 147, 318 147 L72 147 Z"
+        : "M48 143 C46 112, 58 76, 80 56 C92 46, 108 52, 120 68 C134 84, 152 84, 172 62 L192 42 C200 35, 212 40, 220 52 L262 100 C290 110, 324 118, 335 136 C338 143, 331 147, 316 147 L58 147 Z";
+      const treadBlocks = isTrail
+        ? `<path d="M52 175 h16 v5 h-16 z M82 175 h18 v5 h-18 z M114 175 h18 v5 h-18 z M148 175 h20 v5 h-20 z M216 175 h20 v5 h-20 z M250 175 h18 v5 h-18 z M282 175 h18 v5 h-18 z" fill="${soleBottom}" />`
+        : `<path d="M54 175 L312 175 C304 179, 286 180, 260 180 L84 180 C66 180, 56 178, 54 175 Z" fill="${soleBottom}" />`;
+
+      return `
+        <svg viewBox="0 0 380 205" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="up-${id}" x1="50" y1="25" x2="320" y2="155" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="${upper1}" />
+              <stop offset="55%" stop-color="${upper2}" />
+              <stop offset="100%" stop-color="${upperDark}" />
+            </linearGradient>
+            <linearGradient id="ov-${id}" x1="60" y1="80" x2="320" y2="150" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="${overlay}" />
+              <stop offset="100%" stop-color="${upperDark}" />
+            </linearGradient>
+            <linearGradient id="sl-${id}" x1="35" y1="140" x2="340" y2="180" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ffffff" />
+              <stop offset="52%" stop-color="${soleMain}" />
+              <stop offset="100%" stop-color="#94a3b8" />
+            </linearGradient>
+          </defs>
+          <path d="M62 72 L46 62 C42 60, 40 65, 43 70 L56 84 Z" fill="${accent}" />
+          <path d="${collarPath}" fill="url(#up-${id})" />
+          <path d="M52 145 C50 118, 60 88, 82 76 C96 92, 106 118, 102 145 Z" fill="url(#ov-${id})" />
+          <path d="M236 145 C244 122, 268 110, 304 116 C322 120, 333 129, 336 141 C337 145, 330 147, 318 147 Z" fill="url(#ov-${id})" />
+          <path d="M104 116 C152 130, 206 116, 256 86 C228 124, 172 145, 98 130 Z" fill="${accent}" />
+          <path d="M108 118 C154 130, 204 117, 248 90 C222 121, 170 139, 104 126 Z" fill="#ffffff" fill-opacity="0.88" />
+          <g stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round">
+            <line x1="196" y1="60" x2="216" y2="49" />
+            <line x1="210" y1="73" x2="230" y2="62" />
+            <line x1="224" y1="86" x2="244" y2="75" />
+            <line x1="238" y1="98" x2="258" y2="87" />
+          </g>
+          <path d="M40 148 C38 165, 52 175, 90 176 L296 176 C328 176, 344 166, 341 151 C339 142, 324 141, 300 143 L76 143 C52 143, 42 144, 40 148 Z" fill="url(#sl-${id})" />
+          <rect x="66" y="153" width="104" height="17" rx="8.5" fill="#090d16" />
+          <rect x="69" y="155" width="46" height="13" rx="6.5" fill="${airGlow}" fill-opacity="0.88" />
+          <rect x="120" y="155" width="46" height="13" rx="6.5" fill="${airGlow}" fill-opacity="0.88" />
+          ${treadBlocks}
+        </svg>
+      `;
+    }
+
+    VidrieraApp.init({
+      storeName: "KICKS LAB 3D",
+      whatsapp: "5493794860604",
+      variantLabel: "Talle",
+      products: [
+        {
+          id: "z1",
+          code: "HANGAR 01",
+          cat: "air",
+          tag: "HANGAR 01 • AIR MAX SERIES",
+          name: "AeroPulse Cobalt",
+          price: 168900,
+          desc: "Cápsula Air de doble cámara con malla respirable ultraliviana y refuerzos termosellados para pisada reactiva.",
+          specs: ["Cápsula Dual Air", "Peso 290g", "Malla Engineered"],
+          variants: ["39", "40", "41", "42", "43", "44"],
+          outOfStock: ["44"],
+          visual: shoeMedia("../assets/img/zapa-1.png", "AeroPulse Cobalt", detailedShoeSVG({ id: "z1", upper1: "#3b82f6", upper2: "#1d4ed8", upperDark: "#172554", overlay: "#1e40af", accent: "#38bdf8", soleMain: "#e2e8f0", soleBottom: "#1e293b", airGlow: "#38bdf8", style: "air" }))
+        },
+        {
+          id: "z2",
+          code: "HANGAR 02",
+          cat: "urban",
+          tag: "HANGAR 02 • URBAN EDITION",
+          name: "Vortex Coral Flare",
+          price: 154500,
+          desc: "Silueta deportiva en tono coral intenso con entresuela de espuma de alta densidad y cuello acolchado.",
+          specs: ["Espuma React", "Suela Antideslizante", "Edición Limitada"],
+          variants: ["37", "38", "39", "40", "41", "42"],
+          outOfStock: ["37"],
+          visual: shoeMedia("../assets/img/zapa-2.png", "Vortex Coral Flare", detailedShoeSVG({ id: "z2", upper1: "#fb7185", upper2: "#e11d48", upperDark: "#4c0519", overlay: "#be123c", accent: "#fda4af", soleMain: "#f1f5f9", soleBottom: "#334155", airGlow: "#fb7185", style: "runner" }))
+        },
+        {
+          id: "z3",
+          code: "HANGAR 03",
+          cat: "urban",
+          tag: "HANGAR 03 • COURT HIGH",
+          name: "Court Emerald High",
+          price: 179000,
+          desc: "Caña alta inspirada en el básquet clásico en cuero ecológico premium con plantilla Memory Foam.",
+          specs: ["Caña Alta", "Cuero Sintético", "Plantilla Memory"],
+          variants: ["39", "40", "41", "42", "43", "44"],
+          outOfStock: [],
+          visual: shoeMedia("../assets/img/zapa-3.png", "Court Emerald High", detailedShoeSVG({ id: "z3", upper1: "#f8fafc", upper2: "#e2e8f0", upperDark: "#94a3b8", overlay: "#15803d", accent: "#16a34a", soleMain: "#f8fafc", soleBottom: "#14532d", airGlow: "#4ade80", style: "high" }))
+        },
+        {
+          id: "z4",
+          code: "HANGAR 04",
+          cat: "air",
+          tag: "HANGAR 04 • AIR CLOUD",
+          name: "Nebula Rose Cloud",
+          price: 162000,
+          desc: "Diseño envolvente con ajuste tipo calcetín sin costuras internas y cámara de aire amortiguada.",
+          specs: ["Upper Sin Costuras", "Amortiguación Suave", "Ultraliviana"],
+          variants: ["36", "37", "38", "39", "40", "41"],
+          outOfStock: ["41"],
+          visual: shoeMedia("../assets/img/zapa-4.png", "Nebula Rose Cloud", detailedShoeSVG({ id: "z4", upper1: "#f9a8d4", upper2: "#ec4899", upperDark: "#500724", overlay: "#db2777", accent: "#fce7f3", soleMain: "#f8fafc", soleBottom: "#475569", airGlow: "#f472b6", style: "air" }))
+        },
+        {
+          id: "z5",
+          code: "HANGAR 05",
+          cat: "trail",
+          tag: "HANGAR 05 • TRAIL & OUTDOOR",
+          name: "TerraGrip Obsidian",
+          price: 189900,
+          desc: "Tejido antidesgarro repelente al agua con puntera reforzada y tacos de tracción multidireccional.",
+          specs: ["Repelente al Agua", "Suela Tacos 5mm", "Puntera Blindada"],
+          variants: ["40", "41", "42", "43", "44", "45"],
+          outOfStock: ["45"],
+          visual: shoeMedia("../assets/img/zapa-5.png", "TerraGrip Obsidian", detailedShoeSVG({ id: "z5", upper1: "#64748b", upper2: "#334155", upperDark: "#0f172a", overlay: "#1e293b", accent: "#f97316", soleMain: "#cbd5e1", soleBottom: "#ea580c", airGlow: "#fb923c", style: "trail" }))
+        },
+        {
+          id: "z6",
+          code: "HANGAR 06",
+          cat: "urban",
+          tag: "HANGAR 06 • COURT MID",
+          name: "Slate Volt Mid",
+          price: 172500,
+          desc: "Combinación sobria de caña media con plataforma elevada de gran estabilidad para uso diario.",
+          specs: ["Caña Media", "Soporte de Tobillo", "Uso Diario"],
+          variants: ["38", "39", "40", "41", "42", "43"],
+          outOfStock: [],
+          visual: shoeMedia("../assets/img/zapa-6.png", "Slate Volt Mid", detailedShoeSVG({ id: "z6", upper1: "#94a3b8", upper2: "#475569", upperDark: "#1e293b", overlay: "#334155", accent: "#3b82f6", soleMain: "#e2e8f0", soleBottom: "#1d4ed8", airGlow: "#60a5fa", style: "high" }))
+        },
+        {
+          id: "z7",
+          code: "HANGAR 07",
+          cat: "air",
+          tag: "HANGAR 07 • PURE SERIES",
+          name: "Pure Ivory Runner",
+          price: 159000,
+          desc: "Minimalismo blanco marfil con cámara de aire cristalina y tejido técnico ventilado.",
+          specs: ["Triple White", "Cámara Cristalina", "Fácil Limpieza"],
+          variants: ["37", "38", "39", "40", "41", "42"],
+          outOfStock: ["39"],
+          visual: shoeMedia("../assets/img/zapa-7.png", "Pure Ivory Runner", detailedShoeSVG({ id: "z7", upper1: "#ffffff", upper2: "#e2e8f0", upperDark: "#94a3b8", overlay: "#cbd5e1", accent: "#0ea5e9", soleMain: "#f8fafc", soleBottom: "#64748b", airGlow: "#38bdf8", style: "air" }))
+        },
+        {
+          id: "z8",
+          code: "HANGAR 08",
+          cat: "trail",
+          tag: "HANGAR 08 • PERFORMANCE",
+          name: "HyperMint Surge",
+          price: 184000,
+          desc: "Edición de alto retorno de energía con estabilizador trasero en TPU rígido.",
+          specs: ["Retorno +82%", "Estabilizador TPU", "Suela Trail Grip"],
+          variants: ["38", "39", "40", "41", "42", "43"],
+          outOfStock: ["44"],
+          visual: shoeMedia("../assets/img/zapa-8.png", "HyperMint Surge", detailedShoeSVG({ id: "z8", upper1: "#2dd4bf", upper2: "#0d9488", upperDark: "#134e4a", overlay: "#115e59", accent: "#f43f5e", soleMain: "#f1f5f9", soleBottom: "#0f766e", airGlow: "#2dd4bf", style: "trail" }))
+        }
+      ]
+    });
+  </script>
 </body>
 </html>
